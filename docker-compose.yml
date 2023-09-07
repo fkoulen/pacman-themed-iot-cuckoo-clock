@@ -55,6 +55,7 @@ services:
       context: ./docker/images/tunnel
     container_name: iot-tunnel
     environment:
+      - "WEBSERVER_PORT=${WEBSERVER_PORT}"
       - "TUNNEL_SUBDOMAIN=${HVA_USERNAME}"
     depends_on:
       - nginx
