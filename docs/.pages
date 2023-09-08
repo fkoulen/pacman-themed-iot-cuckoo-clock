@@ -1,5 +1,6 @@
 nav:
     - 🏚️ Home: index.md
+    - 📅 Planning: planning.md
     - 📦 System Architecture: system_architecture
     - ♟️ Learning journal: journal
     - 🧰 Embedded:
