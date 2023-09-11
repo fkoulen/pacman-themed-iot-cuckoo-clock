@@ -43,7 +43,7 @@ services:
     container_name: iot-phpmyadmin
     environment:
       - "PMA_HOST=mariadb"
-      - "PMA_PORT=${MYSQL_PORT}"
+      - "PMA_PORT=3306"
       - "PMA_ABSOLUTE_URI=http://localhost/phpmyadmin"
     external_links:
       - mariadb:mariadb

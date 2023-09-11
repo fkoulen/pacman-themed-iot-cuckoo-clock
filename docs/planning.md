@@ -14,7 +14,7 @@
 
 | Day       | Activity                    |  
 |-----------|-----------------------------|
-| Monday    | Work on create-phase        | 
+| Monday    | Work on design-phase        |
 | Wednesday | Work on embedded device     |
 | Thursday  | Work on website             |
 | Friday    | Update portfolio & planning | 
@@ -23,7 +23,7 @@
 
 | Day       | Activity                    |  
 |-----------|-----------------------------|
-| Monday    | Work on create-phase        | 
+| Monday    | Work on design-phase        |
 | Wednesday | Work on embedded device     |
 | Thursday  | Work on website             |
 | Friday    | Update portfolio & planning | 
@@ -32,7 +32,7 @@
 
 | Day       | Activity                    |  
 |-----------|-----------------------------|
-| Monday    | Work on design-phase        | 
+| Monday    | Work on create-phase        |
 | Wednesday | Work on embedded device     |
 | Thursday  | Work on website             |
 | Friday    | Update portfolio & planning |
@@ -41,7 +41,7 @@
 
 | Day       | Activity                    |  
 |-----------|-----------------------------|
-| Monday    | Work on design-phase        | 
+| Monday    | Work on create-phase        | 
 | Wednesday | Work on embedded device     |
 | Thursday  | Work on website             |
 | Friday    | Update portfolio & planning | 
