@@ -18,12 +18,12 @@ title: Learning Journal
 
 # Week 1
 
-| Day       | Description                                                                                                                                                                                                                                                      |
-|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Monday    | I followed the introduction today. Already read the study manual so there was not a lot of new information. I chose the Calendar blueprint.                                                                                                                      |
-| Wednesday | Today I retrieved my IoT kit and soldered the headers onto the WEMOS. I also ran the Blink program on it and it worked.                                                                                                                                          |
-| Thursday  | The day started with the course of Wilko. I had trouble paying attention to it. In the afternoon after a short introduction of Mats, I started working on the web application. I managed to set up a connection to my database.                                  |
-| Friday    | Worked on the planning for the next couple of weeks. I�ve planned it so that the my planning for the day is based on the expertise of the available teachers of that day. So for Mondays I work on physical design, on Wednesdays on embedded devices and so on. |
+| Day       | Description                                                                                                                                                                                                                                                       |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Monday    | I followed the introduction today. Already read the study manual so there was not a lot of new information. I chose the Calendar blueprint.                                                                                                                       |
+| Wednesday | Today I retrieved my IoT kit and soldered the headers onto the WEMOS. I also ran the Blink program on it and it worked.                                                                                                                                           |
+| Thursday  | The day started with the course of Wilko. I had trouble paying attention to it. In the afternoon after a short introduction of Mats, I started working on the web application. I managed to set up a connection to my database.                                   |
+| Friday    | Worked on the planning for the next couple of weeks. I have planned it so that the my planning for the day is based on the expertise of the available teachers of that day. So for Mondays I work on physical design, on Wednesdays on embedded devices and so on. |
 
 
 
