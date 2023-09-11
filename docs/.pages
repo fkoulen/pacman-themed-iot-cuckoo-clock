@@ -2,14 +2,14 @@ nav:
     - 🏚️ Home: index.md
     - 📅 Planning: planning.md
     - 📦 System Architecture: system_architecture
-    - ♟️ Learning journal: journal
+    - ♟️ Learning Journal: journal
     - 🧰 Embedded:
       - Requirements: embedded/requirements
-      - Technical documentation: embedded/technical_documentation
+      - Technical Documentation: embedded/technical_documentation
       - Code: embedded/code
     - 🌐 Web:
-      - Technical documentation: web/technical_documentation
-      - API reference: web/api_reference
+      - Technical Documentation: web/technical_documentation
+      - API Reference: web/api_reference
       - Code: web/code
       - Database: web/database
     - 📐 Physical design:

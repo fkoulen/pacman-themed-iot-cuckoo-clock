@@ -1,4 +1,4 @@
-# Learning journal
+# Learning Journal
 
 Your learning journal can be seen as a diary of your learning process. It is a place where you can reflect on your learning, and where you can keep track of your progress. It is also a place where you can keep track of your questions, and where you can write down your answers to those questions.
 
