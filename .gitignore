@@ -2,3 +2,9 @@ docker/config/mariadb/
 .idea
 json
 md
+.vscode
+.pio
+arduino-tutorials/include
+arduino-tutorials/lib
+arduino-tutorials/test
+arduino-tutorials/platformio.ini
