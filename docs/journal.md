@@ -29,17 +29,24 @@ your project.
 
 # Week 2
 
-| Day    | Description                                                                                                                                                                                                                                                                                                                                |
-|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Monday | Today I listened to the explanation of Joey about 3D printing & laser cutting. I have also 3d printed a guitar pick and a bookmark myself. Next to that, I also had my first performance review with Marise and I have worked on the design phase of physical design. I worked out the user, needs, goals & requirements in bullet points. |
-
-<figure markdown>
-  ![Printer](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1694445661/hva/iot/3dprinter_tvm1po.jpg){ width="150" }
+### Monday (11th of September)
+Today I listened to the explanation of Joey about 3D printing & laser cutting. I have also 3d printed a guitar pick and a bookmark myself.
+Next to that, I also had my first performance review with Marise and I have worked on the design phase of physical design. I worked out the user, needs, goals & requirements in bullet points.
+<figure class="inline start" markdown>
+  ![Printer](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1694445661/hva/iot/3dprinter_tvm1po.jpg){ width="150"}
   <figcaption>3D printing the guitar pick</figcaption>
 </figure>
-
-
-<figure markdown>
+<figure class="inline end" markdown>
   ![Result](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1694447391/hva/iot/IMG_6783_mw4gx3.jpg){ width="150" }
   <figcaption>The Result</figcaption>
 </figure>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+### Tuesday (12th of September)
+Today I messed around with the Arduino and watched some courses of Paul McWhorter on YouTube. I've so far learned the following:
+
+* [Arduino Tutorial 1: Setting Up and Programming the Arduino for Absolute Beginners](https://www.youtube.com/watch?v=fJWR7dBuc18&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=1&pp=iAQB)
+* [Arduino Tutorial 2: Understanding How Light Emitting Diodes (LEDs) Work](https://www.youtube.com/watch?v=9uHZB7-T_XA&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=2)
+* [Arduino Tutorial 3: Understanding How Breadboards Work](https://www.youtube.com/watch?v=CfdaJ4z4u4w&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=3)
+* [Arduino Tutorial 4: Understanding Arduino Variables](https://www.youtube.com/watch?v=nPOKOi1jIK0&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=4) (not finished yet)
