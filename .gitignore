@@ -8,3 +8,4 @@ arduino-tutorials/include
 arduino-tutorials/lib
 arduino-tutorials/test
 arduino-tutorials/platformio.ini
+embedded/show-current-time/__pycache__
