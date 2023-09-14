@@ -4,12 +4,17 @@ services:
     build:
       context: ./docker/images/php
     container_name: iot-php
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_ROOT_USERNAME=${MYSQL_ROOT_USERNAME}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE_NAME=${MYSQL_DATABASE_NAME}
     volumes:
       - './web:/var/www/html'
       - './docker/dashboard:/var/www/dashboard'
     depends_on:
       - mariadb
-  
+
   nginx:
     image: nginx:latest
     container_name: iot-nginx
@@ -27,7 +32,7 @@ services:
       - tunnel:tunnel
     depends_on:
       - php
-  
+
   mariadb:
     image: mariadb:latest
     container_name: iot-mariadb
