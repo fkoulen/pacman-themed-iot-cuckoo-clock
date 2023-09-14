@@ -13,7 +13,7 @@ $appointments = mysqli_query($db, $select_appointments);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title></title>
+    <title>Appointments </title>
 </head>
 <body>
 <div class="container">
@@ -21,7 +21,7 @@ $appointments = mysqli_query($db, $select_appointments);
         <div class="text-center my-5"><h1>Appointments</h1></div>
         <div class="col-md-10 col-md-offset-1">
             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    data-bs-target="#addModal">
                 New Appointment
             </button>
             <table class="table">
@@ -43,7 +43,7 @@ $appointments = mysqli_query($db, $select_appointments);
                         <tr>
                             <td><?php echo $res['name']; ?></td>
                             <td><?php echo $res['start']; ?></td>
-                            <td><a href="update.php?id=<?php echo $res['id']; ?>" class="btn btn-primary">Edit</a></td>
+                            <td><a href="edit.php?id=<?php echo $res['id']; ?>" class="btn btn-primary">Edit</a></td>
                             <td><a href="delete.php?id=<?php echo $res['id']; ?>" class="btn btn-danger">Delete</a></td>
                         </tr>
                         <?php
