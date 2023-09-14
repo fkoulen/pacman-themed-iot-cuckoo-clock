@@ -9,9 +9,9 @@ title: Learning Journal
 > questions,
 > and where you can write down your answers to those questions.
 
-So for example when you receive feedback on your project, you can write down the feedback and your reflection on it in
-your learning journal. You can also write down what you have learned from the feedback, and how you will apply it in
-your project.
+> So for example when you receive feedback on your project, you can write down the feedback and your reflection on it in
+> your learning journal. You can also write down what you have learned from the feedback, and how you will apply it in
+> your project.
 
 # Week 2
 
