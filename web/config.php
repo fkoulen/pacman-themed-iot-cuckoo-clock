@@ -11,3 +11,6 @@ $db = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $datab
 if (!$db) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+// Set the maximum length of the appointment name
+$MAX_LENGTH_APPOINTMENT_NAME = 50;
