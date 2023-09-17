@@ -38,7 +38,7 @@ $data = mysqli_fetch_assoc($result);
                     </div>
                 </div>
                 <div class="modal-footer gap-2 mt-4">
-                    <a href="index.php" class="btn btn-secondary">Cancel</a>
+                    <a href="index.html" class="btn btn-secondary">Cancel</a>
                     <input type="submit" name="update" value="Update" class="btn btn-primary"/>
                 </div>
             </form>

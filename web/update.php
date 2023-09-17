@@ -10,9 +10,9 @@ if (isset($_POST['update'])) {
     $sql = "UPDATE APPOINTMENT SET name = '$name', start = '$start' WHERE id = '$id'";
     $result = mysqli_query($db, $sql);
 
-    // Check if the update was successful. If successful, redirect to index.php
+    // Check if the update was successful. If successful, redirect to index.html
     if ($result) {
-        header("Location: index.php");
+        header("Location: index.html");
     } else { // If unsuccessful, display an error message
         echo "Error: " . $sql . " " . mysqli_error($db);
     }

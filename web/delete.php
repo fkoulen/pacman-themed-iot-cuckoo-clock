@@ -6,9 +6,9 @@ $id = $_GET['id'];
 $sql = "DELETE FROM APPOINTMENT WHERE id = '$id'";
 $result = mysqli_query($db, $sql);
 
-// Check if the deletion was successful. If successful, redirect to index.php
+// Check if the deletion was successful. If successful, redirect to index.html
 if ($result) {
-    header("Location: index.php");
+    header("Location: index.html");
 } else { // If unsuccessful, display an error message
     echo "Error: " . $sql . " " . mysqli_error($db);
 }

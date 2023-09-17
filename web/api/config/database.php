@@ -1,13 +1,19 @@
 <?php
+/*
+ * Database configuration.
+ *
+ * @author F.S. Koulen
+ * @date 2023-09-17
+ */
 
 class Database
 {
 
-    private $host;
-    private $db_name;
-    private $username;
-    private $password;
-    public $conn;
+    private string $host;
+    private string $db_name;
+    private string $username;
+    private string $password;
+    public ?PDO $conn;
 
 
     public function __construct()
@@ -23,7 +29,7 @@ class Database
      *
      * @return PDO
      */
-    public function getConnection()
+    public function getConnection(): ?PDO
     {
         $this->conn = null;
 

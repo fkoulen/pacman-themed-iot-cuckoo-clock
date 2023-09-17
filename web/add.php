@@ -9,9 +9,9 @@ if (isset($_POST['create'])) {
     $sql = "INSERT INTO APPOINTMENT (name, start) VALUES ('$name', '$start')";
     $result = mysqli_query($db, $sql);
 
-    // Check if the insertion was successful. If successful, redirect to index.php
+    // Check if the insertion was successful. If successful, redirect to index.html
     if ($result) {
-        header("Location: index.php");
+        header("Location: index.html");
     } else { // If unsuccessful, display an error message
         echo "Error: " . $sql . " " . mysqli_error($db);
     }
