@@ -5,7 +5,7 @@
 > So just add a link to the code in your repository.
 
 
-!!! show-current-time
+!!! abstract "show-current-time"
 
     === "show-current-time.cpp"
         `void setup()`  

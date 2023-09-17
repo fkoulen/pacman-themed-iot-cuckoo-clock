@@ -48,7 +48,7 @@ if (
         http_response_code(503);
 
         // Tell the user
-        echo json_encode(array("message" => "Unable to create appointment."));
+        echo json_encode(array("message" => "Unable to create appointment. Service unavailable."));
     }
 } else {
     // Set response code - 400 bad request
