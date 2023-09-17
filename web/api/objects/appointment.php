@@ -10,7 +10,7 @@
 
 class Appointment
 {
-    private mixed $conn;
+    private PDO $conn;
     private string $table_name = "appointment";
 
     public $id;
@@ -35,5 +35,30 @@ class Appointment
         $stmt->execute();
 
         return $stmt;
+    }
+
+    // Create appointment
+    function create()
+    {
+        // Query to insert record
+        $query = "INSERT INTO " . $this->table_name . " SET name=:name, start=:start";
+
+        // Prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // Sanitize
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->start = htmlspecialchars(strip_tags($this->start));
+
+        // Bind values
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":start", $this->start);
+
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -5,9 +5,9 @@
     @date 2023-09-16
  */
 
-const API_URL = 'http://localhost/api/appointment/read.php';
+const API_APPOINTMENT_READ = 'http://localhost/api/appointment/read.php';
 
-fetch(API_URL).then(response => {
+fetch(API_APPOINTMENT_READ).then(response => {
     response.json().then(data => {
         const appointments = data.records;
 

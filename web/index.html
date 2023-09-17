@@ -40,7 +40,7 @@
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" action="add.php">
+                <form method="post" id="create-appointment-form">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Appointment</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -48,18 +48,19 @@
                     <div class="modal-body">
                         <div class="form-group mb-2">
                             <label for="name">Name</label>
-                            <input id="name" type="text" required name="name" class="form-control"
-                                   maxlength="<?php echo $MAX_LENGHT_APPOINTMENT_NAME ?>"/>
+                            <input id="name" type="text" required name="name" class="form-control"/>
                         </div>
                         <div class="form-group mb-2">
                             <label for="start">Date and time</label>
-                            <input id="start" type="datetime-local" required name="start" class="form-control"
-                                   maxlength="50"/>
+                            <input id="start" type="datetime-local" name="start" class="form-control"/>
                         </div>
                     </div>
+                    <div class="alert alert-danger mx-3 mb-3 d-none" id="create-appointment-error">
+                        Test
+                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" name="create" value="Create" class="btn btn-primary"/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-button">Close</button>
+                        <input type="submit" name="create" value="Create" class="btn btn-primary" id="submit-button"/>
                     </div>
                 </form>
             </div>
@@ -72,5 +73,6 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 <script src="js/appointment/read.js"></script>
+<script src="js/appointment/create.js"></script>
 </body>
 </html>
