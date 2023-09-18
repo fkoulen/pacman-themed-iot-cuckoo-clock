@@ -1,3 +1,13 @@
+/*
+    Retrieve the id from the url and send a request to the API to get the appointment data.
+    If the appointment was retrieved successfully, fill the form with the appointment data.
+    If an error occurred, display the error message.
+
+    @author F.S. Koulen
+    @date 2023-09-18
+ */
+
+
 // Get the id from the url
 const id = window.location.href.split("=")[1];
 
