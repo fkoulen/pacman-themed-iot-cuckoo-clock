@@ -84,4 +84,58 @@ class Appointment
         $this->name = $row['name'] ?? null;
         $this->start = $row['start'] ?? null;
     }
+
+    // Check if appointment exists
+    function exists(): bool
+    {
+        // Query to read single record
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
+
+        // Prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind id of appointment to be read
+        $stmt->bindParam(1, $this->id);
+
+        // Execute query
+        $stmt->execute();
+
+        // Get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Return true if row exists
+        return (bool)$row;
+    }
+
+    // Update the appointment if it exists
+    function update(): bool
+    {
+        // Check if appointment exists before updating it
+        if ($this->exists()) {
+            // Update query
+            $query = "UPDATE " . $this->table_name . " SET name=:name, start=:start WHERE id=:id";
+
+            // Prepare query statement
+            $stmt = $this->conn->prepare($query);
+
+            // Sanitize
+            $this->name = htmlspecialchars(strip_tags($this->name));
+            $this->start = htmlspecialchars(strip_tags($this->start));
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            // Bind values
+            $stmt->bindParam(":name", $this->name);
+            $stmt->bindParam(":start", $this->start);
+            $stmt->bindParam(":id", $this->id);
+
+            // Execute query
+            if ($stmt->execute()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }
