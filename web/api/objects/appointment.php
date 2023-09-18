@@ -81,7 +81,7 @@ class Appointment
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set values to object properties
-        $this->name = $row['name'];
-        $this->start = $row['start'];
+        $this->name = $row['name'] ?? null;
+        $this->start = $row['start'] ?? null;
     }
 }

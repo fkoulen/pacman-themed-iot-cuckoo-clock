@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<?php
-// Include the database connection file
-include_once("config.php");
-
-// Fetch the appointment record
-$id = $_GET['id'];
-$sql = "SELECT * FROM APPOINTMENT WHERE id = '$id' LIMIT 1";
-$result = mysqli_query($db, $sql);
-$data = mysqli_fetch_assoc($result);
-?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -21,20 +11,27 @@ $data = mysqli_fetch_assoc($result);
 <div class="container">
     <div class="row">
         <div class="text-center my-5"><h1>Edit Appointment</h1></div>
-        <div class="col-md-10 col-md-offset-1">
+        <!--            Show loading spinner -->
+        <div class="d-flex justify-content-center" id="loading">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <!--            Show error message -->
+        <div class="alert alert-danger d-none" id="error"></div>
+        <!--            Show form -->
+        <div id="form" class="d-none">
             <form method="post" action="update.php">
-                <input type="hidden" name="id" value="<?php echo $data['id'] ?>"/>
+                <input type="hidden" name="id" id="id"/>
                 <div class="modal-body">
                     <div class="form-group mb-2">
                         <label for="name">Name</label>
-                        <input id="name" type="text" required name="name" class="form-control"
-                               maxlength="<?php echo $MAX_LENGHT_APPOINTMENT_NAME ?>"
-                               value="<?php echo $data['name'] ?>"/>
+                        <input id="name" type="text" required name="name" class="form-control"/>
                     </div>
                     <div class=" form-group mb-2">
                         <label for="start">Date and time</label>
                         <input id="start" type="datetime-local" required name="start" class="form-control"
-                               value="<?php echo $data['start'] ?>"/>
+                        />
                     </div>
                 </div>
                 <div class="modal-footer gap-2 mt-4">
@@ -50,5 +47,6 @@ $data = mysqli_fetch_assoc($result);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+<script src="js/appointment/read_one.js"></script>
 </body>
 </html>
