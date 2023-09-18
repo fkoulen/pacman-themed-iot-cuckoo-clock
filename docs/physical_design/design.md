@@ -49,11 +49,11 @@ Inspiration for case:
 - [Modern cuckoo clocks](https://www.home-designing.com/unique-modern-style-cuckoo-wall-clocks-for-sale)
 
 <figure class="inline start" markdown>
-![Modern Cuckoo Black](https://i0.wp.com/www.thelindentreedecor.co.uk/wp-content/uploads/2022/05/F6D89CD7-9718-42D1-A55B-4D6E639A79F3.jpeg?fit=777%2C573&ssl=1)
+![Modern Cuckoo Black](https://i0.wp.com/www.thelindentreedecor.co.uk/wp-content/uploads/2022/05/F6D89CD7-9718-42D1-A55B-4D6E639A79F3.jpeg?fit=777%2C573&ssl=1){ width="600" }
   <figcaption>Modern Cuckoo Clock</figcaption>
 </figure>
 <figure markdown>
-![Pac-Man](https://www.posters.nl/media/catalog/product/cache/cb3faf85ecb1e071fdba48f981c86454/p/a/pac-man-maze-poster-61x91.5cm.jpg)
+![Pac-Man](https://www.posters.nl/media/catalog/product/cache/cb3faf85ecb1e071fdba48f981c86454/p/a/pac-man-maze-poster-61x91.5cm.jpg){ width="300" }
   <figcaption>Pac-Man</figcaption>
 </figure>
 
@@ -101,7 +101,7 @@ Choice the material and manufacturing method you want to use
   (Describe what properties of the material fit your concept best. For example: Think about the strength, or speed of
   creating with the device and the chosen material)
 
-### Device
+## Device
 
 To create the physical product I will use the following devices:
 
@@ -113,14 +113,22 @@ To create the physical product I will use the following devices:
   button tops.
 - [3D printer](https://www.fablabamersfoort.nl/machines/3d-printer/)
 
-### Material
-**Case**
+## Material
+**Case**  
 The case will be made out of plexiglas. The plexiglas will be black and the game layout will be engraved on the
 plate. The holes for the LCD, buttons and buzzer will be cut out of the plate. I have chosen for plexiglas because the 
 color of the plexiglas will fit the theme of the product. The plexiglas is also easy to cut and engrave with the laser,
 but strong enough to be a case for my product.
 
-**Pac-Man and Ghosts**
+**Pac-Man and Ghosts**  
 The Pac-Man and Ghosts will be 3D printed. I have chosen for PLA because it is easy to print with, and it is strong
 enough to be used as a button top. I have chosen for yellow and black PLA because it fits the theme of the product.
 For the ghosts I have not yet chosen the color of PLA. I will probably go with the colors of the ghosts in the game.
+
+# Digital Design
+Create your digital design for your chosen manufacturing technique and material using appropriate software
+
+- [ ]  Choices for software are given
+- [ ]  Design process is documented
+- [ ]  Visuals of the software and different stages of the design are presented
+- [ ]  Design files consist of the different versions that were created and that are described in your documentation.
