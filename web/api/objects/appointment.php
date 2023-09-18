@@ -13,9 +13,9 @@ class Appointment
     private PDO $conn;
     private string $table_name = "appointment";
 
-    public $id;
-    public $name;
-    public $start;
+    public ?string $id;
+    public ?string $name;
+    public ?string $start;
 
     public function __construct($db)
     {
@@ -23,7 +23,7 @@ class Appointment
     }
 
     // Read appointments
-    function read()
+    function read(): bool|PDOStatement
     {
         // Select all query
         $query = "SELECT * FROM " . $this->table_name . " ORDER BY start";
@@ -38,7 +38,7 @@ class Appointment
     }
 
     // Create appointment
-    function create()
+    function create(): bool
     {
         // Query to insert record
         $query = "INSERT INTO " . $this->table_name . " SET name=:name, start=:start";
@@ -60,5 +60,28 @@ class Appointment
         }
 
         return false;
+    }
+
+    // Read one appointment
+    function readOne(): void
+    {
+        // Query to read single record
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
+
+        // Prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind id of appointment to be read
+        $stmt->bindParam(1, $this->id);
+
+        // Execute query
+        $stmt->execute();
+
+        // Get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set values to object properties
+        $this->name = $row['name'];
+        $this->start = $row['start'];
     }
 }
