@@ -22,10 +22,10 @@ fetch(API_APPOINTMENT_READ).then(response => {
             appointments.forEach(appointment => {
                 appointmentsHTML += `
                 <tr>
-                    <td>${appointment.name}</td>
-                    <td>${appointment.start}</td>
-                    <td><a href="edit.php?id=${appointment.id}" class="btn btn-primary">Edit</a></td>
-                    <td><a href="delete.php?id=${appointment.id}" class="btn btn-danger">Delete</a></td>
+                    <td class="col-4">${appointment.name}</td>
+                    <td class="col-6">${appointment.start}</td>
+                    <td class="text-end"><a href="edit.html?id=${appointment.id}" class="btn btn-primary">Edit</a></td>
+                    <td class="text-end"><button class="btn btn-danger" onclick="deleteAppointment('${appointment.id}');" >Delete</button></td>
                 </tr>
             `;
             });
