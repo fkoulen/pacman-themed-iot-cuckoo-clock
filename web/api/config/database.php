@@ -1,6 +1,6 @@
 <?php
 /*
- * Database configuration.
+ * Class that handles connecting to the database.
  *
  * @author F.S. Koulen
  * @date 2023-09-17

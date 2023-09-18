@@ -1,8 +1,7 @@
 <?php
 /*
- * File that updates an appointment in the database. It takes the id of the appointment to update as a parameter and
- * the new name and start time of the appointment in JSON format. It returns a JSON response with a message that
- * indicates whether the appointment was updated or not.
+ * Decode the JSON body that is sent to this endpoint and update an appointment. Return a JSON response with a message
+ * that indicates whether the appointment was updated or not.
  *
  * @author F.S. Koulen
  * @date 2023-09-18

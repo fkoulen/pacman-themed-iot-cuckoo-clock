@@ -1,7 +1,7 @@
 <?php
 /*
- * File that deletes an appointment from the database. It takes the id of the appointment to delete as a parameter and
- * returns a JSON response with a message that indicates whether the appointment was deleted or not.
+ * Decode the id that is sent through JSON and delete an appointment from the database. Returns a JSON response with a
+ * message that indicates whether the appointment was deleted or not.
  *
  * @author F.S. Koulen
  * @date 2023-09-18

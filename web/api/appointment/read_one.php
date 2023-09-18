@@ -1,4 +1,12 @@
 <?php
+/*
+ * Get the id from the URL and retrieve the appointment with that id from the database. Return a JSON response with the
+ * appointment data or a message if the appointment does not exist.
+ *
+ * @author F.S. Koulen
+ * @date 2023-09-18
+ */
+
 // Required headers
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET");

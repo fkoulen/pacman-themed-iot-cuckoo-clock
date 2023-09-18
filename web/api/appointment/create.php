@@ -1,6 +1,7 @@
 <?php
 /*
- * Create an appointment. The data is sent as JSON in the request body. The response is JSON as well.
+ * Decode the JSON data that is sent to this endpoint and create a new appointment. Return a JSON response with a
+ * message that indicates whether the appointment was created or not.
  *
  * @author: F.S. Koulen
  * @date 2023-09-17

@@ -1,6 +1,6 @@
 <?php
 /*
- * Retrieve all appointments
+ * Retrieve all appointments from the database and return them as JSON. Return a message if no appointments are found.
  *
  * @author F.S. Koulen
  * @date 2023-09-17
@@ -55,7 +55,5 @@ if ($num > 0) {
     http_response_code(404);
 
     // Tell the user no appointments found
-    echo json_encode(
-        array("message" => "No appointments found.")
-    );
+    echo json_encode(array("message" => "No appointments found."));
 }
