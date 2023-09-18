@@ -13,15 +13,34 @@ title: Learning Journal
 > your learning journal. You can also write down what you have learned from the feedback, and how you will apply it in
 > your project.
 
+# Week 3
+
+### Monday (18th of September)
+
+I also worked on the design phase of physical design. I decided that my product will be Pac-Man themed I have created a
+couple of sketches and looked into what materials and manufacturing techniques I will be using.
+
+![Sketch](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1695039160/hva/iot/sketch_jnana2.png)
+
+Today I also worked on the web application. I created the Read One, Update & Delete endpoints. I also implemented these
+endpoints in the web application. The main functionality of the web application is now finished. This is what it
+currently looks like:
+
+![Home](assets/journal/home.png)
+![Create](assets/journal/create.png)
+![Edit](assets/journal/edit.png)
+
 # Week 2
 
 ### Sunday (17th of September)
-Today I continued working on the REST API. I implemented the Create & Read endpoint. So far I've learned more about 
+
+Today I continued working on the REST API. I implemented the Create & Read endpoint. So far I've learned more about
 classes and objects in PHP by using PHP Data Objects (PDO). I have also used these endpoints in my web application.
 
 ### Saturday (16th of September)
+
 Today I learned how to structure my code in a better way. I started with creating the REST API for my web application.
-I used [this tutorial](https://www.codeofaninja.com/create-simple-rest-api-in-php/) to help me with this. 
+I used [this tutorial](https://www.codeofaninja.com/create-simple-rest-api-in-php/) to help me with this.
 
 ### Thursday (14th of September)
 
@@ -31,9 +50,8 @@ course](https://www.udemy.com/course/build-crud-application-php-mysql/learn/lect
 Found this useful graphic of the Wemos D1 Mini pinout:
 ![](https://www.tinytronics.nl/shop/image/cache/catalog/products/product-003910/wemos-d1-mini-v4-esp8266-ch340-usb-c-pinout-600x600w.jpg)
 
-I also connected the WEMOS to Wi-Fi and retrieved the amount of chocolate cups from the koffiepunt API. Afterward I 
+I also connected the WEMOS to Wi-Fi and retrieved the amount of chocolate cups from the koffiepunt API. Afterward I
 started looking into creating my own API.
-
 
 ### Wednesday (13th of September)
 
