@@ -15,6 +15,14 @@ title: Learning Journal
 
 # Week 2
 
+### Sunday (17th of September)
+Today I continued working on the REST API. I implemented the Create & Read endpoint. So far I've learned more about 
+classes and objects in PHP by using PHP Data Objects (PDO). I have also used these endpoints in my web application.
+
+### Saturday (16th of September)
+Today I learned how to structure my code in a better way. I started with creating the REST API for my web application.
+I used [this tutorial](https://www.codeofaninja.com/create-simple-rest-api-in-php/) to help me with this. 
+
 ### Thursday (14th of September)
 
 Today I implemented CRUD functionality in my web application. I did this with the help of [this
