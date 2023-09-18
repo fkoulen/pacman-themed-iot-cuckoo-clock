@@ -28,7 +28,7 @@ $appointment->id = $_GET['id'] ?? die();
 $appointment->readOne();
 
 if ($appointment->name != null) {
-    // Create array
+    // Create array to be converted to a JSON object
     $appointment_arr = array(
         "id" => $appointment->id,
         "name" => $appointment->name,

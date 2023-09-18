@@ -42,5 +42,5 @@ if ($appointment->update()) {
     http_response_code(400);
 
     // Tell the user
-    echo json_encode(array("message" => "Unable to update appointment."));
+    echo json_encode(array("message" => "Unable to update appointment. Please check if the appointment exists."));
 }

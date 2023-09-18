@@ -30,7 +30,7 @@ The API currently has the following endpoints:
 ### Appointment
 
 ??? abstract "GET /appointment/read.php - Returns all appointments"
-  
+
       **Parameters**  
       None.
       
@@ -69,48 +69,147 @@ The API currently has the following endpoints:
         }
         ```
 
+  
+??? abstract "GET /appointment/read_one.php - Returns a single appointment"
+
+    **Parameters**  
+
+    * **id** - The id of the appointment.
+    
+    **Responses**  
+
+    * **200 OK** - The request was successful.   
+        The response contains a JSON object with the appointment.  
+
+        Example:  
+
+        ```json
+        {
+          "id": "77a702e8-5634-11ee-8f02-0242ac120002",
+          "name": "Nieuwe Afspraak",
+          "start": "2023-09-24 17:14:00"
+        }
+        ```
+
+    * **404 Not Found** - The appointment could not be found.   
+        The response contains a message about the error in `message`.
+
+        Example: 
+
+        ```json
+        {
+            "message": "Appointment does not exist."
+        }
+        ```
+  
 ??? abstract "POST /appointment/create.php - Creates a new appointment"
 
-       **Parameters**  
+     **Parameters**  
+      JSON object with the following properties:  
 
-       * **name** - The name of the appointment.
-       * **start** - The start date and time of the appointment in the format `YYYY-MM-DDTHH:MM:SS`.
-        
-       **Responses**  
-    
-       * **201 Created** - The appointment was created successfully.   
-        The response contains the following message in `message`:  `Appointment was created.`.
-    
+     * **name** - The name of the appointment.  
+     * **start** - The start date and time of the appointment in the format `YYYY-MM-DDTHH:MM:SS`.  
+      
+     **Responses**  
+  
+     * **201 Created** - The appointment was created successfully.   
+      The response contains the following message in `message`:  `Appointment was created.`.
+  
+      Example:  
+  
+      ```json
+        {
+           "message": "Appointment was created."
+        }
+      ```
+  
+     * **400 Bad Request** - The appointment could not be created.   
+      The appointment could not be created since there is missing data. 
+      The response contains a message about the error in `message`.
+  
+      Example: 
+  
+      ```json
+      {
+          "message": "Unable to create appointment. Data is incomplete."
+      }
+      ```
+
+     * **503 Service Unavailable** - The appointment could not be created.   
+      The appointment could not be created since the database is unavailable. 
+      The response contains a message about the error in `message`.
+  
+      Example: 
+  
+      ```json
+      {
+          "message": "Unable to create appointment. Service unavailable."
+      }
+      ```
+
+??? abstract "UPDATE /appointment/update.php - Update a single appointment"
+
+    **Parameters**
+
+    * **id** - The id of the appointment.
+    * **name** - The name of the appointment.
+    * **start** - The start date and time of the appointment in the format `YYYY-MM-DDTHH:MM:SS`.
+
+    **Responses**
+
+    * **200 OK** - The appointment was successfully updated.   
+        The response contains a message about the success in `message`.
+
         Example:  
-    
-        ```json
-          {
-             "message": "Appointment was created."
-          }
-        ```
-    
-       * **400 Bad Request** - The appointment could not be created.   
-        The appointment could not be created since there is missing data. 
-        The response contains a message about the error in `message`.
-    
-        Example: 
-    
+
         ```json
         {
-            "message": "Unable to create appointment. Data is incomplete."
+            "message": "Appointment was updated."
         }
         ```
 
-       * **503 Service Unavailable** - The appointment could not be created.   
-        The appointment could not be created since the database is unavailable. 
+    * **400 Bad Request** - The appointment could not be updated.
+
+        The appointment could not be updated since there is missing data or the appointment does not exist. 
         The response contains a message about the error in `message`.
-    
+
         Example: 
-    
+
         ```json
         {
-            "message": "Unable to create appointment. Service unavailable."
+            "message": "Unable to update appointment. Please check if the appointment exists."
+        }
+        ```  
+
+??? abstract "DELETE /appointment/delete.php - Delete a single appointment"  
+
+    **Parameters**  
+
+    * **id** - The id of the appointment.
+
+    **Responses**
+
+    * **200 OK** - The appointment was successfully deleted.   
+        The response contains a message about the success in `message`.
+
+        Example:  
+
+        ```json
+        {
+            "message": "Appointment was deleted."
         }
         ```
 
+    * **400 Bad Request** - The appointment could not be deleted.
+
+        The appointment could not be deleted since the appointment does not exist or could not be retrieved. 
+        The response contains a message about the error in `message`.
+
+        Example: 
+
+        ```json
+        {
+            "message": "Unable to delete appointment. The appointment does not exist or could not be retrieved."
+        }
+        ```
 

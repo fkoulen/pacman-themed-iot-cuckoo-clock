@@ -37,5 +37,5 @@ if ($appointment->delete()) {
     http_response_code(400);
 
     // Tell the user
-    echo json_encode(array("message" => "Unable to delete appointment."));
+    echo json_encode(array("message" => "Unable to delete appointment. The appointment does not exist or could not be retrieved."));
 }
