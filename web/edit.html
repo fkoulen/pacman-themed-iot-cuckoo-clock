@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="author" content="F.S. Koulen">
+    <meta name="description" content="Update appointments.">
+    <meta name="date" content="2023-09-18">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,7 +24,7 @@
         <div class="alert alert-danger d-none" id="error"></div>
         <!--            Show form -->
         <div id="form" class="d-none">
-            <form method="post" action="update.php">
+            <form method="post" action="" id="update-appointment-form">
                 <input type="hidden" name="id" id="id"/>
                 <div class="modal-body">
                     <div class="form-group mb-2">
@@ -34,9 +37,11 @@
                         />
                     </div>
                 </div>
+                <div class="alert alert-danger mt-4 d-none" id="update-appointment-error">
+                </div>
                 <div class="modal-footer gap-2 mt-4">
-                    <a href="index.html" class="btn btn-secondary">Cancel</a>
-                    <input type="submit" name="update" value="Update" class="btn btn-primary"/>
+                    <a href="index.html" class="btn btn-secondary" id="cancel-button">Cancel</a>
+                    <input type="submit" name="update" value="Update" class="btn btn-primary" id="submit-button"/>
                 </div>
             </form>
         </div>
@@ -48,5 +53,6 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 <script src="js/appointment/read_one.js"></script>
+<script src="js/appointment/update.js"></script>
 </body>
 </html>

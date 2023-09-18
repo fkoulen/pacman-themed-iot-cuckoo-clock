@@ -15,6 +15,11 @@ const id = window.location.href.split("=")[1];
 const MAX_APPOINTMENT_NAME_LENGTH = 50;
 document.getElementById("name").maxLength = MAX_APPOINTMENT_NAME_LENGTH;
 
+// Set min date to today for input for appointment start time
+const LENGTH_DATE_TIME = 16;
+document.getElementById("start").min = new Date().toISOString().slice(0, LENGTH_DATE_TIME);
+
+
 const API_APPOINTMENT_READ_ONE = "http://localhost/api/appointment/read_one.php?id=" + id;
 
 /**
@@ -39,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "GET",
     }).then(response => {
         response.json().then(data => {
-            if (response.status === 404) {
+            if (response.status !== 200) {
                 handleError("Error: " + data.message);
                 return;
             }
