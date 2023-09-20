@@ -1,9 +1,19 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#include <ArduinoJson.h>
 
 #define WIFI_SSID      "iotroam"
 #define WIFI_PASSWORD  "OQqcD8LpM7"
+#define API_URL "http://koulenf.loca.lt/api/appointment/read.php"
+
+
+#define JSON_BUFFER_SIZE 1024
+DynamicJsonDocument jsonBuffer(JSON_BUFFER_SIZE);
+
+JsonArray records; // Used to store all the appointments
+int currentAppointment = 0; // Index of the currently displayed appointment
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // Set the LCD address to 0x27 for 16 chars and 2 line display
 
@@ -47,10 +57,50 @@ void initializeWifi() {
     }
 }
 
+/**
+ * Store all appointments in the records variable
+ *
+ * @param payload The JSON payload from the API
+ */
+void storeAllAppointments(String payload) {
+    deserializeJson(jsonBuffer, payload);
+    records = jsonBuffer["records"];
+}
+
+/**
+ * Connect to the API and store all appointments if the connection is successful.
+ * If the connection is not successful, show an error message on the LCD.
+ */
+void connectToAPI() {
+    showText("Connecting", "to API...");
+    // Initialize a wi-fi client & http client
+    WiFiClient client;
+    HTTPClient httpClient;
+
+    // Set the URL of where the call should be made to.
+    httpClient.begin(client, API_URL);
+
+    // Make the GET-request, this returns the HTTP-code.
+    int httpCode = httpClient.GET();
+
+    // Check if the response is fine.
+    if (httpCode == HTTP_CODE_OK) { // HTTP_CODE_OK == 200
+        String payload = httpClient.getString();
+        storeAllAppointments(payload);
+    } else if (httpCode == HTTP_CODE_NOT_FOUND) {
+        showText("No appointments", "found");
+    } else {
+        String payload = httpClient.getString();
+        deserializeJson(jsonBuffer, payload);
+        String message = jsonBuffer["message"];
+        showText("Error ${httpCode}", message);
+    }
+}
+
 void setup() {
     initializeLCD();
     initializeWifi();
-    showText("Connected", "to Wi-Fi");
+    connectToAPI();
 }
 
 void loop() {
