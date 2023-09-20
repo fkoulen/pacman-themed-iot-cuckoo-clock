@@ -7,9 +7,9 @@
 #define WIFI_SSID      "iotroam"
 #define WIFI_PASSWORD  "OQqcD8LpM7"
 #define API_URL "http://koulenf.loca.lt/api/appointment/read.php"
-
-
 #define JSON_BUFFER_SIZE 1024
+#define NEXT_BUTTON 14
+
 DynamicJsonDocument jsonBuffer(JSON_BUFFER_SIZE);
 
 JsonArray records; // Used to store all the appointments
@@ -128,6 +128,8 @@ void printAppointment(JsonObject record) {
 }
 
 void setup() {
+    pinMode(NEXT_BUTTON, INPUT_PULLUP);
+    pinMode(LED_BUILTIN, OUTPUT);
     initializeLCD();
     initializeWifi();
     connectToAPI();
@@ -135,5 +137,14 @@ void setup() {
 }
 
 void loop() {
-
+    // On button press, show the next appointment
+    if (digitalRead(NEXT_BUTTON) == HIGH) {
+        currentAppointment++;
+        // If we are at the end of the appointments, go back to the first one
+        if (currentAppointment >= records.size()) {
+            currentAppointment = 0;
+        }
+        printAppointment(records[currentAppointment]);
+        delay(250); // Wait 250ms to prevent multiple button presses
+    }
 }
