@@ -97,10 +97,41 @@ void connectToAPI() {
     }
 }
 
+/**
+ * Set the prefix for the given row on the LCD
+ *
+ * @param prefix prefix to set
+ * @param row row to set the prefix on
+ */
+void setPrefix(String prefix, int row) {
+    lcd.setCursor(0, row);
+    lcd.print(prefix);
+}
+
+/**
+ * Print the given appointment on the LCD
+ *
+ * @param record The appointment to print
+ */
+void printAppointment(JsonObject record) {
+    // Get name
+    String name = record["name"];
+    // Get time
+    String time = record["start"];
+
+    lcd.clear();
+
+    setPrefix("Name: ", 0);
+    lcd.print(name); // Display the received name
+    setPrefix("Time: ", 1);
+    lcd.print(time); // Display the received time
+}
+
 void setup() {
     initializeLCD();
     initializeWifi();
     connectToAPI();
+    printAppointment(records[currentAppointment]); // Print the first appointment
 }
 
 void loop() {
