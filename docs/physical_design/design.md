@@ -59,7 +59,7 @@ Inspiration for case:
 
 ### Embedded Devices
 
-- Has a temperature sensor that measures the temperature
+- Has a temperature and humidity sensor that measures the temperature and humidity
 - Has an RTC module that keeps track of the time
 - Has an LCD that shows the current date & time, upcoming appointments and current temperature
 - Has a button to switch the content of the LCD (current date & time / upcoming appointments / current temperature)
@@ -68,7 +68,7 @@ Inspiration for case:
 - Has a buzzer that makes a sound every hour
 - Uses WEMOS to do the following:
     - Uses the WI-FI manager for configuration of SSID, User ID (UID) en Password (PWD) for connecting to the network.
-    - Send measured sensor temperature data to the application backend over http(s)
+    - Send measured temperature and humidity data to the application backend over http(s)
     - Retrieves appointments from the application backend over http(s)
 
 ### Web Application
