@@ -3,7 +3,8 @@
  * module to the time of the compilation of the code. This is done by using the
  * __DATE__ and __TIME__ macros.
  *
- * @author Makuna
+ * @author Michael C. Miller (Makuna)
+ * @editor F.S. Koulen
  * @date 2023-07-27
  */
 
@@ -56,6 +57,12 @@ void setup() {
     Serial.println(compiledTime);
 
     Rtc.Begin();
+    // To set the date and time manually, uncomment the following line and
+    // replace the date and time with the desired values. The format is
+    // "MMM DD YYYY", "HH:MM:SS". Then upload the code and press the reset
+    // button when the desired date time is reached to set the RTC time.
+
+    // Rtc.SetDateTime(RtcDateTime("Sep 27 2023", "22:41:30"));
 
     RtcDateTime compiled = RtcDateTime(compiledDate, compiledTime);
     printDateTime(compiled);
