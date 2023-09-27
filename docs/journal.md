@@ -13,8 +13,37 @@ title: Learning Journal
 > your learning journal. You can also write down what you have learned from the feedback, and how you will apply it in
 > your project.
 
+# Q & A
+
+| Date       | Question                                                                | Answer |
+|------------|-------------------------------------------------------------------------|--------|
+| 2023-09-21 | Are we allowed to use existing STL files for our 3D printed product?    |        |
+| 2023-09-21 | Should we test (as in write test cases) and deploy our websites online? |        |
+
 # Week 3
+
+### Wednesday (27th of September)
+Today I worked on the embedded device. I found out how to configure the time on the RTC. After that I worked on 
+displaying the time from the RTC on the LCD.
+
+Here is the result:
+<figure class="inline start" markdown>
+  ![Circuit](assets/journal/cirkit-display-rtc-time.png)
+  <figcaption>Circuit</figcaption>
+</figure>
+
+<figure markdown>
+  ![type:video](https://res.cloudinary.com/dr6r2hv4m/video/upload/v1695849030/hva/iot/display_rtc_time_device_v1.mp4)
+  <figcaption>The Embedded Device</figcaption>
+</figure>
+
+### Thursday (21st of September)
+
+Today I first followed the class of Business and Trends. It was about (digital) globalisation. Afterward I worked on
+updating the Web section of my portfolio.
+
 ### Wednesday (20th of September)
+
 Today I worked on my embedded device. I have created a simple circuit with a button and an LCD. On startup the LCD
 shows the current state that it is in. It starts with initialized the LCD, then the Wi-Fi, it then connects to the
 API, and finally it shows the first appointment. When the button is pressed it will show the next appointment.
@@ -29,10 +58,9 @@ API, and finally it shows the first appointment. When the button is pressed it w
   <figcaption>The Embedded Device</figcaption>
 </figure>
 
-Here is the circuit diagram:  
+Here is the circuit diagram:
 
 ![Circuit](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1695222728/hva/iot/circuit_g3j58t.png)
-
 
 ### Monday (18th of September)
 
