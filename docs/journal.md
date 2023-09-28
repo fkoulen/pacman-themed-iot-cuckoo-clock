@@ -15,15 +15,28 @@ title: Learning Journal
 
 # Q & A
 
-| Date       | Question                                                                | Answer |
-|------------|-------------------------------------------------------------------------|--------|
-| 2023-09-21 | Are we allowed to use existing STL files for our 3D printed product?    |        |
-| 2023-09-21 | Should we test (as in write test cases) and deploy our websites online? |        |
+| Date       | Question                                                                | Answer                                                                                                                                                                                                                        |
+|------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2023-09-21 | Are we allowed to use existing STL files for our 3D printed product?    | Yes, make sure to credit it and explain why you have chosen to use this. - Mats                                                                                                                                               |
+| 2023-09-21 | Should we test (as in write test cases) and deploy our websites online? | For testing, use the simplest form; so test manually and describe how you've done it. For the deployment part; you do not need to deploy the application. However, make sure to write down how to set up your project. - Mats |
+| 2023-09-28 | What do you need to do for EMBRQ#05                                     | Check this out: https://github.com/tzapu/WiFiManager - Mats                                                                                                                                                                   |
 
-# Week 3
+# Week 4
 
+### Thursday (28th of September)
+
+Today I first followed the class of Business and Trends. It was about China. Afterward I retrieved the KY-015 sensor
+from Miguel and connected it to the WEMOS. I then found some code and tested the sensor out. I then created an endpoint
+in the API to post measurements to. After that, I created a script that successfully posts the measurements to the API
+every 10 seconds. I also got some of my questions answered by Mats.
+
+Here are some links I used:
+
+- [ESP32 HTTP GET and HTTP POST with Arduino IDE (JSON, URL Encoded, Text)](https://randomnerdtutorials.com/esp32-http-get-post-arduino/)  
+- [KY-015 COMBI-SENSOR (TEMPERATURE & HUMIDITY)](https://sensorkit.joy-it.net/en/sensors/ky-015)
 ### Wednesday (27th of September)
-Today I worked on the embedded device. I found out how to configure the time on the RTC. After that I worked on 
+
+Today I worked on the embedded device. I found out how to configure the time on the RTC. After that I worked on
 displaying the time from the RTC on the LCD.
 
 Here is the result:
@@ -36,6 +49,8 @@ Here is the result:
   ![type:video](https://res.cloudinary.com/dr6r2hv4m/video/upload/v1695849030/hva/iot/display_rtc_time_device_v1.mp4)
   <figcaption>The Embedded Device</figcaption>
 </figure>
+
+## Week 3
 
 ### Thursday (21st of September)
 
@@ -94,7 +109,7 @@ I used [this tutorial](https://www.codeofaninja.com/create-simple-rest-api-in-ph
 Today I implemented CRUD functionality in my web application. I did this with the help of [this
 course](https://www.udemy.com/course/build-crud-application-php-mysql/learn/lecture/7000068#reviews).
 
-Found this useful graphic of the Wemos D1 Mini pinout:
+Found this useful graphic of the Wemos D1 Mini pin out:
 ![](https://www.tinytronics.nl/shop/image/cache/catalog/products/product-003910/wemos-d1-mini-v4-esp8266-ch340-usb-c-pinout-600x600w.jpg)
 
 I also connected the WEMOS to Wi-Fi and retrieved the amount of chocolate cups from the koffiepunt API. Afterward I
@@ -119,7 +134,7 @@ Today I watched and did the assignment in the following videos:
 * [Arduino Tutorial 16: Fun With Arduino For Loops](https://www.youtube.com/watch?v=5cd_8AmkI04&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=16)
 * [Arduino Tutorial 17: Understanding Arduino While Loops](https://www.youtube.com/watch?v=CITZIv3SmvU&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=17)
 * [Arduino Tutorial 18: Reading Numbers from the Serial Monitor](https://www.youtube.com/watch?v=7aP5KL5clWA&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=18)
-* [Arduino Tutorial 48: Connecting and Using an LCD Display](https://www.youtube.com/watch?v=4BaDaGTUgIY&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=48)
+* [Arduino Tutorial 48: Connecting and Using an LCD](https://www.youtube.com/watch?v=4BaDaGTUgIY&list=PLGs0VKk2DiYw-L-RibttcvK-WBZm8WLEP&index=48)
 
 I also built a couple of things:
 <figure class="inline start" markdown>
