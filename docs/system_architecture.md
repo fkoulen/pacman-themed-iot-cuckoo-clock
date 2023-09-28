@@ -1,5 +1,15 @@
 # System Architecture
 
-On this page you can describe the system architecture of your full-project. This includes the architecture of the software, the hardware and the communication between them. Make sure you create a clear overview, don't forget everything that is included in the existing Docker environment.
+## Introduction
 
-Keep your system architecture up-to-date during the project. It is a living document that should reflect the current state of your project.
+[Short description on the purpose of having a system architecture diagram]
+
+## Legenda
+
+[Explanation of symbols used in your system architecture diagram]
+
+## System Architecture Diagram
+
+[A picture of your system architecture diagram goes here]
+[All subsystem are in the diagram and contain the correct components. All components are in the diagram.]
+[Text explaining the function of each of the components goes here]
