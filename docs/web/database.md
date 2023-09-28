@@ -10,8 +10,7 @@
   instructions on how to use.
 
 ## Build script
-
-![TODO](link to build .sql)
+[SQL Build file](./seed.sql){:download="seed.sql"}
 
 ## Database diagram
 
