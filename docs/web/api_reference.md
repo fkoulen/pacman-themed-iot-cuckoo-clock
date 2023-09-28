@@ -69,7 +69,6 @@ The API currently has the following endpoints:
         }
         ```
 
-  
 ??? abstract "GET /appointment/read_one.php - Returns a single appointment"
 
     **Parameters**  
@@ -101,7 +100,7 @@ The API currently has the following endpoints:
             "message": "Appointment does not exist."
         }
         ```
-  
+
 ??? abstract "POST /appointment/create.php - Creates a new appointment"
 
      **Parameters**  
@@ -113,39 +112,39 @@ The API currently has the following endpoints:
      **Responses**  
   
      * **201 Created** - The appointment was created successfully.   
-      The response contains the following message in `message`:  `Appointment was created.`.
-  
-      Example:  
-  
-      ```json
-        {
-           "message": "Appointment was created."
-        }
-      ```
+          The response contains the following message in `message`:  `Appointment was created.`.
+      
+          Example:  
+      
+          ```json
+            {
+               "message": "Appointment was created."
+            }
+          ```
   
      * **400 Bad Request** - The appointment could not be created.   
-      The appointment could not be created since there is missing data. 
-      The response contains a message about the error in `message`.
-  
-      Example: 
-  
-      ```json
-      {
-          "message": "Unable to create appointment. Data is incomplete."
-      }
-      ```
+          The appointment could not be created since there is missing data. 
+          The response contains a message about the error in `message`.
+      
+          Example: 
+      
+          ```json
+          {
+              "message": "Unable to create appointment. Data is incomplete."
+          }
+          ```
 
      * **503 Service Unavailable** - The appointment could not be created.   
-      The appointment could not be created since the database is unavailable. 
-      The response contains a message about the error in `message`.
-  
-      Example: 
-  
-      ```json
-      {
-          "message": "Unable to create appointment. Service unavailable."
-      }
-      ```
+          The appointment could not be created since the database is unavailable. 
+          The response contains a message about the error in `message`.
+      
+          Example: 
+      
+          ```json
+          {
+              "message": "Unable to create appointment. Service unavailable."
+          }
+          ```
 
 ??? abstract "UPDATE /appointment/update.php - Update a single appointment"
 
@@ -181,7 +180,7 @@ The API currently has the following endpoints:
         }
         ```  
 
-??? abstract "DELETE /appointment/delete.php - Delete a single appointment"  
+??? abstract "DELETE /appointment/delete.php - Delete a single appointment"
 
     **Parameters**  
 
@@ -213,3 +212,49 @@ The API currently has the following endpoints:
         }
         ```
 
+### Measurement
+
+??? abstract "POST /measurement/create.php - Creates a new measurement"
+
+     **Parameters**  
+      JSON object with the following properties:  
+
+     * **temperature** - The temperature in Celsius degrees in DECIMAL(4,2).  
+     * **humidity** - The humidity in percentage in DECIMAL(4,2).  
+      
+     **Responses**  
+  
+     * **201 Created** - The appointment was created successfully.   
+          The response contains a message about the success in `message`.  
+    
+          Example:  
+      
+          ```json
+            {
+               "message": "Measurement was created."
+            }
+          ```
+  
+     * **400 Bad Request** - The measurement could not be created.   
+          The measurement could not be created since there is missing data. 
+          The response contains a message about the error in `message`.
+      
+          Example: 
+      
+          ```json
+          {
+              "message": "Unable to create measurement. Data is incomplete."
+          }
+          ```
+
+     * **503 Service Unavailable** - The measurement could not be created.   
+          The measurement could not be created since the database is unavailable. 
+          The response contains a message about the error in `message`.
+      
+          Example: 
+      
+          ```json
+          {
+              "message": "Unable to create measurement. Service unavailable."
+          }
+          ```
