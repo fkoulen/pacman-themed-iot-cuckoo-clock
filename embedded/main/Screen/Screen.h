@@ -6,7 +6,7 @@
 #define SCREEN_H
 
 #include <Arduino.h>
-#include "../constants.h"
+#include "../Constants.h"
 #include "LiquidCrystal_I2C.h"
 
 class Screen {

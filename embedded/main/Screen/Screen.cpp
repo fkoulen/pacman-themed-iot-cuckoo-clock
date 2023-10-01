@@ -7,17 +7,17 @@
 
 #include "Screen.h"
 
-Screen::Screen() {
-    initializeLCD();
-}
+Screen::Screen() { }
 
 /**
  * Initialize the LCD
  */
 void Screen::initializeLCD() {
+    Serial.println("Initializing LCD...");
     lcd.init();
     lcd.backlight();
     printText("Initializing...", "Please wait...");
+    Serial.println("LCD initialized.");
 }
 
 /**
