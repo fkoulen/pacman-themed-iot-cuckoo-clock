@@ -8,7 +8,7 @@
 class WiFiManager {
 public:
     WiFiManager();
-    explicit WiFiManager(Screen screen);
+    void setScreen(Screen screen);
     void initializeWiFi(String ssid, String password);
 private:
     Screen screen;

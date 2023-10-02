@@ -49,7 +49,7 @@ void printDateTime(const RtcDateTime &dateTime) {
 void setup() {
     char compiledDate[12] = __DATE__;
     char compiledTime[9] = __TIME__;
-    Serial.begin(57600);
+    Serial.begin(115200);
 
     Serial.println();
     Serial.print("compiled: ");

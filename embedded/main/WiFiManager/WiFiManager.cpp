@@ -2,8 +2,11 @@
 
 WiFiManager::WiFiManager() {}
 
-WiFiManager::WiFiManager(Screen screen) {
-    this->screen = screen;
+/**
+ * Set the screen object
+ */
+void WiFiManager::setScreen(Screen givenScreen) {
+    this->screen = givenScreen;
 }
 
 
