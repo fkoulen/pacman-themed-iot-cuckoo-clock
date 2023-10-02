@@ -11,7 +11,6 @@
 #include <Arduino.h>
 #include "../Screen/Screen.h"
 #include <RtcDS1302.h>
-#include "../main.h"
 
 class TimeManager {
 public:

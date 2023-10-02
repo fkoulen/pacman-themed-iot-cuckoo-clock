@@ -9,7 +9,6 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include "../Screen/Screen.h"
-#include "../main.h"
 
 
 class Hygrometer {

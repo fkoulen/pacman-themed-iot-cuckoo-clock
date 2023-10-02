@@ -22,18 +22,22 @@ const int NUMBER_OF_DISPLAYS = sizeof(DisplayState) / sizeof(int) + 1;
 DisplayState currentDisplayState = TIME;
 unsigned long lastDisplayUpdateTime = 0;
 
-void setup() {
-    pinMode(NEXT_BUTTON_PIN, INPUT_PULLUP);
-    Serial.begin(SERIAL_BAUD_RATE);
-    Serial.println(); // Print empty line to separate boot messages from the rest of the output
-
+/*
+ * Initialize the screen and set the screen for the other components
+ */
+void initializeScreen() {
     screen.initializeLCD();
     wifiManager.setScreen(screen);
     timeManager.setScreen(screen);
     hygrometer.setScreen(screen);
+}
 
-//    wifiManager.initializeWiFi(WIFI_SSID, WIFI_PASSWORD);
-
+void setup() {
+    pinMode(NEXT_BUTTON_PIN, INPUT_PULLUP);
+    Serial.begin(SERIAL_BAUD_RATE);
+    Serial.println(); // Print empty line to separate boot messages from the rest of the output
+    initializeScreen();
+    wifiManager.initializeWiFi(WIFI_SSID, WIFI_PASSWORD);
 }
 
 /**
