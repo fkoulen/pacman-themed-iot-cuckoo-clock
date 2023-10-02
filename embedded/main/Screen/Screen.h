@@ -1,7 +1,10 @@
 /**
  * Create a Screen object to print text on the LCD screen.
  *
+ * @author F.S. Koulen
+ * @date 2023-10-02
  */
+
 #ifndef SCREEN_H
 #define SCREEN_H
 

@@ -1,6 +1,9 @@
-//
-// Created by feryl on 02/10/2023.
-//
+/**
+ * Create a TimeManager object to display the time on the screen
+ *
+ * @author F.S. Koulen
+ * @date 2023-10-02
+ */
 
 #ifndef TIME_MANAGER_H
 #define TIME_MANAGER_H

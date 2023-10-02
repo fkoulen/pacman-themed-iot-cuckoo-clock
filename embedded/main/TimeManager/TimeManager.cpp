@@ -1,13 +1,29 @@
+/**
+ * Implementation of the TimeManager class. This class is used to display the time on the LCD screen.
+ *
+ * @author F.S. Koulen
+ * @date 2023-10-02
+ */
 #include "TimeManager.h"
 #include <RtcDS1302.h>
-
+/**
+ * Constructor for the TimeManager class.
+ *
+ * @param rtc The RTC object to use for getting the time.
+ */
 TimeManager::TimeManager(RtcDS1302<ThreeWire> rtc) : rtc(rtc) {
 }
 
+/**
+ * Set the screen to use for displaying the time.
+ */
 void TimeManager::setScreen(Screen givenScreen) {
     this->screen = givenScreen;
 }
 
+/**
+ * Display the time on the screen.
+ */
 void TimeManager::displayTime() {
     RtcDateTime now = rtc.GetDateTime();
 

@@ -1,17 +1,29 @@
+/**
+ * Implementation of the WiFiManager class.
+ * This class is used to connect to the Wi-Fi network.
+ */
+
 #include "WiFiManager.h"
 
+/**
+ * Constructor of the WiFiManager class
+ */
 WiFiManager::WiFiManager() {}
 
 /**
- * Set the screen object
+ * Set the screen to be used by the WiFiManager
+ *
+ * @param givenScreen The screen object
  */
 void WiFiManager::setScreen(Screen givenScreen) {
     this->screen = givenScreen;
 }
 
-
 /**
- * Initialize the WiFi connection
+ * Initialize the Wi-Fi connection
+ *
+ * @param ssid      The SSID of the Wi-Fi network
+ * @param password  The password of the Wi-Fi network
  */
 void WiFiManager::initializeWiFi(String ssid, String password) {
     screen.printText("Connecting to", "Wi-Fi...");

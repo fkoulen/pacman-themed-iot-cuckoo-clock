@@ -1,3 +1,10 @@
+/**
+ * Create a WifiManager object to connect to a Wi-Fi network
+ *
+ * @author F.S. Koulen
+ * @date 2023-10-02
+ */
+
 #ifndef WIFI_MANAGER_H
 #define WIFI_MANAGER_H
 

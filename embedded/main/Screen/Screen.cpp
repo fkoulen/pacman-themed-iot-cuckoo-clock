@@ -1,5 +1,6 @@
 /**
- * Implementation of the Screen class
+ * Implementation of the Screen class. This class is used to control the LCD.
+ * It contains methods to initialize the LCD and to print text on the LCD.
  *
  * @author F.S. Koulen
  * @date 2023-10-02
