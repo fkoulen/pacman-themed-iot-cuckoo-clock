@@ -62,7 +62,7 @@ void setup() {
     // "MMM DD YYYY", "HH:MM:SS". Then upload the code and press the reset
     // button when the desired date time is reached to set the RTC time.
 
-    // Rtc.SetDateTime(RtcDateTime("Sep 27 2023", "22:41:30"));
+    // Rtc.SetDateTime(RtcDateTime("Oct 2 2023", "02:43:15"));
 
     RtcDateTime compiled = RtcDateTime(compiledDate, compiledTime);
     printDateTime(compiled);

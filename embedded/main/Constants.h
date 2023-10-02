@@ -11,9 +11,12 @@
 #define CHARACTERS_PER_LINE 16
 #define NUMBER_OF_LINES 2
 
+#define DHT_TYPE DHT11 // Temperature & Humidity Sensor KY-015 is type DHT11
+
 // --------------------- PINS
 #define RTC_CLK_PIN 15
 #define RTC_DAT_PIN 13
 #define RTC_RST_PIN 12
+#define DHT_PIN     2   // Temperature & Humidity Sensor Pin
 
 #endif //CONSTANTS_H
