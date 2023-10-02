@@ -17,6 +17,7 @@ class Screen {
         Screen();
         void initializeLCD();
         void printText(String firstLine, String secondLine);
+        void clear();
     private:
         LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCD_ADDRESS, 16, 2);
 };

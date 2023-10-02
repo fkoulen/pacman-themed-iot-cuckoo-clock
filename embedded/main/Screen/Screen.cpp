@@ -8,7 +8,7 @@
 
 #include "Screen.h"
 
-Screen::Screen() { }
+Screen::Screen() {}
 
 /**
  * Initialize the LCD
@@ -33,4 +33,11 @@ void Screen::printText(String firstLine, String secondLine) {
     lcd.print(firstLine);
     lcd.setCursor(0, 1);
     lcd.print(secondLine);
+}
+
+/**
+ * Clear the LCD
+ */
+void Screen::clear() {
+    lcd.clear();
 }

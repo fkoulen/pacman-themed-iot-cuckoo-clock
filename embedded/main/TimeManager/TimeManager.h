@@ -11,16 +11,17 @@
 #include <Arduino.h>
 #include "../Screen/Screen.h"
 #include <RtcDS1302.h>
+#include "../main.h"
 
 class TimeManager {
 public:
     TimeManager(RtcDS1302<ThreeWire> rtc);
     void setScreen(Screen screen);
     void displayTime();
+    int updateInterval = 1000;
 private:
     RtcDS1302<ThreeWire> rtc;
     Screen screen;
-    int LCD_UPDATE_INTERVAL = 1000;
 };
 
 

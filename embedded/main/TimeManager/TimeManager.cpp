@@ -41,7 +41,5 @@ void TimeManager::displayTime() {
     sprintf(timeString, "Time: %02d:%02d:%02d", now.Hour(), now.Minute(), now.Second());
 
     screen.printText(dateString, timeString);
-
-    delay(LCD_UPDATE_INTERVAL);
 }
 

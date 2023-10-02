@@ -56,7 +56,6 @@ void Hygrometer::displayState() {
     if (isnan(temperature) || isnan(humidity)) {
         Serial.println("Failed to read from DHT sensor!");
         screen.printText("Failed to read", "from DHT sensor!");
-        delay(interval);
         return;
     }
 
@@ -65,6 +64,4 @@ void Hygrometer::displayState() {
     String secondLine = "Humidity: " + String(humidity) + "%";
 
     screen.printText(firstLine, secondLine);
-
-    delay(interval);
 }

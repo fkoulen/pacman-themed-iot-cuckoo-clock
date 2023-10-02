@@ -9,6 +9,8 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include "../Screen/Screen.h"
+#include "../main.h"
+
 
 class Hygrometer {
 public:
@@ -22,10 +24,11 @@ public:
 
     void displayState();
 
+    int updateInterval = 10 * 1000;
+
 private:
     DHT dht;
     Screen screen;
-    int interval = 10 * 1000;
 };
 
 

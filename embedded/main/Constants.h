@@ -18,5 +18,6 @@
 #define RTC_DAT_PIN 13
 #define RTC_RST_PIN 12
 #define DHT_PIN     2   // Temperature & Humidity Sensor Pin
+#define NEXT_BUTTON_PIN  14
 
 #endif //CONSTANTS_H
