@@ -14,11 +14,13 @@
 #include "../TimeManager/TimeManager.h"
 #include "../Hygrometer/Hygrometer.h"
 #include "../Appointments/Appointments.h"
+#include "../CuckooMechanism/CuckooMechanism.h"
 
 
 class StateManager {
 public:
-    StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer, Appointments appointments);
+    StateManager(Screen screen, CuckooMechanism cuckooMechanism, TimeManager timeManager, Hygrometer hygrometer,
+                 Appointments appointments);
 
     void initialize(const Screen &givenScreen);
 
@@ -30,14 +32,17 @@ public:
 
 private:
     Screen screen;
+    CuckooMechanism cuckooMechanism;
     TimeManager timeManager;
     Hygrometer hygrometer;
     Appointments appointments;
+
     enum DisplayState {
         TIME,
         HYGROMETER,
         APPOINTMENTS
     };
+
     const int NUMBER_OF_DISPLAYS = 3; // Update this when adding a new display state
     DisplayState currentDisplayState = TIME;
     unsigned long lastDisplayUpdateTime = 0;

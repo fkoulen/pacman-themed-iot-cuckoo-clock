@@ -6,6 +6,7 @@
 #include "TimeManager/TimeManager.h"
 #include "Hygrometer/Hygrometer.h"
 #include "Appointments/Appointments.h"
+#include "CuckooMechanism/CuckooMechanism.h"
 
 Screen screen = Screen();
 WiFiManager wifiManager;
@@ -14,7 +15,8 @@ TimeManager timeManager = TimeManager(rtcWiring);
 DHT dht(DHT_PIN, DHT_TYPE);
 Hygrometer hygrometer = Hygrometer(dht);
 Appointments appointments = Appointments();
-StateManager stateManager = StateManager(screen, timeManager, hygrometer, appointments);
+CuckooMechanism cuckooMechanism = CuckooMechanism();
+StateManager stateManager = StateManager(screen, cuckooMechanism, timeManager, hygrometer, appointments);
 
 void setup() {
     pinMode(NEXT_BUTTON_PIN, INPUT_PULLUP);

@@ -26,7 +26,7 @@ public:
     void clear();
 
 private:
-    LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCD_ADDRESS, 16, 2);
+    LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCD_ADDRESS, CHARACTERS_PER_LINE, NUMBER_OF_LINES);
 };
 
 #endif //SCREEN_H

@@ -1,12 +1,3 @@
-//
-// Created by feryl on 30/09/2023.
-//
-
-#ifndef IOT_KOULENF_PITCHES_H
-#define IOT_KOULENF_PITCHES_H
-
-#endif //IOT_KOULENF_PITCHES_H
-
 /*************************************************
 
  * Public Constants
