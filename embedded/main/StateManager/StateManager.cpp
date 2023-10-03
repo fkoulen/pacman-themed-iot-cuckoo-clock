@@ -11,19 +11,22 @@
 /**
  * Initialize the state manager
  */
-StateManager::StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer)
-        : screen(std::move(screen)), timeManager(std::move(timeManager)), hygrometer(std::move(hygrometer)) {
+StateManager::StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer, Appointments appointments) :
+        screen(std::move(screen)), timeManager(std::move(timeManager)), hygrometer(std::move(hygrometer)),
+        appointments(std::move(appointments)) {
 }
 
 /**
- * Set the screen for the state manager and its components. Then change the display state to TIME.
+ * Set the givenScreen for the state manager and its components. Then change the display state to TIME.
  *
- * @param screen The screen
+ * @param givenScreen The givenScreen
  */
-void StateManager::initialize(const Screen &screen) {
-    this->screen = screen;
-    timeManager.setScreen(screen);
-    hygrometer.setScreen(screen);
+void StateManager::initialize(const Screen &givenScreen) {
+    this->screen = givenScreen;
+    timeManager.setScreen(givenScreen);
+    hygrometer.setScreen(givenScreen);
+    appointments.setScreen(givenScreen);
+    appointments.connectToAPI();
     changeCurrentDisplayState(TIME);
 }
 
@@ -39,6 +42,8 @@ String StateManager::getDisplayStateString(DisplayState displayState) {
             return "Time";
         case HYGROMETER:
             return "Hygrometer";
+        case APPOINTMENTS:
+            return "Appointments";
         default:
             return "Time";
     }
@@ -55,6 +60,8 @@ int StateManager::getCurrentUpdateInterval() {
             return timeManager.updateInterval;
         case HYGROMETER:
             return hygrometer.updateInterval;
+        case APPOINTMENTS:
+            return appointments.updateInterval;
         default:
             return timeManager.updateInterval;
     }
@@ -74,6 +81,9 @@ void StateManager::displayContent(const bool update = false) {
             break;
         case HYGROMETER:
             hygrometer.displayState();
+            break;
+        case APPOINTMENTS:
+            appointments.displayState();
             break;
         default:
             timeManager.displayTime();
@@ -113,7 +123,7 @@ void StateManager::checkButtonPress() {
         lastButtonPressTime = millis();
         auto nextDisplayState = static_cast<DisplayState>((currentDisplayState + 1) % NUMBER_OF_DISPLAYS);
         changeCurrentDisplayState(nextDisplayState);
-        delay(1000); // Debounce the button press
+        delay(timeToWaitForNextButtonPress);
     }
 }
 

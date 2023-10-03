@@ -13,13 +13,14 @@
 #include "../WiFiManager/WiFiManager.h"
 #include "../TimeManager/TimeManager.h"
 #include "../Hygrometer/Hygrometer.h"
+#include "../Appointments/Appointments.h"
 
 
 class StateManager {
 public:
-    StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer);
+    StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer, Appointments appointments);
 
-    void initialize(const Screen &screen);
+    void initialize(const Screen &givenScreen);
 
     void checkToGoBackToTimeDisplay();
 
@@ -31,21 +32,24 @@ private:
     Screen screen;
     TimeManager timeManager;
     Hygrometer hygrometer;
+    Appointments appointments;
     enum DisplayState {
         TIME,
-        HYGROMETER
+        HYGROMETER,
+        APPOINTMENTS
     };
+    const int NUMBER_OF_DISPLAYS = 3; // Update this when adding a new display state
     DisplayState currentDisplayState = TIME;
-    const int NUMBER_OF_DISPLAYS = sizeof(DisplayState) / sizeof(int) + 1;
     unsigned long lastDisplayUpdateTime = 0;
     unsigned long lastButtonPressTime = 0;
-    unsigned long timeToGoBackToTimeDisplay = 15 * 1000;
+    const unsigned long timeToGoBackToTimeDisplay = 15 * 1000;
+    const unsigned long timeToWaitForNextButtonPress = 500;
 
     static String getDisplayStateString(DisplayState displayState);
 
     int getCurrentUpdateInterval();
 
-    void displayContent(const bool updateDisplay);
+    void displayContent(bool updateDisplay);
 
     void changeCurrentDisplayState(DisplayState displayState);
 };

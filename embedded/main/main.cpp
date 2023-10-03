@@ -1,10 +1,11 @@
 #include <Arduino.h>
 #include "Constants.h"
+#include "StateManager/StateManager.h"
 #include "Screen/Screen.h"
 #include "WiFiManager/WiFiManager.h"
 #include "TimeManager/TimeManager.h"
 #include "Hygrometer/Hygrometer.h"
-#include "StateManager/StateManager.h"
+#include "Appointments/Appointments.h"
 
 Screen screen = Screen();
 WiFiManager wifiManager;
@@ -12,7 +13,8 @@ ThreeWire rtcWiring(RTC_DAT_PIN, RTC_CLK_PIN, RTC_RST_PIN);
 TimeManager timeManager = TimeManager(rtcWiring);
 DHT dht(DHT_PIN, DHT_TYPE);
 Hygrometer hygrometer = Hygrometer(dht);
-StateManager stateManager = StateManager(screen, timeManager, hygrometer);
+Appointments appointments = Appointments();
+StateManager stateManager = StateManager(screen, timeManager, hygrometer, appointments);
 
 void setup() {
     pinMode(NEXT_BUTTON_PIN, INPUT_PULLUP);
