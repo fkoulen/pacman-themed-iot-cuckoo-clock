@@ -19,7 +19,7 @@ class StateManager {
 public:
     StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer);
 
-    void setScreen(const Screen &screen);
+    void initialize(const Screen &screen);
 
     void checkToGoBackToTimeDisplay();
 
@@ -45,7 +45,7 @@ private:
 
     int getCurrentUpdateInterval();
 
-    void displayContent();
+    void displayContent(const bool updateDisplay);
 
     void changeCurrentDisplayState(DisplayState displayState);
 };

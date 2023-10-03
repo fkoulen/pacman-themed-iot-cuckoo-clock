@@ -18,6 +18,9 @@ public:
 
     void initializeLCD();
 
+    void printText(const String &firstLine, unsigned int positionFirstLine, const String &secondLine,
+                   unsigned int positionSecondLine, bool clear);
+
     void printText(const String &firstLine, const String &secondLine);
 
     void clear();

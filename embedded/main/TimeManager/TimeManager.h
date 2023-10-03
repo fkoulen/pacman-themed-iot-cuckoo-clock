@@ -20,11 +20,24 @@ public:
 
     void displayTime();
 
+    void updateDateTime();
+
     int updateInterval = 1000;
 private:
     RtcDS1302<ThreeWire> rtc;
     Screen screen;
+    String datePrefix = "Date: ";
+    String timePrefix = "Time: ";
+
+
+    bool isValidDateTime(const RtcDateTime &dateTime);
 };
 
+class DateTime {
+public:
+    DateTime(RtcDateTime dateTime);
+    String date;
+    String time;
+};
 
 #endif //TIME_MANAGER_H

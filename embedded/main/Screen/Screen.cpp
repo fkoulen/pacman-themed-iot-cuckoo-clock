@@ -22,17 +22,33 @@ void Screen::initializeLCD() {
 }
 
 /**
+ * Clear the LCD if specified and show the given text on the first and second line
+ *
+ * @param clear Whether to clear the LCD before printing the text
+ * @param firstLine The text for the first line
+ * @param positionFirstLine The position for the first line
+ * @param secondLine The text for the second line
+ * @param positionSecondLine The position for the second line
+ */
+void Screen::printText(const String &firstLine, unsigned int positionFirstLine, const String &secondLine,
+                       unsigned int positionSecondLine, bool clear = true) {
+    if (clear) lcd.clear();
+
+    lcd.setCursor(positionFirstLine, 0);
+    lcd.print(firstLine);
+    lcd.setCursor(positionSecondLine, 1);
+    lcd.print(secondLine);
+}
+
+
+/**
  * Clear the LCD and show the given text on the first and second line
  *
  * @param firstLine The text for the first line
  * @param secondLine The text for the second line
  */
 void Screen::printText(const String &firstLine, const String &secondLine) {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(firstLine);
-    lcd.setCursor(0, 1);
-    lcd.print(secondLine);
+    printText(firstLine, 0, secondLine, 0, true);
 }
 
 /**

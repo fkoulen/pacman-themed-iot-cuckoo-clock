@@ -31,19 +31,64 @@ void TimeManager::setScreen(Screen givenScreen) {
 void TimeManager::displayTime() {
     RtcDateTime now = rtc.GetDateTime();
 
-    if (!now.IsValid()) {
+    if (!isValidDateTime(now)) {
+        return;
+    }
+
+    DateTime dateTime = DateTime(now);
+
+    screen.printText(datePrefix + dateTime.date, timePrefix + dateTime.time);
+}
+
+/**
+ * Update the time on the screen instead of clearing the screen and redrawing the time.
+ * This is used to prevent flickering. Should only be called if displayTime() has been called before.
+ */
+void TimeManager::updateDateTime() {
+    RtcDateTime now = rtc.GetDateTime();
+
+    if (!isValidDateTime(now)) {
+        return;
+    }
+
+    DateTime dateTime = DateTime(now);
+
+    screen.printText(dateTime.date, datePrefix.length(), dateTime.time, timePrefix.length(), false);
+}
+
+/**
+ * Check if the given date and time are valid.
+ *
+ * @param dateTime The date and time to check
+ */
+bool TimeManager::isValidDateTime(const RtcDateTime &dateTime) {
+    if (!dateTime.IsValid()) {
         // Common Causes:
         //    1) the battery on the device is low or even missing and the power line was disconnected
         Serial.println("RTC lost confidence in the DateTime!");
+        screen.printText("Could not", "retrieve time");
+        return false;
     }
 
+    return true;
+}
+
+
+// ---------------------------------- DateTime ----------------------------------
+
+/**
+ * Constructor for the DateTime class.
+ *
+ * @param dateTime The date and time to use for this DateTime object.
+ */
+DateTime::DateTime(RtcDateTime dateTime) {
     char dateString[CHARACTERS_PER_LINE];
     char timeString[CHARACTERS_PER_LINE];
 
-    sprintf(dateString, "Date: %02u/%02u/%04u", now.Day(), now.Month(), now.Year());
+    sprintf(dateString, "%02u/%02u/%04u", dateTime.Day(), dateTime.Month(), dateTime.Year());
 
-    sprintf(timeString, "Time: %02d:%02d:%02d", now.Hour(), now.Minute(), now.Second());
+    sprintf(timeString, "%02d:%02d:%02d", dateTime.Hour(), dateTime.Minute(), dateTime.Second());
 
-    screen.printText(dateString, timeString);
+    this->date = String(dateString);
+    this->time = String(timeString);
 }
-

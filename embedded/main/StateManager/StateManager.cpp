@@ -16,14 +16,15 @@ StateManager::StateManager(Screen screen, TimeManager timeManager, Hygrometer hy
 }
 
 /**
- * Set the screen for the state manager
+ * Set the screen for the state manager and its components. Then change the display state to TIME.
  *
  * @param screen The screen
  */
-void StateManager::setScreen(const Screen &givenScreen) {
-    this->screen = givenScreen;
-    timeManager.setScreen(givenScreen);
-    hygrometer.setScreen(givenScreen);
+void StateManager::initialize(const Screen &screen) {
+    this->screen = screen;
+    timeManager.setScreen(screen);
+    hygrometer.setScreen(screen);
+    changeCurrentDisplayState(TIME);
 }
 
 /**
@@ -61,12 +62,15 @@ int StateManager::getCurrentUpdateInterval() {
 
 /**
  * Display the content of the current display state
+ *
+ * @param update Whether to update the display instead of clearing it
  */
-void StateManager::displayContent() {
-    screen.clear();
+void StateManager::displayContent(const bool update = false) {
+    if (!update) screen.clear();
+
     switch (currentDisplayState) {
         case TIME:
-            timeManager.displayTime();
+            update ? timeManager.updateDateTime() : timeManager.displayTime();
             break;
         case HYGROMETER:
             hygrometer.displayState();
@@ -96,7 +100,7 @@ void StateManager::checkToUpdateDisplay() {
     unsigned long currentTime = millis();
 
     if (currentTime - lastDisplayUpdateTime >= getCurrentUpdateInterval()) {
-        displayContent();
+        displayContent(true);
         lastDisplayUpdateTime = currentTime;
     }
 }

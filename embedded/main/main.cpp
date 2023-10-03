@@ -14,21 +14,14 @@ DHT dht(DHT_PIN, DHT_TYPE);
 Hygrometer hygrometer = Hygrometer(dht);
 StateManager stateManager = StateManager(screen, timeManager, hygrometer);
 
-/*
- * Initialize the screen and set the screen for the other components
- */
-void initializeScreen() {
-    screen.initializeLCD();
-    wifiManager.setScreen(screen);
-    stateManager.setScreen(screen);
-}
-
 void setup() {
     pinMode(NEXT_BUTTON_PIN, INPUT_PULLUP);
     Serial.begin(SERIAL_BAUD_RATE);
     Serial.println(); // Print empty line to separate boot messages from the rest of the output
-    initializeScreen();
+    screen.initializeLCD();
+    wifiManager.setScreen(screen);
     wifiManager.initializeWiFi(WIFI_SSID, WIFI_PASSWORD);
+    stateManager.initialize(screen);
 }
 
 void loop() {
