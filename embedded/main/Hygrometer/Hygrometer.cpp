@@ -8,6 +8,8 @@
 
 #include "Hygrometer.h"
 
+#include <utility>
+
 /**
  * Constructor of the Hygrometer class.
  * Create a new Hygrometer instance and initialize the DHT sensor.
@@ -17,14 +19,13 @@
  */
 Hygrometer::Hygrometer(DHT dht) : dht(dht) {
     dht.begin();
-    this->dht = dht;
 }
 
 /**
  * Set the screen to use.
  */
 void Hygrometer::setScreen(Screen givenScreen) {
-    this->screen = givenScreen;
+    this->screen = std::move(givenScreen);
 }
 
 /**
@@ -42,7 +43,7 @@ float Hygrometer::readTemperature() {
  * @return The humidity in percent
  */
 int Hygrometer::readHumidity() {
-    return round(dht.readHumidity());
+    return static_cast<int>(dht.readHumidity());
 }
 
 /**

@@ -1,5 +1,8 @@
 /*
+ * A StateManager object is used to manage the state of the display and to handle button presses.
  *
+ * @author F.S. Koulen
+ * @date 2023-10-03
  */
 
 #ifndef STATE_MANAGER_H
@@ -15,10 +18,15 @@
 class StateManager {
 public:
     StateManager(Screen screen, TimeManager timeManager, Hygrometer hygrometer);
-    void setScreen(const Screen& screen);
+
+    void setScreen(const Screen &screen);
+
     void checkToGoBackToTimeDisplay();
+
     void checkToUpdateDisplay();
+
     void checkButtonPress();
+
 private:
     Screen screen;
     TimeManager timeManager;
@@ -32,9 +40,13 @@ private:
     unsigned long lastDisplayUpdateTime = 0;
     unsigned long lastButtonPressTime = 0;
     unsigned long timeToGoBackToTimeDisplay = 15 * 1000;
+
     static String getDisplayStateString(DisplayState displayState);
+
     int getCurrentUpdateInterval();
+
     void displayContent();
+
     void changeCurrentDisplayState(DisplayState displayState);
 };
 

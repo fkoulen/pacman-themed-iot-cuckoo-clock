@@ -1,5 +1,9 @@
 /*
+ * Implementation of the StateManager class.
+ * This class is used to control the display state and listen to the button presses.
  *
+ * @author F.S. Koulen
+ * @date 2023-10-03
  */
 
 #include "StateManager.h"
@@ -16,7 +20,7 @@ StateManager::StateManager(Screen screen, TimeManager timeManager, Hygrometer hy
  *
  * @param screen The screen
  */
-void StateManager::setScreen(const Screen& givenScreen) {
+void StateManager::setScreen(const Screen &givenScreen) {
     this->screen = givenScreen;
     timeManager.setScreen(givenScreen);
     hygrometer.setScreen(givenScreen);

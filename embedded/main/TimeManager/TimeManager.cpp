@@ -4,8 +4,12 @@
  * @author F.S. Koulen
  * @date 2023-10-02
  */
+
 #include "TimeManager.h"
 #include <RtcDS1302.h>
+
+#include <utility>
+
 /**
  * Constructor for the TimeManager class.
  *
@@ -18,7 +22,7 @@ TimeManager::TimeManager(RtcDS1302<ThreeWire> rtc) : rtc(rtc) {
  * Set the screen to use for displaying the time.
  */
 void TimeManager::setScreen(Screen givenScreen) {
-    this->screen = givenScreen;
+    this->screen = std::move(givenScreen);
 }
 
 /**

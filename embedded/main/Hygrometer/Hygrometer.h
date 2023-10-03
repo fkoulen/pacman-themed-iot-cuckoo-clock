@@ -1,5 +1,5 @@
 /**
- * Create a hygrometer to measure the temperature and humidity.
+ * A Hygrometer object is used to measure the temperature and humidity.
  */
 
 #ifndef HYGROMETER_H

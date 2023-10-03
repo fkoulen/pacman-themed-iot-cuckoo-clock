@@ -5,10 +5,12 @@
 
 #include "WiFiManager.h"
 
+#include <utility>
+
 /**
  * Constructor of the WiFiManager class
  */
-WiFiManager::WiFiManager() {}
+WiFiManager::WiFiManager() = default;
 
 /**
  * Set the screen to be used by the WiFiManager
@@ -16,7 +18,7 @@ WiFiManager::WiFiManager() {}
  * @param givenScreen The screen object
  */
 void WiFiManager::setScreen(Screen givenScreen) {
-    this->screen = givenScreen;
+    this->screen = std::move(givenScreen);
 }
 
 /**
@@ -25,7 +27,7 @@ void WiFiManager::setScreen(Screen givenScreen) {
  * @param ssid      The SSID of the Wi-Fi network
  * @param password  The password of the Wi-Fi network
  */
-void WiFiManager::initializeWiFi(String ssid, String password) {
+void WiFiManager::initializeWiFi(const String& ssid, const String& password) {
     screen.printText("Connecting to", "Wi-Fi...");
     // Try to connect to the Wi-Fi network
     WiFi.begin(ssid, password);

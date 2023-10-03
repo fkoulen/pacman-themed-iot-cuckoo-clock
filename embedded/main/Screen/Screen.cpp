@@ -8,7 +8,7 @@
 
 #include "Screen.h"
 
-Screen::Screen() {}
+Screen::Screen() = default;
 
 /**
  * Initialize the LCD
@@ -27,7 +27,7 @@ void Screen::initializeLCD() {
  * @param firstLine The text for the first line
  * @param secondLine The text for the second line
  */
-void Screen::printText(String firstLine, String secondLine) {
+void Screen::printText(const String &firstLine, const String &secondLine) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print(firstLine);

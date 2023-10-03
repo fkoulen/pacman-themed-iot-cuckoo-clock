@@ -1,5 +1,5 @@
 /**
- * Create a WifiManager object to connect to a Wi-Fi network
+ * A WiFiManager object is used to connect to a Wi-Fi network.
  *
  * @author F.S. Koulen
  * @date 2023-10-02
@@ -15,8 +15,11 @@
 class WiFiManager {
 public:
     WiFiManager();
+
     void setScreen(Screen screen);
-    void initializeWiFi(String ssid, String password);
+
+    void initializeWiFi(const String &ssid, const String &password);
+
 private:
     Screen screen;
 };
