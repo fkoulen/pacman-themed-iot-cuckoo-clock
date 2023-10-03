@@ -7,11 +7,19 @@
 CuckooMechanism::CuckooMechanism() = default;
 
 /**
+ * Initialize the cuckoo mechanism by attaching the servo motor and moving it to the starting position.
+ */
+void CuckooMechanism::initialize() {
+    motor.attach(SERVO_PIN);
+    motor.write(0);
+}
+
+/**
  * Play the Pac-Man melody.
  */
 void CuckooMechanism::playMelody() {
     Serial.println("Playing melody.");
-    double thisNoteDuration, noteDurationInMs;
+    double thisNoteDuration, noteDurationInMs = 0;
 
     /**
      * Iterate over the notes of the melody.
@@ -32,12 +40,37 @@ void CuckooMechanism::playMelody() {
         }
 
         // Play the note on the buzzer. Only play 90% of the note, to avoid overlapping notes.
-        tone(BUZZER_PIN, melody[thisNote], noteDurationInMs * 0.9);
+        tone(BUZZER_PIN, melody[thisNote], static_cast<int>(noteDurationInMs * 0.9));
 
         // Wait for the specified duration before playing the next note.
-        delay(noteDurationInMs);
+        delay(static_cast<int>(noteDurationInMs));
 
         // Stop playing the note.
         noTone(BUZZER_PIN);
     }
+}
+
+/**
+ * Move the cuckoo forward.
+ */
+void CuckooMechanism::moveCuckooForward() {
+    Serial.println("Moving cuckoo forward.");
+    motor.write(180);
+}
+
+/**
+ * Move the cuckoo backward.
+ */
+void CuckooMechanism::moveCuckooBackward() {
+    Serial.println("Moving cuckoo backward.");
+    motor.write(0);
+}
+
+/**
+ * Move the cuckoo forward, play the melody and move the cuckoo backward.
+ */
+void CuckooMechanism::moveCuckooAndPlayMelody() {
+    moveCuckooForward();
+    playMelody();
+    moveCuckooBackward();
 }

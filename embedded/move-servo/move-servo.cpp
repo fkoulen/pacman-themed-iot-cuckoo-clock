@@ -8,7 +8,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-#define SERVO_PIN 4
+#define SERVO_PIN 16
 
 Servo motor;
 

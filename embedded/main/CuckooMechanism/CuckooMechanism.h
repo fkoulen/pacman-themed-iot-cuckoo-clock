@@ -12,15 +12,25 @@
 #define CUCKOO_MECHANISM_H
 
 #include <Arduino.h>
+#include <Servo.h>
 #include "../Constants.h"
 #include "../Pitches.h"
 
 class CuckooMechanism {
 public:
     CuckooMechanism();
-    void playMelody();
+
+    void initialize();
+
+    void moveCuckooAndPlayMelody();
 
 private:
+    void playMelody();
+
+    void moveCuckooForward();
+
+    void moveCuckooBackward();
+
     static const int BPM = 105;
     static const int MELODY_SIZE = 62;
     /**
@@ -52,6 +62,7 @@ private:
      * Calculated by dividing 60000 (ms in a minute) multiplied by 4 (quarter notes) by the BPM.
      */
     const int wholeNote = (60000 * 4) / BPM;
+    Servo motor;
 };
 
 

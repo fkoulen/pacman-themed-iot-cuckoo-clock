@@ -35,6 +35,7 @@ void StateManager::initialize(const Screen &givenScreen) {
     hygrometer.setScreen(givenScreen);
     appointments.setScreen(givenScreen);
     appointments.connectToAPI();
+    cuckooMechanism.initialize();
     changeCurrentDisplayState(TIME);
 }
 
@@ -137,7 +138,7 @@ void StateManager::checkButtonPress() {
     // to check if the button is pressed. The button is pressed when the analog value is close to 1024.
     // So we check if the analog value is greater than 1000.
     if (analogRead(PLAY_BUTTON_ANALOG_PIN) > 1000) {
-        cuckooMechanism.playMelody();
+        cuckooMechanism.moveCuckooAndPlayMelody();
         delay(timeToWaitForNextButtonPress);
     }
 }

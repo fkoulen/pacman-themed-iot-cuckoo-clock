@@ -25,5 +25,6 @@
 #define NEXT_BUTTON_PIN         12
 #define PLAY_BUTTON_ANALOG_PIN  A0
 #define BUZZER_PIN              14
+#define SERVO_PIN               16
 
 #endif //CONSTANTS_H
