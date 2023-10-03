@@ -19,6 +19,7 @@
  */
 Hygrometer::Hygrometer(DHT dht) : dht(dht) {
     dht.begin();
+    this->dht = dht;
 }
 
 /**
