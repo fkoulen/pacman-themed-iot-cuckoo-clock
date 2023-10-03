@@ -73,6 +73,15 @@ bool TimeManager::isValidDateTime(const RtcDateTime &dateTime) {
     return true;
 }
 
+/**
+ * Get the current date and time.
+ *
+ * @return The current date and time
+ */
+RtcDateTime TimeManager::getDateTime() {
+    return rtc.GetDateTime();
+}
+
 
 // ---------------------------------- DateTime ----------------------------------
 

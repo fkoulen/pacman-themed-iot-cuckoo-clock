@@ -14,7 +14,7 @@
 
 class TimeManager {
 public:
-    TimeManager(RtcDS1302<ThreeWire> rtc);
+    explicit TimeManager(RtcDS1302<ThreeWire> rtc);
 
     void setScreen(Screen screen);
 
@@ -23,6 +23,8 @@ public:
     void updateDateTime();
 
     int updateInterval = 1000;
+
+    RtcDateTime getDateTime();
 private:
     RtcDS1302<ThreeWire> rtc;
     Screen screen;
@@ -35,7 +37,7 @@ private:
 
 class DateTime {
 public:
-    DateTime(RtcDateTime dateTime);
+    explicit DateTime(RtcDateTime dateTime);
     String date;
     String time;
 };

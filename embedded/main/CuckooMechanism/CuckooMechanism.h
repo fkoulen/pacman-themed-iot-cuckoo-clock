@@ -15,14 +15,16 @@
 #include <Servo.h>
 #include "../Constants.h"
 #include "../Pitches.h"
+#include "../Screen/Screen.h"
+#include <RtcDS1302.h>
 
 class CuckooMechanism {
 public:
     CuckooMechanism();
 
-    void initialize();
+    void initialize(Screen givenScreen);
 
-    void moveCuckooAndPlayMelody();
+    void executeCuckooMechanism(RtcDateTime time);
 
 private:
     void playMelody();
@@ -30,6 +32,8 @@ private:
     void moveCuckooForward();
 
     void moveCuckooBackward();
+
+    void displayCuckooState(RtcDateTime dateTime);
 
     static const int BPM = 105;
     static const int MELODY_SIZE = 62;
@@ -44,13 +48,12 @@ private:
             // Pacman
             // Score available at https://musescore.com/user/85429/scores/107109
             NOTE_B4, 16, NOTE_B5, 16, NOTE_FS5, 16, NOTE_DS5, 16, //1
-            NOTE_B5, 32, NOTE_FS5, -16, NOTE_DS5, 8, NOTE_C5, 16,
-            NOTE_C6, 16, NOTE_G6, 16, NOTE_E6, 16, NOTE_C6, 32, NOTE_G6, -16, NOTE_E6, 8,
+            NOTE_B5, 32, NOTE_FS5, -16, NOTE_DS5, 8, NOTE_C5, 16, NOTE_C6, 16, NOTE_G6, 16, NOTE_E6, 16, NOTE_C6, 32,
+            NOTE_G6, -16, NOTE_E6, 8,
 
             NOTE_B4, 16, NOTE_B5, 16, NOTE_FS5, 16, NOTE_DS5, 16, NOTE_B5, 32,  //2
-            NOTE_FS5, -16, NOTE_DS5, 8, NOTE_DS5, 32, NOTE_E5, 32, NOTE_F5, 32,
-            NOTE_F5, 32, NOTE_FS5, 32, NOTE_G5, 32, NOTE_G5, 32, NOTE_GS5, 32, NOTE_A5, 16, NOTE_B5, 8
-    };
+            NOTE_FS5, -16, NOTE_DS5, 8, NOTE_DS5, 32, NOTE_E5, 32, NOTE_F5, 32, NOTE_F5, 32, NOTE_FS5, 32, NOTE_G5, 32,
+            NOTE_G5, 32, NOTE_GS5, 32, NOTE_A5, 16, NOTE_B5, 8};
     /**
      * The number of notes.
      * Since each note is represented by two values (pitch and duration),
@@ -63,6 +66,16 @@ private:
      */
     const int wholeNote = (60000 * 4) / BPM;
     Servo motor;
+    Screen screen;
+
+    byte pacMan[8] = {B01110, B11011, B11110, B11100, B11111, B01110, B00000, B00000};
+    const int PAC_MAN_CHARACTER = 0;
+
+    byte ghost[8] = {B00000, B01110, B11111, B11010, B11111, B11111, B10101, B00000,};
+    const int GHOST_CHARACTER = 1;
+
+    byte dot[8] = {B00000, B00000, B00000, B00110, B00110, B00000, B00000, B00000};
+    const int DOT_CHARACTER = 2;
 };
 
 

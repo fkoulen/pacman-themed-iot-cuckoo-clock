@@ -3,15 +3,22 @@
  */
 
 #include "CuckooMechanism.h"
+#include "RtcDateTime.h"
+
+#include <utility>
 
 CuckooMechanism::CuckooMechanism() = default;
 
 /**
  * Initialize the cuckoo mechanism by attaching the servo motor and moving it to the starting position.
  */
-void CuckooMechanism::initialize() {
+void CuckooMechanism::initialize(Screen givenScreen) {
     motor.attach(SERVO_PIN);
     motor.write(0);
+    screen = std::move(givenScreen);
+    screen.createCustomCharacter(PAC_MAN_CHARACTER, pacMan);
+    screen.createCustomCharacter(GHOST_CHARACTER, ghost);
+    screen.createCustomCharacter(DOT_CHARACTER, dot);
 }
 
 /**
@@ -67,9 +74,64 @@ void CuckooMechanism::moveCuckooBackward() {
 }
 
 /**
- * Move the cuckoo forward, play the melody and move the cuckoo backward.
+ * Display the cuckoo state on the screen.
+ * The first line shows the time.
+ * The second line shows Pac-Man related characters
+ * @param dateTime
  */
-void CuckooMechanism::moveCuckooAndPlayMelody() {
+void CuckooMechanism::displayCuckooState(RtcDateTime dateTime) {
+    String timeString = "It's ";
+
+    // If it is a full hour, print the hour
+    if (dateTime.Minute() == 0 && dateTime.Second() == 0) {
+        timeString += String(dateTime.Hour()) + " o'clock";
+    } else {
+        const int TIME_STRING_SIZE = 6;
+        char currentTimeString[TIME_STRING_SIZE];
+        sprintf(currentTimeString, "%02d:%02d", dateTime.Minute(), dateTime.Second());
+        timeString += currentTimeString;
+    }
+
+    // Center timeString
+    int timeStringPadding = static_cast<int>(CHARACTERS_PER_LINE - timeString.length()) / 2;
+    for (int i = 0; i < timeStringPadding; i++) {
+        timeString = " " + timeString;
+    }
+
+    screen.clear();
+    screen.printText(timeString, 0, 0);
+
+    // Print the following: " X ･･････････ Y " where X represents Pac-Man and Y the ghost
+    const int SECOND_LINE = 1;
+    for (int position = 0; position < CHARACTERS_PER_LINE; position++) {
+        // Check if the position should be skipped
+        if (position == 0 || position == 2 || position == 13 || position == 15) {
+            continue;
+        }
+
+        // Print pac-man at position 1, then move on to the next position
+        if (position == 1) {
+            screen.printCustomCharacter(position, SECOND_LINE, byte(PAC_MAN_CHARACTER));
+            continue;
+        }
+
+        // Print ghost at position 14, then move on to the next position
+        if (position == 14) {
+            screen.printCustomCharacter(position, SECOND_LINE, byte(GHOST_CHARACTER));
+            continue;
+        }
+
+        // Else, print a dot
+        screen.printCustomCharacter(position, SECOND_LINE, byte(DOT_CHARACTER));
+    }
+}
+
+/**
+ * Execute the cuckoo mechanism by moving the cuckoo forward, playing the melody and moving the cuckoo backward.
+ */
+void CuckooMechanism::executeCuckooMechanism(RtcDateTime time) {
+    Serial.println("Executing cuckoo mechanism.");
+    displayCuckooState(time);
     moveCuckooForward();
     playMelody();
     moveCuckooBackward();

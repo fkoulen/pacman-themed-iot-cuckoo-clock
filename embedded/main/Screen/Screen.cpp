@@ -22,6 +22,32 @@ void Screen::initializeLCD() {
 }
 
 /**
+ * Print a custom character on the given location and row
+ *
+ * @param position The position for the character
+ * @param row The row for the character
+ * @param character The character to print
+ */
+void Screen::printCustomCharacter(int position, int row, int character) {
+    lcd.setCursor(position, row);
+    lcd.write(character);
+}
+
+
+/**
+ * Print the given text on the given line and row
+ *
+ * @param line The text to print
+ * @param positionLine The position for the text
+ * @param row The row for the text
+ * @param clear Whether to clear the LCD before printing the text
+ */
+void Screen::printText(const String &line, unsigned int positionLine, unsigned int row) {
+    lcd.setCursor(positionLine, row);
+    lcd.print(line);
+}
+
+/**
  * Clear the LCD if specified and show the given text on the first and second line
  *
  * @param clear Whether to clear the LCD before printing the text
@@ -31,13 +57,11 @@ void Screen::initializeLCD() {
  * @param positionSecondLine The position for the second line
  */
 void Screen::printText(const String &firstLine, unsigned int positionFirstLine, const String &secondLine,
-                       unsigned int positionSecondLine, bool clear = true) {
+                       unsigned int positionSecondLine, bool clear = false) {
     if (clear) lcd.clear();
 
-    lcd.setCursor(positionFirstLine, 0);
-    lcd.print(firstLine);
-    lcd.setCursor(positionSecondLine, 1);
-    lcd.print(secondLine);
+    printText(firstLine, positionFirstLine, 0);
+    printText(secondLine, positionSecondLine, 1);
 }
 
 
@@ -56,4 +80,14 @@ void Screen::printText(const String &firstLine, const String &secondLine) {
  */
 void Screen::clear() {
     lcd.clear();
+}
+
+/**
+ * Create a custom character on the given location with the character pixels
+ *
+ * @param location The location of the custom character
+ * @param pixels The character's pixels
+ */
+void Screen::createCustomCharacter(int location, byte pixels[]) {
+    lcd.createChar(location, pixels);
 }

@@ -8,6 +8,8 @@
 
 #include "StateManager.h"
 
+#include <utility>
+
 /**
  * Initialize the state manager
  */
@@ -18,11 +20,11 @@ StateManager::StateManager(
         Hygrometer hygrometer,
         Appointments appointments)
         :
-        screen(screen),
-        cuckooMechanism(cuckooMechanism),
-        timeManager(timeManager),
-        hygrometer(hygrometer),
-        appointments(appointments) {}
+        screen(std::move(screen)),
+        cuckooMechanism(std::move(cuckooMechanism)),
+        timeManager(std::move(timeManager)),
+        hygrometer(std::move(hygrometer)),
+        appointments(std::move(appointments)) {}
 
 /**
  * Set the givenScreen for the state manager and its components. Then change the display state to TIME.
@@ -35,7 +37,7 @@ void StateManager::initialize(const Screen &givenScreen) {
     hygrometer.setScreen(givenScreen);
     appointments.setScreen(givenScreen);
     appointments.connectToAPI();
-    cuckooMechanism.initialize();
+    cuckooMechanism.initialize(givenScreen);
     changeCurrentDisplayState(TIME);
 }
 
@@ -138,8 +140,8 @@ void StateManager::checkButtonPress() {
     // to check if the button is pressed. The button is pressed when the analog value is close to 1024.
     // So we check if the analog value is greater than 1000.
     if (analogRead(PLAY_BUTTON_ANALOG_PIN) > 1000) {
-        cuckooMechanism.moveCuckooAndPlayMelody();
-        delay(timeToWaitForNextButtonPress);
+        cuckooMechanism.executeCuckooMechanism(timeManager.getDateTime());
+        changeCurrentDisplayState(TIME);
     }
 }
 
