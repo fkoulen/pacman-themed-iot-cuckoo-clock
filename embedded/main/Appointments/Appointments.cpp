@@ -91,10 +91,11 @@ boolean Appointments::displayNextAppointment() {
     String name = appointment["name"];
     String time = appointment["start"];
 
-    Serial.print("Displaying appointment" + String(currentAppointmentIndex) + ": ");
+    String appointmentNumber = String(currentAppointmentIndex + 1);
+    Serial.print("Displaying appointment " + appointmentNumber + ": ");
     Serial.println(name + " at " + time);
 
-    screen.printText("Name: " + name, "Time: " + time);
+    screen.printText(appointmentNumber + ": " + name, time);
 
     currentAppointmentIndex++;
     return true;
