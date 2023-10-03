@@ -19,8 +19,7 @@ void setup() {
     Serial.begin(SERIAL_BAUD_RATE);
     Serial.println(); // Print empty line to separate boot messages from the rest of the output
     screen.initializeLCD();
-    wifiManager.setScreen(screen);
-    wifiManager.initializeWiFi(WIFI_SSID, WIFI_PASSWORD);
+    wifiManager.initialize(screen, WIFI_SSID, WIFI_PASSWORD);
     stateManager.initialize(screen);
 }
 

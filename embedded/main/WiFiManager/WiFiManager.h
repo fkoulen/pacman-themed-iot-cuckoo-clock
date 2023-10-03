@@ -16,9 +16,7 @@ class WiFiManager {
 public:
     WiFiManager();
 
-    void setScreen(Screen screen);
-
-    void initializeWiFi(const String &ssid, const String &password);
+    void initialize(const Screen &givenScreen, const String &ssid, const String &password);
 
 private:
     Screen screen;
