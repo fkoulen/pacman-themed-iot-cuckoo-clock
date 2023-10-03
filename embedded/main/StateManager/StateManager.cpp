@@ -109,7 +109,7 @@ void StateManager::checkToGoBackToTimeDisplay() {
 void StateManager::checkToUpdateDisplay() {
     unsigned long currentTime = millis();
 
-    if (currentTime - lastDisplayUpdateTime >= getCurrentUpdateInterval()) {
+    if (currentTime - lastDisplayUpdateTime >= static_cast<unsigned long int>(getCurrentUpdateInterval())) {
         displayContent(true);
         lastDisplayUpdateTime = currentTime;
     }
@@ -121,8 +121,7 @@ void StateManager::checkToUpdateDisplay() {
 void StateManager::checkButtonPress() {
     if (digitalRead(NEXT_BUTTON_PIN) == HIGH) {
         lastButtonPressTime = millis();
-        auto nextDisplayState = static_cast<DisplayState>((currentDisplayState + 1) % NUMBER_OF_DISPLAYS);
-        changeCurrentDisplayState(nextDisplayState);
+        goToNextDisplayState();
         delay(timeToWaitForNextButtonPress);
     }
 }
@@ -136,4 +135,18 @@ void StateManager::changeCurrentDisplayState(DisplayState displayState) {
     currentDisplayState = displayState;
     Serial.println("Switched to display mode: " + getDisplayStateString(currentDisplayState));
     displayContent();
+}
+
+/**
+ * Go to the next display state
+ */
+void StateManager::goToNextDisplayState() {
+    // If the current display state is appointments and there is an appointment to display,
+    // don't switch to the next display state, but display the next appointment.
+    if (currentDisplayState == APPOINTMENTS && appointments.displayNextAppointment()) {
+        return;
+    }
+
+    auto nextDisplayState = static_cast<DisplayState>((currentDisplayState + 1) % NUMBER_OF_DISPLAYS);
+    changeCurrentDisplayState(nextDisplayState);
 }

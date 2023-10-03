@@ -52,6 +52,8 @@ private:
     void displayContent(bool updateDisplay);
 
     void changeCurrentDisplayState(DisplayState displayState);
+
+    void goToNextDisplayState();
 };
 
 

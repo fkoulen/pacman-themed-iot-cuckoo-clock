@@ -62,6 +62,40 @@ void Appointments::storeAllAppointments(String payload) {
  * Display how many appointments are found on the LCD
  */
 void Appointments::displayState() {
+    if (records.size() == 0) {
+        Serial.println("No appointments found");
+        screen.printText("No appointments", "found");
+        return;
+    }
+
     String appointmentsPluralized = records.size() == 1 ? "appointment" : "appointments";
     screen.printText("This week:", String(records.size()) + " " + appointmentsPluralized);
+}
+
+/**
+ * Display the next appointment on the LCD if possible
+ *
+ * @return whether or not there is an appointment to display
+ */
+boolean Appointments::displayNextAppointment() {
+    if (records.size() == 0) return false;
+
+    // If we are at the end of the list, reset the index to 0 and return false
+    if (currentAppointmentIndex >= static_cast<int>(records.size())) {
+        currentAppointmentIndex = 0;
+        return false;
+    }
+
+
+    JsonObject appointment = records[currentAppointmentIndex];
+    String name = appointment["name"];
+    String time = appointment["start"];
+
+    Serial.print("Displaying appointment" + String(currentAppointmentIndex) + ": ");
+    Serial.println(name + " at " + time);
+
+    screen.printText("Name: " + name, "Time: " + time);
+
+    currentAppointmentIndex++;
+    return true;
 }
