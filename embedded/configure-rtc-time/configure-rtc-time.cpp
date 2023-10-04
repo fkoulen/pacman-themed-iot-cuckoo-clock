@@ -11,6 +11,7 @@
 
 #include <Arduino.h>
 #include <RtcDS1302.h>
+#include "main/Constants.h"
 
 // CONNECTIONS:
 // DS1302 CLK/SCL --> 15
@@ -20,7 +21,7 @@
 // DS1302 GND --> GND
 
 
-ThreeWire myWire(13, 15, 12); // IO (DAT), SCL (CLK), CE (RST)
+ThreeWire myWire(RTC_DAT_PIN, RTC_CLK_PIN, RTC_RST_PIN); // IO (DAT), SCL (CLK), CE (RST)
 RtcDS1302<ThreeWire> Rtc(myWire);
 
 
@@ -49,7 +50,7 @@ void printDateTime(const RtcDateTime &dateTime) {
 void setup() {
     char compiledDate[12] = __DATE__;
     char compiledTime[9] = __TIME__;
-    Serial.begin(115200);
+    Serial.begin(SERIAL_BAUD_RATE);
 
     Serial.println();
     Serial.print("compiled: ");
@@ -62,7 +63,7 @@ void setup() {
     // "MMM DD YYYY", "HH:MM:SS". Then upload the code and press the reset
     // button when the desired date time is reached to set the RTC time.
 
-    // Rtc.SetDateTime(RtcDateTime("Oct 2 2023", "02:43:15"));
+//     Rtc.SetDateTime(RtcDateTime("Oct 4 2023", "20:55:55"));
 
     RtcDateTime compiled = RtcDateTime(compiledDate, compiledTime);
     printDateTime(compiled);

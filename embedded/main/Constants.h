@@ -20,9 +20,9 @@
 // --------------------- PINS
 #define RTC_CLK_PIN             15
 #define RTC_DAT_PIN             13
-#define RTC_RST_PIN             0
+#define RTC_RST_PIN             12
 #define DHT_PIN                 2   // Temperature & Humidity Sensor Pin
-#define NEXT_BUTTON_PIN         12
+#define NEXT_BUTTON_PIN         0
 #define PLAY_BUTTON_ANALOG_PIN  A0
 #define BUZZER_PIN              14
 #define SERVO_PIN               16

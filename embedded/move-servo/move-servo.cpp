@@ -7,8 +7,7 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-
-#define SERVO_PIN 16
+#include "main/Constants.h"
 
 Servo motor;
 
