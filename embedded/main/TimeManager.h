@@ -9,8 +9,8 @@
 #define TIME_MANAGER_H
 
 #include <Arduino.h>
-#include "../Screen/Screen.h"
-#include <RtcDS1302.h>
+#include "Screen.h"
+#include "RtcDS1302.h"
 
 class TimeManager {
 public:

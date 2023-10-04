@@ -6,9 +6,9 @@
 #define HYGROMETER_H
 
 #include <Arduino.h>
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
-#include "../Screen/Screen.h"
+#include "Adafruit_Sensor.h"
+#include "DHT.h"
+#include "Screen.h"
 
 
 class Hygrometer {
@@ -26,6 +26,7 @@ public:
     int updateInterval = 10 * 1000;
 
 private:
+    const char DEGREE_SYMBOL = (char) 223;
     DHT dht;
     Screen screen;
 };

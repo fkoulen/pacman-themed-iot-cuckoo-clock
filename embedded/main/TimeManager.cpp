@@ -6,7 +6,7 @@
  */
 
 #include "TimeManager.h"
-#include <RtcDS1302.h>
+#include "RtcDS1302.h"
 
 #include <utility>
 

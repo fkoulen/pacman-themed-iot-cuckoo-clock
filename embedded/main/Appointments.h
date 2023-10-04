@@ -5,11 +5,11 @@
 #ifndef APPOINTMENTS_H
 #define APPOINTMENTS_H
 
-#include "../Screen/Screen.h"
-#include "../Constants.h"
+#include "Screen.h"
+#include "Constants.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <ArduinoJson.h>
+#include "ArduinoJson.h"
 
 class Appointments {
 public:

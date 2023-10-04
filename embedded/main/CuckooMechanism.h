@@ -13,10 +13,10 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-#include "../Constants.h"
-#include "../Pitches.h"
-#include "../Screen/Screen.h"
-#include <RtcDS1302.h>
+#include "Constants.h"
+#include "Pitches.h"
+#include "Screen.h"
+#include "RtcDS1302.h"
 
 class CuckooMechanism {
 public:

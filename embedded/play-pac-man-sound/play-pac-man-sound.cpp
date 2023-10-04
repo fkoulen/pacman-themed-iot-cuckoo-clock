@@ -8,7 +8,7 @@
  */
 
 #include <Arduino.h>
-#include "main/Pitches.h"
+#include "Pitches.h"
 
 #define BPM 105;
 #define BUZZER_PIN 14

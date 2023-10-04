@@ -9,12 +9,12 @@
 #define STATE_MANAGER_H
 
 #include <Arduino.h>
-#include "../Screen/Screen.h"
-#include "../WiFiManager/WiFiManager.h"
-#include "../TimeManager/TimeManager.h"
-#include "../Hygrometer/Hygrometer.h"
-#include "../Appointments/Appointments.h"
-#include "../CuckooMechanism/CuckooMechanism.h"
+#include "Screen.h"
+#include "WiFiManager.h"
+#include "TimeManager.h"
+#include "Hygrometer.h"
+#include "Appointments.h"
+#include "CuckooMechanism.h"
 
 
 class StateManager {
@@ -29,6 +29,8 @@ public:
     void checkToUpdateDisplay();
 
     void checkButtonPress();
+
+    void checkToActivateCuckooMechanism();
 
 private:
     Screen screen;
@@ -47,6 +49,7 @@ private:
     DisplayState currentDisplayState = TIME;
     unsigned long lastDisplayUpdateTime = 0;
     unsigned long lastButtonPressTime = 0;
+    unsigned long lastCuckooMechanismActivationHour = 0;
     const unsigned long timeToGoBackToTimeDisplay = 15 * 1000;
     const unsigned long timeToWaitForNextButtonPress = 500;
 

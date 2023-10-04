@@ -10,7 +10,7 @@
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-#include "../Screen/Screen.h"
+#include "Screen.h"
 
 class WiFiManager {
 public:

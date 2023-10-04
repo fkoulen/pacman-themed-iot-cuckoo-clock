@@ -169,3 +169,21 @@ void StateManager::goToNextDisplayState() {
     auto nextDisplayState = static_cast<DisplayState>((currentDisplayState + 1) % NUMBER_OF_DISPLAYS);
     changeCurrentDisplayState(nextDisplayState);
 }
+
+/**
+ * Check if it's time to activate the cuckoo mechanism.
+ * If it is, activate the cuckoo mechanism and change the display state to TIME afterwards.
+ *
+ * @param now The current time
+ */
+void StateManager::checkToActivateCuckooMechanism() {
+    RtcDateTime now = timeManager.getDateTime();
+    unsigned long int currentHour = now.Hour();
+
+    // It is time to activate the cuckoo mechanism if it has not been activated yet this hour
+    if (lastCuckooMechanismActivationHour != currentHour) {
+        cuckooMechanism.executeCuckooMechanism(now);
+        lastCuckooMechanismActivationHour = currentHour;
+        changeCurrentDisplayState(TIME);
+    }
+}

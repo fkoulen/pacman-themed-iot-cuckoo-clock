@@ -62,7 +62,7 @@ void Hygrometer::displayState() {
     }
 
     //  Print temperature with one decimal place and the degree symbol
-    String firstLine = "Temp: " + String(temperature, 1) + (char) 223 + "C";
+    String firstLine = "Temp: " + String(temperature, 1) + DEGREE_SYMBOL + "C";
     String secondLine = "Humidity: " + String(humidity) + "%";
 
     screen.printText(firstLine, secondLine);

@@ -1,11 +1,13 @@
 /**
+ * Implementation of the cuckoo mechanism.
+ * Contains methods to play the melody, move the cuckoo and display the cuckoo state.
  *
+ * @author F.S. Koulen
+ * @date 2023-10-03
  */
 
 #include "CuckooMechanism.h"
-#include "RtcDateTime.h"
 
-#include <utility>
 
 CuckooMechanism::CuckooMechanism() = default;
 
@@ -15,10 +17,10 @@ CuckooMechanism::CuckooMechanism() = default;
 void CuckooMechanism::initialize(Screen givenScreen) {
     motor.attach(SERVO_PIN);
     motor.write(0);
-    screen = std::move(givenScreen);
     screen.createCustomCharacter(PAC_MAN_CHARACTER, pacMan);
     screen.createCustomCharacter(GHOST_CHARACTER, ghost);
     screen.createCustomCharacter(DOT_CHARACTER, dot);
+    screen = std::move(givenScreen);
 }
 
 /**
@@ -88,7 +90,7 @@ void CuckooMechanism::displayCuckooState(RtcDateTime dateTime) {
     } else {
         const int TIME_STRING_SIZE = 6;
         char currentTimeString[TIME_STRING_SIZE];
-        sprintf(currentTimeString, "%02d:%02d", dateTime.Minute(), dateTime.Second());
+        sprintf(currentTimeString, "%02d:%02d", dateTime.Hour(), dateTime.Minute());
         timeString += currentTimeString;
     }
 
@@ -102,27 +104,11 @@ void CuckooMechanism::displayCuckooState(RtcDateTime dateTime) {
     screen.printText(timeString, 0, 0);
 
     // Print the following: " X ･･････････ Y " where X represents Pac-Man and Y the ghost
-    const int SECOND_LINE = 1;
-    for (int position = 0; position < CHARACTERS_PER_LINE; position++) {
-        // Check if the position should be skipped
-        if (position == 0 || position == 2 || position == 13 || position == 15) {
-            continue;
-        }
+    screen.printCustomCharacter(1, 1, byte(PAC_MAN_CHARACTER));
+    screen.printCustomCharacter(14, 1, byte(GHOST_CHARACTER));
 
-        // Print pac-man at position 1, then move on to the next position
-        if (position == 1) {
-            screen.printCustomCharacter(position, SECOND_LINE, byte(PAC_MAN_CHARACTER));
-            continue;
-        }
-
-        // Print ghost at position 14, then move on to the next position
-        if (position == 14) {
-            screen.printCustomCharacter(position, SECOND_LINE, byte(GHOST_CHARACTER));
-            continue;
-        }
-
-        // Else, print a dot
-        screen.printCustomCharacter(position, SECOND_LINE, byte(DOT_CHARACTER));
+    for (int i = 3; i < 13; ++i) {
+        screen.printCustomCharacter(i, 1, byte(DOT_CHARACTER));
     }
 }
 
