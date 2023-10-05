@@ -11,16 +11,9 @@
 // Get the id from the url
 const id = window.location.href.split("=")[1];
 
-// Set max length of text input for name
-const MAX_APPOINTMENT_NAME_LENGTH = 50;
-document.getElementById("name").maxLength = MAX_APPOINTMENT_NAME_LENGTH;
+setFormLimitations();
 
-// Set min date to today for input for appointment start time
-const LENGTH_DATE_TIME = 16;
-document.getElementById("start").min = new Date().toISOString().slice(0, LENGTH_DATE_TIME);
-
-
-const API_APPOINTMENT_READ_ONE = "http://localhost/api/appointment/read_one.php?id=" + id;
+const API_APPOINTMENT_READ_ONE = `${BASE_URL}/api/appointment/read_one.php?id=${id}`;
 
 /**
  * Handle error by displaying error message and logging error to console.
@@ -50,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             document.getElementById("id").value = data.id;
             document.getElementById("name").value = data.name;
-            document.getElementById("start").value = data.start;
+            document.getElementById("start").value = moment(utcToLocal(data.start)).format("YYYY-MM-DDTHH:mm");
             document.getElementById("loading").classList.add("d-none");
             document.getElementById("form").classList.remove("d-none");
         }).catch((reason) => {

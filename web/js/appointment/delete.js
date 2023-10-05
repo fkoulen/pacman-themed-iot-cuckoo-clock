@@ -7,7 +7,7 @@
     @date 2023-09-18
  */
 
-const API_APPOINTMENT_DELETE = 'http://localhost/api/appointment/delete.php';
+const API_APPOINTMENT_DELETE = `${BASE_URL}/api/appointment/delete.php`;
 
 /**
  * Delete an appointment.

@@ -6,7 +6,7 @@
     @author F.S. Koulen
     @date 2023-09-18
  */
-const API_APPOINTMENT_UPDATE = "http://localhost/api/appointment/update.php";
+const API_APPOINTMENT_UPDATE = `${BASE_URL}/api/appointment/update.php`;
 
 document.getElementById("update-appointment-form").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -17,6 +17,9 @@ document.getElementById("update-appointment-form").addEventListener("submit", fu
     formData.forEach((value, key) => {
         appointment[key] = value;
     });
+
+    // Set start time to UTC
+    appointment.start = moment(localToUtc(appointment.start)).format("YYYY-MM-DD HH:mm:ss");
 
     // Disable cancel and submit button, change text of submit button to "Updating..." and hide error message
     document.getElementById("cancel-button").disabled = true;

@@ -7,15 +7,9 @@
     @date 2023-09-17
  */
 
-// Set max length of text input for name
-const MAX_APPOINTMENT_NAME_LENGTH = 50;
-document.getElementById("name").maxLength = MAX_APPOINTMENT_NAME_LENGTH;
+setFormLimitations();
 
-// Set min date to today for input for appointment start time
-const LENGTH_DATE_TIME = 16;
-document.getElementById("start").min = new Date().toISOString().slice(0, LENGTH_DATE_TIME);
-
-const API_APPOINTMENT_CREATE = "http://localhost/api/appointment/create.php";
+const API_APPOINTMENT_CREATE = `${BASE_URL}/api/appointment/create.php`;
 
 // Add event listener to form
 document.getElementById("create-appointment-form").addEventListener("submit", (event) => {
@@ -28,6 +22,8 @@ document.getElementById("create-appointment-form").addEventListener("submit", (e
         appointment[key] = value;
     });
 
+    // Set start time to UTC
+    appointment.start = moment(localToUtc(appointment.start)).format("YYYY-MM-DD HH:mm:ss");
 
     // Disable close and submit button, change text of submit button to "Creating..." and hide error message
     document.getElementById("close-button").disabled = true;
