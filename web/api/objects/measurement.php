@@ -45,4 +45,28 @@ class Measurement
             return true;
         }
     }
+
+    // Read latest measurement
+    function readLatest(): bool
+    {
+        // Query to read record
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY measurement_time DESC LIMIT 1";
+
+        // Prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // Execute query
+        $stmt->execute();
+
+        // Get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set values to object properties
+        $this->id = $row['id'];
+        $this->measurement_time = $row['measurement_time'];
+        $this->temperature = $row['temperature'];
+        $this->humidity = $row['humidity'];
+
+        return true;
+    }
 }

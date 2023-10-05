@@ -258,3 +258,36 @@ The API currently has the following endpoints:
               "message": "Unable to create measurement. Service unavailable."
           }
           ```
+
+??? abstract "GET /appointment/read_latest.php - Returns the most recent measurement"
+
+    **Parameters**  
+
+    None.
+    
+    **Responses**  
+
+    * **200 OK** - The request was successful.   
+        The response contains a JSON object with the measurement.  
+
+        Example:  
+
+        ```json
+        {
+            "id": "69",
+            "measurement_time": "2023-10-05 15:47:15",
+            "temperature": 25.2,
+            "humidity": 49
+        }
+        ```
+
+    * **404 Not Found** - The measurement could not be found.   
+        The response contains a message about the error in `message`.
+
+        Example: 
+
+        ```json
+        {
+            "message": "No measurements found."
+        }
+        ```
