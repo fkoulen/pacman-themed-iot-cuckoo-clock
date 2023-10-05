@@ -23,6 +23,23 @@ title: Learning Journal
 
 # Week 5
 
+### Thursday (5th of October)
+
+* Listened to Wilko's course, Business and Trends
+* Helped two peer students with their REST API
+* Figured out how to fix the button that is connected to GPIO 0. I had to connect the VVC to the button through the 10k
+  resistor and then connect the button to ground. GPIO 0 Is always pulled high, so when the button is pressed, it will
+  pull the pin low. This is called a pull-down resistor.
+* Created endpoint for latest measurement
+* Retrieved latest measurement from API in front-end
+* Displayed the latest measurement on the site
+* Fixed bug where "appointment" was not pluralized correctly
+* Adjust READ_APPOINTMENTS query to only return appointments that are in the future
+* Configure the web application to work with UTC. I have chosen for the dates in the database to be stored in UTC
+  because this is the standard. So I had to update the web application to work with UTC as well. I have done this by
+  using the moment.js library which makes it easy to work with dates and times.
+* Added a config file to the web application.
+
 ### Wednesday (4th of October)
 
 Today I continued working on the Fritzing diagram. I was trying to look at how I could improve the wiring. Once I tried
