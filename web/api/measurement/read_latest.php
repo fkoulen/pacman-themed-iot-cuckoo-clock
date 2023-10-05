@@ -1,4 +1,11 @@
 <?php
+/*
+ * Retrieve the latest measurement from the database and return it in JSON format. If no measurement is found, return a
+ * JSON response with a message that indicates that no measurements were found.
+ *
+ * @author F.S. Koulen
+ * @date 2023-10-05
+ */
 
 // Required headers
 header("Access-Control-Allow-Origin: *");
