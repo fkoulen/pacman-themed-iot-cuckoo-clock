@@ -11,12 +11,7 @@
 #include <ArduinoJson.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
-
-#define SERIAL_BAUD 9600
-#define WIFI_SSID      "iotroam"
-#define WIFI_PASSWORD  "OQqcD8LpM7"
-#define BASE_URL "https://rnqwz-145-3-251-236.a.free.pinggy.online/api"
-#define API_URL BASE_URL "/measurement/create.php"
+#include "main/Constants.h"
 
 #define JSON_BUFFER_SIZE 1024
 
@@ -27,7 +22,7 @@ DynamicJsonDocument jsonBuffer(JSON_BUFFER_SIZE);
 
 DHT dht(DHT_PIN, DHT_TYPE);
 
-#define MEASUREMENT_INTERVAL (10 * 1000)
+#define MEASUREMENT_INTERVAL (30 * 1000)
 
 
 /**
@@ -35,7 +30,7 @@ DHT dht(DHT_PIN, DHT_TYPE);
  */
 void initializeWifi() {
     // Initialize the Serial-connection on a speed of 115200 b/s
-    Serial.begin(SERIAL_BAUD);
+    Serial.begin(SERIAL_BAUD_RATE);
 
     // Your WeMos tries to connect to your Wi-fi network
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -59,7 +54,7 @@ void postMeasurement(float temperature, float humidity) {
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.
-    httpClient.begin(client, API_URL);
+    httpClient.begin(client, String(BASE_URL) + API_POST_MEASUREMENT);
 
     // Set the content-type header
     httpClient.addHeader("Content-Type", "application/json");

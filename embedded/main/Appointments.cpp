@@ -23,7 +23,7 @@ void Appointments::connectToAPI() {
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.
-    httpClient.begin(client, API_READ_APPOINTMENTS);
+    httpClient.begin(client, String(BASE_URL) + API_READ_APPOINTMENTS);
 
     // Make the GET-request, this returns the HTTP-code.
     int httpCode = httpClient.GET();
@@ -33,7 +33,7 @@ void Appointments::connectToAPI() {
         Serial.println("Successfully connected to API");
         String payload = httpClient.getString();
         storeAllAppointments(payload);
-        screen.printText(String(records.size()) + " appointments", "found");
+        screen.printText(String(records.size()) + " " + getPluralizedAppointmentsString(), "found");
     } else if (httpCode == HTTP_CODE_NOT_FOUND) {
         Serial.println("No appointments found");
         screen.printText("No appointments", "found");
@@ -68,8 +68,7 @@ void Appointments::displayState() {
         return;
     }
 
-    String appointmentsPluralized = records.size() == 1 ? "appointment" : "appointments";
-    screen.printText("This week:", String(records.size()) + " " + appointmentsPluralized);
+    screen.printText("Next 7 days:", String(records.size()) + " " + getPluralizedAppointmentsString());
 }
 
 /**
@@ -99,4 +98,13 @@ boolean Appointments::displayNextAppointment() {
 
     currentAppointmentIndex++;
     return true;
+}
+
+/**
+ * Get the pluralized string of the word appointment
+ *
+ * @return The pluralized string
+ */
+String Appointments::getPluralizedAppointmentsString() {
+    return records.size() == 1 ? "appointment" : "appointments";
 }

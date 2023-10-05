@@ -9,7 +9,9 @@
 
 #define JSON_BUFFER_SIZE        1024
 
-#define API_READ_APPOINTMENTS   "http://koulenf.loca.lt/api/appointment/read.php"
+#define BASE_URL                "http://koulenf.loca.lt/"
+#define API_READ_APPOINTMENTS   "api/appointment/read.php"
+#define API_POST_MEASUREMENT    "api/measurement/create.php"
 
 #define LCD_ADDRESS             0x27
 #define CHARACTERS_PER_LINE     16

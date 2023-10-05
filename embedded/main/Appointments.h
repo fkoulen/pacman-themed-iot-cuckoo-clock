@@ -32,6 +32,7 @@ private:
     int currentAppointmentIndex = 0;
 
     void storeAllAppointments(String payload);
+    String getPluralizedAppointmentsString();
 };
 
 
