@@ -22,11 +22,8 @@ $db = $database->getConnection();
 // Initialize object
 $measurement = new Measurement($db);
 
-// Query measurements
-$measurement->readLatest();
-
-// Check if a measurement was found
-if ($measurement->id != null) {
+// Read latest measurement
+if ($measurement->readLatest()) {
     // Create array to be converted to a JSON object
     $measurement_arr = array(
         "id" => $measurement->id,
@@ -40,7 +37,7 @@ if ($measurement->id != null) {
 
     // Make it JSON format
     echo json_encode($measurement_arr);
-} else {
+} else { // If no measurements are found
     // Set response code - 404 Not found
     http_response_code(404);
 

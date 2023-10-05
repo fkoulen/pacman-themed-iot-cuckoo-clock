@@ -61,6 +61,11 @@ class Measurement
         // Get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // If no measurement was found, return false
+        if ($row == null) {
+            return false;
+        }
+
         // Set values to object properties
         $this->id = $row['id'];
         $this->measurement_time = $row['measurement_time'];
