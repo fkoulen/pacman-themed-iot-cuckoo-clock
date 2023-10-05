@@ -23,6 +23,20 @@ title: Learning Journal
 
 # Week 4
 
+# Weekend (29th of September - 1st of October)
+
+This weekend I worked on the embedded device. I first started with creating some code to play the Pac-Man sound. I found
+some code on the internet that helped me with this.
+
+https://github.com/robsoncouto/arduino-songs/blob/master/pacman/pacman.ino
+
+After that I worked on moving the servo motor. I now had all the components working separately. I then started working
+on combining the components. For this I have created separate classes, each with their own responsibility. I started
+with creating a class to manage the LCD screen. After that I created a class to manage the Wi-Fi connection. I then 
+created the Time Manager class. This class is responsible for keeping track of the time and updating the time on the
+LCD screen. I then created the Hygrometer class. This class is responsible for retrieving the humidity and temperature
+from the sensor.
+
 ### Thursday (28th of September)
 
 Today I first followed the class of Business and Trends. It was about China. Afterward I retrieved the KY-015 sensor
@@ -32,8 +46,9 @@ every 10 seconds. I also got some of my questions answered by Mats.
 
 Here are some links I used:
 
-- [ESP32 HTTP GET and HTTP POST with Arduino IDE (JSON, URL Encoded, Text)](https://randomnerdtutorials.com/esp32-http-get-post-arduino/)  
+- [ESP32 HTTP GET and HTTP POST with Arduino IDE (JSON, URL Encoded, Text)](https://randomnerdtutorials.com/esp32-http-get-post-arduino/)
 - [KY-015 COMBI-SENSOR (TEMPERATURE & HUMIDITY)](https://sensorkit.joy-it.net/en/sensors/ky-015)
+
 ### Wednesday (27th of September)
 
 Today I worked on the embedded device. I found out how to configure the time on the RTC. After that I worked on
