@@ -8,12 +8,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Appointments </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="js/lib/moment-with-locales.js"></script>
+    <title>Smart Home</title>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <div class="text-center my-5"><h1>Appointments</h1></div>
+        <div class="text-center my-5"><h1>Welcome!</h1></div>
+        <div class="text-center"><h3>Latest Measurement</h3></div>
+
+        <div class="text-center my-5" id="measurement-spinner">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div class="text-center text-danger my-5 d-none" id="measurement-error">
+            <h3>Could not load latest measurement.</h3>
+        </div>
+
+        <div class="d-flex justify-content-center mb-5 mt-3" id="measurement-container">
+            <div class="card w-50">
+                <div class="card-header text-end">
+                    <button type="button" class="btn text-primary p-0 border-0" id="refresh-button">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6">
+                                Temperature:
+                            </div>
+                            <div class="col-6 text-end">
+                                <span id="measurement-temperature"></span> °C
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6">
+                                Humidity:
+                            </div>
+                            <div class="col-6 text-end">
+                                <span id="measurement-humidity"></span> %
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="card-footer text-body-secondary">
+                    <div class="row">
+                        <div class="col-6">
+                            Last measurement:
+                        </div>
+                        <div class="col-6 text-end">
+                            <span id="measurement-time"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center"><h3>Appointments</h3></div>
         <div>
             <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
