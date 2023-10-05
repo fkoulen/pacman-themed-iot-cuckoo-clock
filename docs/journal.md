@@ -21,21 +21,82 @@ title: Learning Journal
 | 2023-09-21 | Should we test (as in write test cases) and deploy our websites online? | For testing, use the simplest form; so test manually and describe how you've done it. For the deployment part; you do not need to deploy the application. However, make sure to write down how to set up your project. - Mats |
 | 2023-09-28 | What do you need to do for EMBRQ#05                                     | Check this out: https://github.com/tzapu/WiFiManager - Mats                                                                                                                                                                   |
 
+# Week 5
+
+### Wednesday (4th of October)
+
+Today I continued working on the Fritzing diagram. I was trying to look at how I could improve the wiring. Once I tried
+to turn on my device at school, it started working weirdly. The screen was flickering whenever the servo motor was
+moving. I tried to fix this, but I couldn't figure out what was causing it. I then decided to remove the servo motor
+power from the WEMOS and power it with an external power supply. This fixed the problem. I then continued working on
+the diagram. But later on, I had some trouble with the button that is connected to GPIO 0. I couldn't figure out why
+it wasn't working.
+
+
+<figure markdown>
+  ![type:video](https://res.cloudinary.com/dr6r2hv4m/video/upload/v1696496474/hva/iot/cuckoo_mechanism.mp4)
+    <figcaption>The cuckoo mechanism</figcaption>
+</figure>
+
+### Tuesday (3rd of October)
+
+Today I worked a lot on the embedded device. I first started with adding logic to go back to the main screen. The main
+file was getting a bit messy, so I decided to move all the logic for managing the screen into a separate file. The State
+Manager. This class is responsible for managing the different states of the device. After that I mainly worked on
+optimizing the code. Once I finished that, I worked on retrieving appointments from the API and displaying them on the
+LCD screen. At the end of the day I worked on cuckoo mechanism. I created a class for this. This class is responsible
+for playing the sound and moving the servo motor. I started with creating the circuit diagram for this in Fritzing.
+
+<figure markdown>
+  ![Diagram](assets/journal/fritzing0410.png)
+  <figcaption>The circuit diagram</figcaption>
+</figure>
+
+### Monday (2nd of October)
+
+Today I continued working on the embedded device. I worked on adding logic to switch between the different screens.
+I also 3d printed a linear actuator to move the servo motor. This was not easy. I had to print some parts multiple
+times because they somehow stuck on the nozzle of the printer. Eventually I got it all together, but had trouble fitting
+the wheel on the servo motor. I even went to the hardware store to look for a better fitting screw. In the end I ended
+up breaking one of the horns of the servo and sanded that down to make it fit in the wheel and connect the wheel to the
+servo motor. This kind of worked. The wheel was still a bit loose, but it was good enough for now.
+
+<figure class="inline start" markdown>
+  ![](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1696496203/hva/iot/failed_servo_print.png){ width="150" }
+  <figcaption>One of the failed prints</figcaption>
+</figure>
+<figure class="inline" markdown>
+  ![](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1696496142/hva/iot/servo_holder.png){ width="150" }
+  <figcaption>Succesful print</figcaption>
+</figure>
+<figure markdown>
+  ![](https://res.cloudinary.com/dr6r2hv4m/image/upload/v1696496263/hva/iot/hardware_store.png){ width="150" }
+  <figcaption>Me in the GAMMA</figcaption>
+</figure>
+
 # Week 4
 
-# Weekend (29th of September - 1st of October)
+### Weekend (29th of September - 1st of October)
 
 This weekend I worked on the embedded device. I first started with creating some code to play the Pac-Man sound. I found
 some code on the internet that helped me with this.
 
 https://github.com/robsoncouto/arduino-songs/blob/master/pacman/pacman.ino
 
-After that I worked on moving the servo motor. I now had all the components working separately. I then started working
+After that I worked on moving the servo motor.
+
+<figure markdown>
+  ![type:video](https://res.cloudinary.com/dr6r2hv4m/video/upload/v1696495499/hva/iot/Servo_Moving_alnm20.mp4)
+</figure>
+
+I now had all the components working separately. I then started working
 on combining the components. For this I have created separate classes, each with their own responsibility. I started
-with creating a class to manage the LCD screen. After that I created a class to manage the Wi-Fi connection. I then 
+with creating a class to manage the LCD screen. After that I created a class to manage the Wi-Fi connection. I then
 created the Time Manager class. This class is responsible for keeping track of the time and updating the time on the
 LCD screen. I then created the Hygrometer class. This class is responsible for retrieving the humidity and temperature
 from the sensor.
+
+I also tried to compile Fritzing myself, but had no luck with that.
 
 ### Thursday (28th of September)
 
