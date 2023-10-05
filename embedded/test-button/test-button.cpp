@@ -3,7 +3,6 @@
 
 void setup() {
     Serial.begin(SERIAL_BAUD_RATE);
-    pinMode(0, OUTPUT);
     pinMode(0, INPUT);
 }
 

@@ -130,7 +130,7 @@ void StateManager::checkToUpdateDisplay() {
  * Check if the button is pressed to switch display mode
  */
 void StateManager::checkButtonPress() {
-    if (digitalRead(NEXT_BUTTON_PIN) == HIGH) {
+    if (digitalRead(NEXT_BUTTON_PIN) == LOW) {
         lastButtonPressTime = millis();
         goToNextDisplayState();
         delay(timeToWaitForNextButtonPress);

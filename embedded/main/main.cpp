@@ -19,9 +19,6 @@ CuckooMechanism cuckooMechanism = CuckooMechanism();
 StateManager stateManager = StateManager(screen, cuckooMechanism, timeManager, hygrometer, appointments);
 
 void setup() {
-    // NEXT_BUTTON_PIN uses GPIO0. To use this pin as an input, it must first be set as an output.
-    // See https://arduino.stackexchange.com/questions/67751/esp8266-how-to-use-gpio0-as-an-input
-    pinMode(NEXT_BUTTON_PIN, OUTPUT);
     pinMode(NEXT_BUTTON_PIN, INPUT);
     Serial.begin(SERIAL_BAUD_RATE);
     Serial.println(); // Print empty line to separate boot messages from the rest of the output
