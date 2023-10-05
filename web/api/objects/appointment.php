@@ -22,11 +22,11 @@ class Appointment
         $this->conn = $db;
     }
 
-    // Read appointments
+    // Read upcoming appointments
     function read(): bool|PDOStatement
     {
         // Select all query
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY start";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE start > NOW() ORDER BY start ASC";
 
         // Prepare query statement
         $stmt = $this->conn->prepare($query);

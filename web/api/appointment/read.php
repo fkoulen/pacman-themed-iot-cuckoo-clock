@@ -1,6 +1,7 @@
 <?php
 /*
- * Retrieve all appointments from the database and return them as JSON. Return a message if no appointments are found.
+ * Retrieve all upcoming appointments from the database and return them as JSON.
+ * Return a message if no appointments are found.
  *
  * @author F.S. Koulen
  * @date 2023-09-17

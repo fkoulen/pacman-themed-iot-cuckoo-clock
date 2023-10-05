@@ -29,7 +29,7 @@ The API currently has the following endpoints:
 
 ### Appointment
 
-??? abstract "GET /appointment/read.php - Returns all appointments"
+??? abstract "GET /appointment/read.php - Returns all upcoming appointments"
 
       **Parameters**  
       None.
@@ -37,7 +37,7 @@ The API currently has the following endpoints:
       **Responses**  
   
       * **200 OK** - The request was successful.   
-        The response contains a JSON array with all appointments in `records`.  
+        The response contains a JSON array with all upcoming appointments in `records`.  
   
         Example:  
   

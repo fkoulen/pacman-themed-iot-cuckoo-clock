@@ -1,5 +1,5 @@
 /*
-    Retrieve all appointments from the API and display them in a table.
+    Retrieve all upcoming appointments from the API and display them in a table.
 
     @author F.S. Koulen
     @date 2023-09-16
