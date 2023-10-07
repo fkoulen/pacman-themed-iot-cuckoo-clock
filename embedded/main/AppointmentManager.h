@@ -10,6 +10,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include "ArduinoJson.h"
+#include "TimeManager.h"
 
 class AppointmentManager {
 public:
@@ -21,7 +22,7 @@ public:
 
     void displayState();
 
-    boolean displayNextAppointment();
+    boolean displayNextAppointment(TimeManager timeManager);
 
     // No update interval needed so set to 1 minute since it will be back to time display after 15 seconds
     const int updateInterval = 60 * 1000;

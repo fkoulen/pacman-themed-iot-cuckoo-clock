@@ -96,6 +96,24 @@ RtcDateTime TimeManager::getDateTime() {
     return rtc.GetDateTime();
 }
 
+String TimeManager::convertUTCtoLocalTime(const String& utcTime) {
+    auto utcString = utcTime.c_str();
+
+    int year, month, day, hour, minute, second;
+    sscanf(utcString, "%d-%d-%d %d:%d:%d", &year, &month, &day, &hour, &minute, &second);
+    const time_t time = makeTime(hour, minute, second, day, month, year);
+
+    // Display date as "Today" or "Tomorrow" if applicable
+    if (day == timeZone.day() && month == timeZone.month() && year == timeZone.year()) {
+        return "Today, " + timeZone.dateTime(timeZone.tzTime(time, UTC_TIME), "H:i");
+    } else if (day == timeZone.day() + 1 && month == timeZone.month() && year == timeZone.year()) {
+        return "Tomorrow, " + timeZone.dateTime(timeZone.tzTime(time, UTC_TIME), "H:i");
+    }
+
+    // Else display the date with the day of the week
+    return timeZone.dateTime(timeZone.tzTime(time, UTC_TIME), "D d M H:i");
+}
+
 
 // ---------------------------------- DateTime ----------------------------------
 

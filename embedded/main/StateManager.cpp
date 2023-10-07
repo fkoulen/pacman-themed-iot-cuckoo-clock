@@ -162,7 +162,7 @@ void StateManager::changeCurrentDisplayState(DisplayState displayState) {
 void StateManager::goToNextDisplayState() {
     // If the current display state is appointments and there is an appointment to display,
     // don't switch to the next display state, but display the next appointment.
-    if (currentDisplayState == APPOINTMENTS && appointments.displayNextAppointment()) {
+    if (currentDisplayState == APPOINTMENTS && appointments.displayNextAppointment(timeManager)) {
         return;
     }
 

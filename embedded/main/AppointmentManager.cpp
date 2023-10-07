@@ -76,7 +76,7 @@ void AppointmentManager::displayState() {
  *
  * @return whether or not there is an appointment to display
  */
-boolean AppointmentManager::displayNextAppointment() {
+boolean AppointmentManager::displayNextAppointment(TimeManager timeManager) {
     if (records.size() == 0) return false;
 
     // If we are at the end of the list, reset the index to 0 and return false
@@ -88,7 +88,7 @@ boolean AppointmentManager::displayNextAppointment() {
 
     JsonObject appointment = records[currentAppointmentIndex];
     String name = appointment["name"];
-    String time = appointment["start"];
+    String time = timeManager.convertUTCtoLocalTime(appointment["start"]);
 
     String appointmentNumber = String(currentAppointmentIndex + 1);
     Serial.print("Displaying appointment " + appointmentNumber + ": ");

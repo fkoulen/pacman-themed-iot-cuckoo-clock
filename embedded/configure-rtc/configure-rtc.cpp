@@ -19,7 +19,6 @@ Timezone timeZone;
 
 void convertUTCToLocal(const char *str) {
     int year, month, day, hour, minute, second;
-    char dummy[2]; // Dummy variable to consume the '-' and ' ' characters
     sscanf(str, "%d-%d-%d %d:%d:%d", &year, &month, &day, &hour, &minute, &second);
     const time_t time = makeTime(hour, minute, second, day, month, year);
     Serial.println("Local time:             " + timeZone.dateTime(timeZone.tzTime(time, UTC_TIME)));

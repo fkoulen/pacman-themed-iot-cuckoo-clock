@@ -26,6 +26,8 @@ public:
     int updateInterval = 1000;
 
     RtcDateTime getDateTime();
+
+    String convertUTCtoLocalTime(const String& utcTime);
 private:
     Timezone timeZone;
     RtcDS1302<ThreeWire> rtc;
