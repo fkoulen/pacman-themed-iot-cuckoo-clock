@@ -9,14 +9,15 @@
 #define TIME_MANAGER_H
 
 #include <Arduino.h>
+#include <RtcDS1302.h>
+#include <ezTime.h>
 #include "Screen.h"
-#include "RtcDS1302.h"
 
 class TimeManager {
 public:
     explicit TimeManager(RtcDS1302<ThreeWire> rtc);
 
-    void setScreen(Screen screen);
+    void initialize(Screen screen);
 
     void displayTime();
 
@@ -26,6 +27,7 @@ public:
 
     RtcDateTime getDateTime();
 private:
+    Timezone timeZone;
     RtcDS1302<ThreeWire> rtc;
     Screen screen;
     String datePrefix = "Date: ";

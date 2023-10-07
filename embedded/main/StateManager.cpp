@@ -33,7 +33,7 @@ StateManager::StateManager(
  */
 void StateManager::initialize(const Screen &givenScreen) {
     this->screen = givenScreen;
-    timeManager.setScreen(givenScreen);
+    timeManager.initialize(givenScreen);
     hygrometer.setScreen(givenScreen);
     appointments.setScreen(givenScreen);
     appointments.connectToAPI();

@@ -6,9 +6,7 @@
  */
 
 #include "TimeManager.h"
-#include "RtcDS1302.h"
 
-#include <utility>
 
 /**
  * Constructor for the TimeManager class.
@@ -21,7 +19,23 @@ TimeManager::TimeManager(RtcDS1302<ThreeWire> rtc) : rtc(rtc) {
 /**
  * Set the screen to use for displaying the time.
  */
-void TimeManager::setScreen(Screen givenScreen) {
+void TimeManager::initialize(Screen givenScreen) {
+    givenScreen.printText("Initializing", "RTC module");
+
+    setDebug(INFO); // Enable debug output from ezTime to serial
+    waitForSync(); // Wait for NTP sync to complete
+
+    timeZone.setLocation(TIME_ZONE);
+
+    rtc.Begin();
+    rtc.SetIsWriteProtected(false); // Unlock RTC for writing
+    rtc.SetIsRunning(true); // Enable RTC
+
+    rtc.SetDateTime(RtcDateTime(timeZone.year(), timeZone.month(), timeZone.day(), timeZone.hour(), timeZone.minute(),
+                                timeZone.second())); // Set RTC time to NTP time
+
+    rtc.SetIsWriteProtected(true); // Lock RTC for writing
+
     this->screen = std::move(givenScreen);
 }
 
