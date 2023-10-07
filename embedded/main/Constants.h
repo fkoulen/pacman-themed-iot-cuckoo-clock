@@ -1,6 +1,11 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+// Provide official timezone names
+// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+#define TIME_ZONE               "Europe/Amsterdam"
+
 // --------------------- Configuration
 #define SERIAL_BAUD_RATE 115200
 
