@@ -1,14 +1,4 @@
 # Database
-
-> Your database should be well documented. On your portfolio you describe how your database is designed and how it
-> works. You include a diagram of your database made in MySQL Workbench.
-
-- [x] The database is normalized into a correct relation database. Tool: MySQL Workbench
-- [x] All the tables in the database have a logical and correct primary key.
-- [x] The structure of all the columns and tables is in such way that there is no data saved in a wrong format.
-- [x] The build script of your MySQL Database should be stores as .sql files in your portfolio website with detailed
-  instructions on how to use.
-
 ## Creating the database
 
 The build script is a SQL script that creates the database called `iot` and the tables called `appointment` and
@@ -16,9 +6,9 @@ The build script is a SQL script that creates the database called `iot` and the 
 
 ### Pre-requisites
 
-- MySQL server
+- A running MariaDB or MySQL server
 - MySQL Workbench
-- [Build script](./seed.sql){:download="seed.sql"}
+- [Build script](./seed.sql){:download="seed.sql"} (click on the link to download the build script)
 
 ### Steps
 
@@ -38,7 +28,7 @@ The build script is a SQL script that creates the database called `iot` and the 
    .env file as well.  
    ![Run build script](../assets/web/database/step_5.png){: style="width:600px"}
 
-## Database diagram
+## Database Diagram
 
 <figure markdown>
   ![Database Diagram](../assets/web/database/database_diagram.png){: style="width:600px"}
