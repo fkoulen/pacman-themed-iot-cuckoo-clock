@@ -15,7 +15,15 @@ LiquidCrystal_I2C lcd(LCD_ADDRESS, CHARACTERS_PER_LINE,
                       NUMBER_OF_LINES); // create LCD with I2C address 0x27, 16 characters per line, 2 lines
 ThreeWire myWire(RTC_DAT_PIN, RTC_CLK_PIN, RTC_RST_PIN); // IO (DAT), SCL (CLK), CE (RST)
 RtcDS1302<ThreeWire> RTC(myWire);
+Timezone timeZone;
 
+void convertUTCToLocal(const char *str) {
+    int year, month, day, hour, minute, second;
+    char dummy[2]; // Dummy variable to consume the '-' and ' ' characters
+    sscanf(str, "%d-%d-%d %d:%d:%d", &year, &month, &day, &hour, &minute, &second);
+    const time_t time = makeTime(hour, minute, second, day, month, year);
+    Serial.println("Local time:             " + timeZone.dateTime(timeZone.tzTime(time, UTC_TIME)));
+}
 
 void setup() {
     lcd.init();
@@ -43,7 +51,6 @@ void setup() {
 
     Serial.println("UTC:             " + UTC.dateTime());
 
-    Timezone timeZone;
     timeZone.setLocation(TIME_ZONE);
 
     Serial.println("Local time:             " + timeZone.dateTime());
@@ -62,6 +69,11 @@ void setup() {
                                 timeZone.second())); // Set RTC time to NTP time
 
     RTC.SetIsWriteProtected(true); // Lock RTC for writing
+
+
+    String appointmentStart = "2023-10-13 20:40:00";
+
+    convertUTCToLocal(appointmentStart.c_str());
 }
 
 void loop() {
