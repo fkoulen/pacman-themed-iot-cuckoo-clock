@@ -37,31 +37,6 @@ class Appointment
         return $stmt;
     }
 
-    // Create appointment
-    function create(): bool
-    {
-        // Query to insert record
-        $query = "INSERT INTO " . $this->table_name . " SET name=:name, start=:start";
-
-        // Prepare query
-        $stmt = $this->conn->prepare($query);
-
-        // Sanitize
-        $this->name = htmlspecialchars(strip_tags($this->name));
-        $this->start = htmlspecialchars(strip_tags($this->start));
-
-        // Bind values
-        $stmt->bindParam(":name", $this->name);
-        $stmt->bindParam(":start", $this->start);
-
-        // Execute query
-        if ($stmt->execute()) {
-            return true;
-        }
-
-        return false;
-    }
-
     // Read one appointment
     function readOne(): void
     {
@@ -85,6 +60,21 @@ class Appointment
         $this->start = $row['start'] ?? null;
     }
 
+    // Read appointments of the next 7 days
+    function readNext7Days(): bool|PDOStatement
+    {
+        // Select all query
+        $query = "SELECT * FROM " . $this->table_name . " WHERE start > NOW() AND start < DATE_ADD(NOW(), INTERVAL 7 DAY) ORDER BY start ASC";
+
+        // Prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // Execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     // Check if appointment exists
     function exists(): bool
     {
@@ -105,6 +95,32 @@ class Appointment
 
         // Return true if row exists
         return (bool)$row;
+    }
+
+
+    // Create appointment
+    function create(): bool
+    {
+        // Query to insert record
+        $query = "INSERT INTO " . $this->table_name . " SET name=:name, start=:start";
+
+        // Prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // Sanitize
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->start = htmlspecialchars(strip_tags($this->start));
+
+        // Bind values
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":start", $this->start);
+
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
     }
 
     // Update the appointment if it exists

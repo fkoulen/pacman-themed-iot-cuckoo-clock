@@ -16,31 +16,5 @@ setHeadersGetRequest();
 // Initialize object
 $appointment = new Appointment(getDatabaseConnection());
 
-// Query appointments
-$stmt = $appointment->read();
-$num = $stmt->rowCount();
-
-// Check if more than 0 record found
-if ($num > 0) {
-    // Appointments array
-    $appointments_arr = array();
-    $appointments_arr["records"] = array();
-
-    // Retrieve table contents
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Extract row
-        extract($row);
-
-        $appointment_item = array(
-            "id" => $id,
-            "name" => $name,
-            "start" => $start
-        );
-
-        $appointments_arr["records"][] = $appointment_item;
-    }
-
-    returnData($appointments_arr, 200);
-} else {
-    returnMessage("No appointments found.", 404);
-}
+// Return appointments
+handleReturnAppointments($appointment->read());

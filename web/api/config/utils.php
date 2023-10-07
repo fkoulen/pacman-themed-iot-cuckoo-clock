@@ -98,3 +98,40 @@ function getDatabaseConnection(): PDO
     $database = new Database();
     return $database->getConnection();
 }
+
+/**
+ * Handle the return of appointments. Return a JSON response with the appointments or a message if no appointments are
+ * found.
+ *
+ * @param bool|PDOStatement $statement the statement to handle.
+ * @return void
+ */
+function handleReturnAppointments(bool|PDOStatement $statement): void
+{
+    $num = $statement->rowCount();
+
+// Check if more than 0 record found
+    if ($num > 0) {
+        // Appointments array
+        $appointments_arr = array();
+        $appointments_arr["records"] = array();
+
+        // Retrieve table contents
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            // Extract row
+            extract($row);
+
+            $appointment_item = array(
+                "id" => $id,
+                "name" => $name,
+                "start" => $start
+            );
+
+            $appointments_arr["records"][] = $appointment_item;
+        }
+
+        returnData($appointments_arr, 200);
+    } else {
+        returnMessage("No appointments found.", 404);
+    }
+}
