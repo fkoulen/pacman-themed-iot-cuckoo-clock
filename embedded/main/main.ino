@@ -5,7 +5,7 @@
 // #include "WiFiManager.h"
 // #include "TimeManager.h"
 // #include "Hygrometer.h"
-// #include "Appointments.h"
+// #include "AppointmentManager.h"
 // #include "CuckooMechanism.h"
 //
 // Screen screen = Screen();
@@ -14,7 +14,7 @@
 // TimeManager timeManager = TimeManager(rtcWiring);
 // DHT dht(DHT_PIN, DHT_TYPE);
 // Hygrometer hygrometer = Hygrometer(dht);
-// Appointments appointments = Appointments();
+// AppointmentManager appointments = AppointmentManager();
 // CuckooMechanism cuckooMechanism = CuckooMechanism();
 // StateManager stateManager = StateManager(screen, cuckooMechanism, timeManager, hygrometer, appointments);
 //

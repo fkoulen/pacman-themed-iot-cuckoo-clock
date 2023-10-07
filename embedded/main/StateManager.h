@@ -13,14 +13,14 @@
 #include "WiFiManager.h"
 #include "TimeManager.h"
 #include "Hygrometer.h"
-#include "Appointments.h"
+#include "AppointmentManager.h"
 #include "CuckooMechanism.h"
 
 
 class StateManager {
 public:
     StateManager(Screen screen, CuckooMechanism cuckooMechanism, TimeManager timeManager, Hygrometer hygrometer,
-                 Appointments appointments);
+                 AppointmentManager appointments);
 
     void initialize(const Screen &givenScreen);
 
@@ -37,7 +37,7 @@ private:
     CuckooMechanism cuckooMechanism;
     TimeManager timeManager;
     Hygrometer hygrometer;
-    Appointments appointments;
+    AppointmentManager appointments;
 
     enum DisplayState {
         TIME,

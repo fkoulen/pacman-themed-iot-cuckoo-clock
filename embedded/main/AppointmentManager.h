@@ -11,9 +11,9 @@
 #include <ESP8266HTTPClient.h>
 #include "ArduinoJson.h"
 
-class Appointments {
+class AppointmentManager {
 public:
-    Appointments();
+    AppointmentManager();
 
     void setScreen(Screen screen);
 

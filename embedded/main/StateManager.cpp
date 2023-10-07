@@ -18,7 +18,7 @@ StateManager::StateManager(
         CuckooMechanism cuckooMechanism,
         TimeManager timeManager,
         Hygrometer hygrometer,
-        Appointments appointments)
+        AppointmentManager appointments)
         :
         screen(std::move(screen)),
         cuckooMechanism(std::move(cuckooMechanism)),
@@ -54,7 +54,7 @@ String StateManager::getDisplayStateString(DisplayState displayState) {
         case HYGROMETER:
             return "Hygrometer";
         case APPOINTMENTS:
-            return "Appointments";
+            return "AppointmentManager";
         default:
             return "Time";
     }

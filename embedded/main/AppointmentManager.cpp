@@ -2,12 +2,12 @@
  *
  */
 
-#include "Appointments.h"
+#include "AppointmentManager.h"
 
-Appointments::Appointments() : jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
+AppointmentManager::AppointmentManager() : jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
 }
 
-void Appointments::setScreen(Screen givenScreen) {
+void AppointmentManager::setScreen(Screen givenScreen) {
     this->screen = std::move(givenScreen);
 }
 
@@ -16,7 +16,7 @@ void Appointments::setScreen(Screen givenScreen) {
  * Connect to the API and store all appointments if the connection is successful.
  * If the connection is not successful, show an error message on the LCD.
  */
-void Appointments::connectToAPI() {
+void AppointmentManager::connectToAPI() {
     screen.printText("Connecting", "to API...");
     // Initialize a wi-fi client & http client
     WiFiClient client;
@@ -53,7 +53,7 @@ void Appointments::connectToAPI() {
  *
  * @param payload The JSON payload from the API
  */
-void Appointments::storeAllAppointments(String payload) {
+void AppointmentManager::storeAllAppointments(String payload) {
     deserializeJson(jsonBuffer, payload);
     records = jsonBuffer["records"];
 }
@@ -61,7 +61,7 @@ void Appointments::storeAllAppointments(String payload) {
 /**
  * Display how many appointments are found on the LCD
  */
-void Appointments::displayState() {
+void AppointmentManager::displayState() {
     if (records.size() == 0) {
         Serial.println("No appointments found");
         screen.printText("No appointments", "found");
@@ -76,7 +76,7 @@ void Appointments::displayState() {
  *
  * @return whether or not there is an appointment to display
  */
-boolean Appointments::displayNextAppointment() {
+boolean AppointmentManager::displayNextAppointment() {
     if (records.size() == 0) return false;
 
     // If we are at the end of the list, reset the index to 0 and return false
@@ -105,6 +105,6 @@ boolean Appointments::displayNextAppointment() {
  *
  * @return The pluralized string
  */
-String Appointments::getPluralizedAppointmentsString() {
+String AppointmentManager::getPluralizedAppointmentsString() {
     return records.size() == 1 ? "appointment" : "appointments";
 }
