@@ -7,21 +7,14 @@
  * @date 2023-09-17
  */
 
-// Required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+// Include utils and object files
+require_once '../config/utils.php';
+require_once '../objects/appointment.php';
 
-// Include database and object files
-include_once '../config/database.php';
-include_once '../objects/appointment.php';
-
-// Instantiate database and appointment object
-$database = new Database();
-$db = $database->getConnection();
+setHeadersPostRequest();
 
 // Initialize object
-$appointment = new Appointment($db);
+$appointment = new Appointment(getDatabaseConnection());
 
 // Get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -37,22 +30,10 @@ if (
 
     // Create the appointment
     if ($appointment->create()) {
-        // Set response code - 201 created
-        http_response_code(201);
-
-        // Tell the user
-        echo json_encode(array("message" => "Appointment was created."));
+        returnMessage("Appointment was created.", 201);
     } else {
-        // Set response code - 503 service unavailable
-        http_response_code(503);
-
-        // Tell the user
-        echo json_encode(array("message" => "Unable to create appointment. Service unavailable."));
+        returnMessage("Unable to create appointment. Service unavailable.", 503);
     }
 } else {
-    // Set response code - 400 bad request
-    http_response_code(400);
-
-    // Tell the user
-    echo json_encode(array("message" => "Unable to create appointment. Data is incomplete."));
+    returnMessage("Unable to create appointment. Data is incomplete.", 400);
 }

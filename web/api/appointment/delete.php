@@ -7,19 +7,13 @@
  * @date 2023-09-18
  */
 
-// Required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: DELETE");
+// Include database, utils and object files
+require_once '../config/utils.php';
+require_once '../objects/appointment.php';
 
-// Include database and object files
-include_once '../config/database.php';
-include_once '../objects/appointment.php';
+setHeadersDeleteRequest();
 
-// Instantiate database and appointment object
-$database = new Database();
-$db = $database->getConnection();
-$appointment = new Appointment($db);
+$appointment = new Appointment(getDatabaseConnection());
 
 // Get & set appointment id
 $data = json_decode(file_get_contents("php://input"));
@@ -27,15 +21,7 @@ $appointment->id = $data->id;
 
 // Delete the appointment
 if ($appointment->delete()) {
-    // Set response code - 200 ok
-    http_response_code(200);
-
-    // Tell the user
-    echo json_encode(array("message" => "Appointment was deleted."));
+    returnMessage("Appointment was deleted.", 200);
 } else {
-    // Set response code - 400 bad request
-    http_response_code(400);
-
-    // Tell the user
-    echo json_encode(array("message" => "Unable to delete appointment. The appointment does not exist or could not be retrieved."));
+    returnMessage("Unable to delete appointment. The appointment does not exist or could not be retrieved.", 400);
 }

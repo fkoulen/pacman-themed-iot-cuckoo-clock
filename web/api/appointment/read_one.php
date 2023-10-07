@@ -7,19 +7,13 @@
  * @date 2023-09-18
  */
 
-// Required headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
-header("Content-Type: application/json; charset=UTF-8");
+// Include utils and object files
+require_once '../config/utils.php';
+require_once '../objects/appointment.php';
 
-// Include database and object files
-include_once '../config/database.php';
-include_once '../objects/appointment.php';
+setHeadersGetRequest();
 
-// Instantiate database and appointment object
-$database = new Database();
-$db = $database->getConnection();
-$appointment = new Appointment($db);
+$appointment = new Appointment(getDatabaseConnection());
 
 // Set ID of appointment to be read
 $appointment->id = $_GET['id'] ?? die();

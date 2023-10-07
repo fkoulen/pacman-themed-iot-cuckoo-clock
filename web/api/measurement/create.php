@@ -7,22 +7,14 @@
  * @date 2023-09-28
  */
 
+// Include utils and object files
+require_once '../config/utils.php';
+require_once '../objects/measurement.php';
 
-// Required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-
-// Include database and object files
-include_once '../config/database.php';
-include_once '../objects/measurement.php';
-
-// Instantiate database and measurement object
-$database = new Database();
-$db = $database->getConnection();
+setHeadersPostRequest();
 
 // Initialize object
-$measurement = new Measurement($db);
+$measurement = new Measurement(getDatabaseConnection());
 
 // Get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -38,22 +30,10 @@ if (
 
     // Create the measurement
     if ($measurement->create()) {
-        // Set response code - 201 created
-        http_response_code(201);
-
-        // Tell the user
-        echo json_encode(array("message" => "Measurement was created."));
+        returnMessage("Measurement was created.", 201);
     } else {
-        // Set response code - 503 service unavailable
-        http_response_code(503);
-
-        // Tell the user
-        echo json_encode(array("message" => "Unable to create measurement. Service unavailable."));
+        returnMessage("Unable to create measurement. Service unavailable.", 503);
     }
 } else {
-    // Set response code - 400 bad request
-    http_response_code(400);
-
-    // Tell the user
-    echo json_encode(array("message" => "Unable to create measurement. Data is incomplete."));
+    returnMessage("Unable to create measurement. Data is incomplete.", 400);
 }

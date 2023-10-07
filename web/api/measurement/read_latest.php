@@ -7,20 +7,14 @@
  * @date 2023-10-05
  */
 
-// Required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-
-// Include database and object files
-require_once "../config/database.php";
+// Include utils and object files
+require_once "../config/utils.php";
 require_once "../objects/measurement.php";
 
-// Instantiate database and measurement object
-$database = new Database();
-$db = $database->getConnection();
+setHeadersGetRequest();
 
 // Initialize object
-$measurement = new Measurement($db);
+$measurement = new Measurement(getDatabaseConnection());
 
 // Read latest measurement
 if ($measurement->readLatest()) {
@@ -32,15 +26,7 @@ if ($measurement->readLatest()) {
         "humidity" => $measurement->humidity
     );
 
-    // Set response code - 200 OK
-    http_response_code(200);
-
-    // Make it JSON format
-    echo json_encode($measurement_arr);
+    returnData($measurement_arr, 200);
 } else { // If no measurements are found
-    // Set response code - 404 Not found
-    http_response_code(404);
-
-    // Tell the user no measurements found
-    echo json_encode(array("message" => "No measurements found."));
+    returnMessage("No measurements found.", 404);
 }
