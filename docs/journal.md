@@ -15,13 +15,26 @@ title: Learning Journal
 
 # Q & A
 
-| Date       | Question                                                                | Answer                                                                                                                                                                                                                        |
-|------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2023-09-21 | Are we allowed to use existing STL files for our 3D printed product?    | Yes, make sure to credit it and explain why you have chosen to use this. - Mats                                                                                                                                               |
-| 2023-09-21 | Should we test (as in write test cases) and deploy our websites online? | For testing, use the simplest form; so test manually and describe how you've done it. For the deployment part; you do not need to deploy the application. However, make sure to write down how to set up your project. - Mats |
-| 2023-09-28 | What do you need to do for EMBRQ#05                                     | Check this out: https://github.com/tzapu/WiFiManager - Mats                                                                                                                                                                   |
+| Date       | Question                                                                         | Answer                                                                                                                                                                                                                        |
+|------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2023-09-21 | Are we allowed to use existing STL files for our 3D printed product?             | Yes, make sure to credit it and explain why you have chosen to use this. - Mats                                                                                                                                               |
+| 2023-09-21 | Should we test (as in write test cases) and deploy our websites online?          | For testing, use the simplest form; so test manually and describe how you've done it. For the deployment part; you do not need to deploy the application. However, make sure to write down how to set up your project. - Mats |
+| 2023-09-28 | What do you need to do for EMBRQ#05                                              | Check this out: https://github.com/tzapu/WiFiManager - Mats                                                                                                                                                                   |
+| 2023-10-07 | Can I get some advice on how to make my embedded device ready for manufacturing? | TBA                                                                                                                                                                                                                           |
 
 # Week 5
+
+### Saturday (7th of October)
+
+* Gave feedback on Niels and Nazlıcan's work.
+* Created utility class for the API to reduce the repetition of code.
+* Created new endpoint for retrieving the appointments for the next 7 days.
+* Updated API reference with new endpoint.
+* Used [ezTime](https://github.com/ropg/ezTime) library to get the time from the internet.
+* Created a function to convert a UTC string to a local time string.
+* Updated the embedded device to use the new endpoint, and to display the appointments for the next 7 days. Date is now
+  displayed in local time. 
+* Completed the Web/Database section of my portfolio and asked for feedback.
 
 ### Thursday (5th of October)
 
