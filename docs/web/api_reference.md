@@ -45,12 +45,12 @@ The API currently has the following endpoints:
         {
             "records": [
                 {
-                    "id": "6b77b957-54d0-11ee-bff1-0242ac120003",
+                    "id": "1",
                     "name": "Dentist",
                     "start": "2023-09-20 21:53:00"
                 },
                 {
-                    "id": "25dbfc4c-54d0-11ee-bff1-0242ac120003",
+                    "id": "2",
                     "name": "Doctor",
                     "start": "2023-09-28 12:25:00"
                 }
@@ -84,8 +84,8 @@ The API currently has the following endpoints:
 
         ```json
         {
-          "id": "77a702e8-5634-11ee-8f02-0242ac120002",
-          "name": "Nieuwe Afspraak",
+          "id": "1",
+          "name": "Dentist",
           "start": "2023-09-24 17:14:00"
         }
         ```
@@ -100,6 +100,48 @@ The API currently has the following endpoints:
             "message": "Appointment does not exist."
         }
         ```
+
+??? abstract "GET /appointment/read_next_7_days.php - Read appointments of upcoming 7 days"
+
+    **Parameters**  
+
+    None.
+    
+    **Responses**  
+
+    * **200 OK** - The request was successful.   
+        The response contains a JSON array with all upcoming appointments of the next 7 days in `records`.  
+
+        Example:  
+
+        ```json
+        {
+            "records": [
+                {
+                    "id": "1",
+                    "name": "Dentist",
+                    "start": "2023-09-20 21:53:00"
+                },
+                {
+                    "id": "2",
+                    "name": "Doctor",
+                    "start": "2023-09-28 12:25:00"
+                }
+            ]
+        }
+        ```
+
+    * **404 Not Found** - There are no appointments in the next 7 days in the database.   
+        The response contains a message about there being no appointments in `message`.
+
+        Example: 
+
+        ```json
+        {
+            "message": "No appointments found."
+        }
+        ```
+
 
 ??? abstract "POST /appointment/create.php - Creates a new appointment"
 
