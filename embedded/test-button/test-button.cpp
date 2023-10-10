@@ -3,15 +3,11 @@
 
 void setup() {
     Serial.begin(SERIAL_BAUD_RATE);
-    pinMode(0, INPUT);
+    pinMode(NEXT_BUTTON_PIN, INPUT);
 }
 
 void loop() {
-//    if (digitalRead(0)) {
-//        Serial.println("Button pressed");
-//        delay(500); // Debounce button press
-//    }
-    Serial.println(digitalRead(0));
+    Serial.println(digitalRead(NEXT_BUTTON_PIN));
     delay(500);
 }
 
