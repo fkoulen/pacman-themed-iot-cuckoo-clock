@@ -9,8 +9,11 @@
 // --------------------- Configuration
 #define SERIAL_BAUD_RATE 115200
 
-#define WIFI_SSID               "iotroam"
-#define WIFI_PASSWORD           "OQqcD8LpM7"
+//#define WIFI_SSID               "iotroam"
+//#define WIFI_PASSWORD           "OQqcD8LpM7"
+
+#define WIFI_SSID               "iot-koulenf"
+#define WIFI_PASSWORD           "iot2023"
 
 #define JSON_BUFFER_SIZE        1024
 

@@ -1,5 +1,5 @@
 /**
- * A WiFiManager object is used to connect to a Wi-Fi network.
+ * A InternetManager object is used to connect to a Wi-Fi network.
  *
  * @author F.S. Koulen
  * @date 2023-10-02
@@ -11,10 +11,11 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include "Screen.h"
+#include <WiFiManager.h>
 
-class WiFiManager {
+class InternetManager {
 public:
-    WiFiManager();
+    InternetManager();
 
     void initialize(const Screen &givenScreen, const String &ssid, const String &password);
 

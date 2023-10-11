@@ -10,7 +10,7 @@
 
 #include <Arduino.h>
 #include "Screen.h"
-#include "WiFiManager.h"
+#include "InternetManager.h"
 #include "TimeManager.h"
 #include "Hygrometer.h"
 #include "AppointmentManager.h"
