@@ -6,7 +6,9 @@
   ![Database Diagram](../assets/web/database/database_diagram.png){: style="width:600px"}
 </figure>
 
-The database has two tables:
+The database has two tables: `appointment` and `measurement`. The `appointment` table stores the appointments that are
+made by the user in the web application. These are then displayed on the LCD screen. The `measurement` table stores the
+measurements that are made by the sensor. These are then displayed on the LCD screen as well as in the web application.
 
 ### Table `appointment`
 
