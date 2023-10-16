@@ -24,17 +24,14 @@
   ![Bootstrap](../assets/web/technical_documentation/bootstrap.png){ width="150" }
   <figcaption>Bootstrap</figcaption>
 </figure>
-<figure class="inline" markdown>
-  ![JavaScript](../assets/web/technical_documentation/javascript.png){ width="150" }
-  <figcaption>JavaScript</figcaption>
-</figure>
-<figure class="inline" markdown>
+<figure class="inline end" markdown>
   ![Moment.js](../assets/web/technical_documentation/momentjs.png){ width="150" }
   <figcaption>Moment.js</figcaption>
 </figure>
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
+<figure markdown>
+  ![JavaScript](../assets/web/technical_documentation/javascript.png){ width="150" }
+  <figcaption>JavaScript</figcaption>
+</figure>
 
 ### Back-end
 

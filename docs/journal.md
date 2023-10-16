@@ -22,6 +22,28 @@ title: Learning Journal
 | 2023-09-28 | What do you need to do for EMBRQ#05                                              | Check this out: https://github.com/tzapu/WiFiManager - Mats                                                                                                                                                                   |
 | 2023-10-07 | Can I get some advice on how to make my embedded device ready for manufacturing? | TBA                                                                                                                                                                                                                           |
 
+# Week 7
+
+### Monday (16th of October)
+
+* Gave feedback to a classmate on their code.
+* Restructured the database section of my portfolio after getting feedback on it from Dorus.
+* Wrote the technical documentation for the web section of my portfolio.
+* Asked Nazlıcan for feedback on the Technical Documentation of web.
+
+# Week 6
+
+### Wednesday (11th of October)
+
+* New button suddenly works again.
+* Configured the Wi-Fi Manager.
+
+### Tuesday (10th of October)
+
+* Connected new buttons to the WEMOS.
+* Used dupont wires to connect the buttons and buzzer to the WEMOS. This will make it easier to connect the buttons to
+  the front of the end product.
+
 # Week 5
 
 ### Saturday (7th of October)
@@ -33,7 +55,7 @@ title: Learning Journal
 * Used [ezTime](https://github.com/ropg/ezTime) library to get the time from the internet.
 * Created a function to convert a UTC string to a local time string.
 * Updated the embedded device to use the new endpoint, and to display the appointments for the next 7 days. Date is now
-  displayed in local time. 
+  displayed in local time.
 * Completed the Web/Database section of my portfolio and asked for feedback.
 
 ### Thursday (5th of October)
