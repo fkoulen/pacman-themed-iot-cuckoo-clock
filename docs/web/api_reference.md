@@ -1,14 +1,5 @@
 # API Reference
 
-> Your API Reference should contain information about the endpoints of your API, and how to use them. It should also
-> contain information about the data that is returned by your API.
-
-> The REST API documentation explains the input, output, and endpoint URL for each API to help you use them effectively.
-
-> There is a full explanation of the used technology.
-
-> All the design choices are explained in detail of the front-end and back-end of the web application.
-
 ## General Information
 
 * The API is fully written in PHP.
