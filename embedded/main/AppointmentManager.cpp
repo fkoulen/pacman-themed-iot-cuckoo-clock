@@ -19,7 +19,8 @@ void AppointmentManager::setScreen(Screen givenScreen) {
 void AppointmentManager::connectToAPI() {
     screen.printText("Connecting", "to API...");
     // Initialize a wi-fi client & http client
-    WiFiClient client;
+    WiFiClientSecure client;
+    client.setFingerprint(FINGERPRINT);
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.
@@ -28,23 +29,38 @@ void AppointmentManager::connectToAPI() {
     // Make the GET-request, this returns the HTTP-code.
     int httpCode = httpClient.GET();
 
-    // Check if the response is fine.
-    if (httpCode == HTTP_CODE_OK) { // HTTP_CODE_OK == 200
-        Serial.println("Successfully connected to API");
+    // Initialize boolean to check if the connection was successful
+    boolean connectionSuccessful = false;
+
+    if (httpCode > 0) { // httpCode will be negative if it is an HttpClient error
         String payload = httpClient.getString();
-        storeAllAppointments(payload);
-        screen.printText(String(records.size()) + " " + getPluralizedAppointmentsString(), "found");
-    } else if (httpCode == HTTP_CODE_NOT_FOUND) {
-        Serial.println("No appointments found");
-        screen.printText("No appointments", "found");
-    } else {
-        String payload = httpClient.getString();
+        jsonBuffer.clear();
         deserializeJson(jsonBuffer, payload);
         String message = jsonBuffer["message"];
-        screen.printText("Error ${httpCode}", message);
-        Serial.println("Error " + String(httpCode));
-        Serial.println(message);
+
+        Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
+        if (message != "null") {
+            if (httpCode == HTTP_CODE_OK) {
+                connectionSuccessful = true;
+                Serial.println("Successfully connected to API");
+                storeAllAppointments(payload);
+            } else {
+                Serial.println(message);
+            }
+        } else {
+            Serial.printf("[HTTPS] GET... failed, error (%d)\n", httpCode);
+        }
+    } else {
+        Serial.printf("[HTTPS] GET... failed, error: %s\n", httpClient.errorToString(httpCode).c_str());
     }
+
+    // Show the correct message on the LCD
+    if (connectionSuccessful) {
+        screen.printText(String(records.size()) + " " + getPluralizedAppointmentsString(), "found");
+    } else {
+        screen.printText("Error ${httpCode}", "Failed to connect");
+    }
+
     delay(5000);
 }
 

@@ -15,16 +15,23 @@
 #define WIFI_SSID               "iot-koulenf"
 #define WIFI_PASSWORD           "iot2023"
 
-#define JSON_BUFFER_SIZE        1024
 
-#define BASE_URL                "http://koulenf.loca.lt/"
+// --------------------- API
+// You can get the fingerprint of the API by running the following command in bash:
+// echo | openssl s_client -connect koulenf.loca.lt:443 |& openssl x509 -fingerprint -noout | awk -F= '{print $2}' | tr -d ':' | sed 's/../& /g'
+const char *FINGERPRINT = "BB 6D 47 85 E9 84 C9 A6 7B E5 2D AC 67 EB 9F C9 26 85 F9 C4";
+#define JSON_BUFFER_SIZE        1024
+#define BASE_URL                "https://koulenf.loca.lt/"
 #define API_READ_APPOINTMENTS   "api/appointment/read_next_7_days.php"
 #define API_POST_MEASUREMENT    "api/measurement/create.php"
 
+
+// --------------------- LCD
 #define LCD_ADDRESS             0x27
 #define CHARACTERS_PER_LINE     16
 #define NUMBER_OF_LINES         2
 
+// --------------------- DHT
 #define DHT_TYPE                DHT11 // Temperature & Humidity Sensor KY-015 is type DHT11
 
 // --------------------- PINS
