@@ -10,8 +10,10 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 #include <Adafruit_Sensor.h>
+#include <WiFiManager.h>
 #include <DHT.h>
 #include "main/Constants.h"
+
 
 #define JSON_BUFFER_SIZE 1024
 
@@ -33,7 +35,9 @@ void initializeWifi() {
     Serial.begin(SERIAL_BAUD_RATE);
 
     // Your WeMos tries to connect to your Wi-fi network
-    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    WiFiManager wifiManager;
+
+    wifiManager.autoConnect(WIFI_SSID, WIFI_PASSWORD);
 
     // Keep the while-statement alive as long as we are NOT connected
     // to the Wi-fi network.
@@ -50,8 +54,10 @@ void initializeWifi() {
  */
 void postMeasurement(float temperature, float humidity) {
     // Initialize a wi-fi client & http client
-    WiFiClient client;
+    WiFiClientSecure client;
     HTTPClient httpClient;
+
+    client.setInsecure();
 
     // Set the URL of where the call should be made to.
     httpClient.begin(client, String(BASE_URL) + API_POST_MEASUREMENT);

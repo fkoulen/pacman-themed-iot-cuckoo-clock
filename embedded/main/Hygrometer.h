@@ -9,6 +9,9 @@
 #include "Adafruit_Sensor.h"
 #include "DHT.h"
 #include "Screen.h"
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#include "ArduinoJson.h"
 
 
 class Hygrometer {
@@ -29,6 +32,9 @@ private:
     const char DEGREE_SYMBOL = (char) 223;
     DHT dht;
     Screen screen;
+    DynamicJsonDocument jsonBuffer;
+
+    void postMeasurement(float temperature, int humidity);
 };
 
 
