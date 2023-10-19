@@ -18,7 +18,7 @@ class Hygrometer {
 public:
     explicit Hygrometer(DHT sensor);
 
-    void setScreen(Screen screen);
+    void setScreen(Screen *screen);
 
     float readTemperature();
 
@@ -31,7 +31,7 @@ public:
 private:
     const char DEGREE_SYMBOL = (char) 223;
     DHT dht;
-    Screen screen;
+    Screen *screen{};
     DynamicJsonDocument jsonBuffer;
 
     void postMeasurement(float temperature, int humidity);

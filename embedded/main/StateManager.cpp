@@ -14,30 +14,31 @@
  * Initialize the state manager
  */
 StateManager::StateManager(
-        Screen screen,
+        Screen *screen,
         CuckooMechanism cuckooMechanism,
         TimeManager timeManager,
         Hygrometer hygrometer,
         AppointmentManager appointments)
         :
-        screen(std::move(screen)),
+        screen(screen),
         cuckooMechanism(std::move(cuckooMechanism)),
         timeManager(std::move(timeManager)),
         hygrometer(std::move(hygrometer)),
-        appointments(std::move(appointments)) {}
+        appointments(std::move(appointments)) {
+}
 
 /**
  * Set the givenScreen for the state manager and its components. Then change the display state to TIME.
  *
  * @param givenScreen The givenScreen
  */
-void StateManager::initialize(const Screen &givenScreen) {
+void StateManager::initialize(Screen *givenScreen) {
     this->screen = givenScreen;
-    timeManager.initialize(givenScreen);
-    hygrometer.setScreen(givenScreen);
-    appointments.setScreen(givenScreen);
+    timeManager.initialize(screen);
+    hygrometer.setScreen(screen);
+    appointments.setScreen(screen);
     appointments.connectToAPI();
-    cuckooMechanism.initialize(givenScreen);
+    cuckooMechanism.initialize(screen);
     changeCurrentDisplayState(TIME);
 }
 
@@ -84,7 +85,7 @@ int StateManager::getCurrentUpdateInterval() {
  * @param update Whether to update the display instead of clearing it
  */
 void StateManager::displayContent(const bool update = false) {
-    if (!update) screen.clear();
+    if (!update) screen->clear();
 
     switch (currentDisplayState) {
         case TIME:
@@ -132,8 +133,13 @@ void StateManager::checkToUpdateDisplay() {
 void StateManager::checkButtonPress() {
     if (digitalRead(NEXT_BUTTON_PIN) == HIGH) {
         lastButtonPressTime = millis();
-        goToNextDisplayState();
-        delay(timeToWaitForNextButtonPress);
+        if (!screen->isBacklightOn()) {
+            screen->toggleBacklight();
+            displayContent();
+        } else {
+            goToNextDisplayState();
+            delay(timeToWaitForNextButtonPress);
+        }
     }
 
     // The play button is connected to an analog pin, so we need to use analogRead instead of digitalRead
@@ -182,8 +188,18 @@ void StateManager::checkToActivateCuckooMechanism() {
 
     // It is time to activate the cuckoo mechanism if it has not been activated yet this hour
     if (lastCuckooMechanismActivationHour != currentHour) {
+        if (!screen->isBacklightOn()) {
+            screen->toggleBacklight();
+        }
         cuckooMechanism.executeCuckooMechanism(now);
         lastCuckooMechanismActivationHour = currentHour;
         changeCurrentDisplayState(TIME);
     }
+}
+
+/**
+ * Display the time on the LCD
+ */
+void StateManager::displayTime() {
+    changeCurrentDisplayState(TIME);
 }

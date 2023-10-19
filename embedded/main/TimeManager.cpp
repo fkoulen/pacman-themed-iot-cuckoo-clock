@@ -1,5 +1,5 @@
 /**
- * Implementation of the TimeManager class. This class is used to display the time on the LCD screen.
+ * Implementation of the TimeManager class. This class is used to display the time on the LCD screen->
  *
  * @author F.S. Koulen
  * @date 2023-10-02
@@ -19,8 +19,9 @@ TimeManager::TimeManager(RtcDS1302<ThreeWire> rtc) : rtc(rtc) {
 /**
  * Set the screen to use for displaying the time.
  */
-void TimeManager::initialize(Screen givenScreen) {
-    givenScreen.printText("Initializing", "RTC module");
+void TimeManager::initialize(Screen *givenScreen) {
+    this->screen = givenScreen;
+    screen->printText("Initializing", "RTC module");
 
     setDebug(INFO); // Enable debug output from ezTime to serial
     waitForSync(); // Wait for NTP sync to complete
@@ -35,12 +36,10 @@ void TimeManager::initialize(Screen givenScreen) {
                                 timeZone.second())); // Set RTC time to NTP time
 
     rtc.SetIsWriteProtected(true); // Lock RTC for writing
-
-    this->screen = std::move(givenScreen);
 }
 
 /**
- * Display the time on the screen.
+ * Display the time on the screen->
  */
 void TimeManager::displayTime() {
     RtcDateTime now = rtc.GetDateTime();
@@ -51,7 +50,7 @@ void TimeManager::displayTime() {
 
     DateTime dateTime = DateTime(now);
 
-    screen.printText(datePrefix + dateTime.date, timePrefix + dateTime.time);
+    screen->printText(datePrefix + dateTime.date, timePrefix + dateTime.time);
 }
 
 /**
@@ -67,7 +66,7 @@ void TimeManager::updateDateTime() {
 
     DateTime dateTime = DateTime(now);
 
-    screen.printText(dateTime.date, datePrefix.length(), dateTime.time, timePrefix.length(), false);
+    screen->printText(dateTime.date, datePrefix.length(), dateTime.time, timePrefix.length(), false);
 }
 
 /**
@@ -80,7 +79,7 @@ bool TimeManager::isValidDateTime(const RtcDateTime &dateTime) {
         // Common Causes:
         //    1) the battery on the device is low or even missing and the power line was disconnected
         Serial.println("RTC lost confidence in the DateTime!");
-        screen.printText("Could not", "retrieve time");
+        screen->printText("Could not", "retrieve time");
         return false;
     }
 

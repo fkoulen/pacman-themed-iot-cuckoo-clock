@@ -31,8 +31,16 @@ public:
 
     void clear();
 
+    bool toggleBacklight();
+
+    bool isBacklightOn() const;
+
 private:
     LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCD_ADDRESS, CHARACTERS_PER_LINE, NUMBER_OF_LINES);
+    bool backlightOn = false;
+
+    void setBacklightOn(bool turnOn);
+
 };
 
 #endif //SCREEN_H

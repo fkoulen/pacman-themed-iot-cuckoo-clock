@@ -16,7 +16,7 @@ class AppointmentManager {
 public:
     AppointmentManager();
 
-    void setScreen(Screen screen);
+    void setScreen(Screen *screen);
 
     void connectToAPI();
 
@@ -27,7 +27,7 @@ public:
     // No update interval needed so set to 1 minute since it will be back to time display after 15 seconds
     const int updateInterval = 60 * 1000;
 private:
-    Screen screen;
+    Screen *screen{};
     DynamicJsonDocument jsonBuffer;
     JsonArray records;
     int currentAppointmentIndex = 0;

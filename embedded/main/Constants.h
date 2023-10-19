@@ -19,7 +19,7 @@
 // --------------------- API
 // You can get the fingerprint of the API by running the following command in bash:
 // echo | openssl s_client -connect koulenf.loca.lt:443 |& openssl x509 -fingerprint -noout | awk -F= '{print $2}' | tr -d ':' | sed 's/../& /g'
-const char *FINGERPRINT = "BB 6D 47 85 E9 84 C9 A6 7B E5 2D AC 67 EB 9F C9 26 85 F9 C4";
+#define FINGERPRINT             "BB 6D 47 85 E9 84 C9 A6 7B E5 2D AC 67 EB 9F C9 26 85 F9 C4";
 #define JSON_BUFFER_SIZE        1024
 #define BASE_URL                "https://koulenf.loca.lt/"
 #define API_READ_APPOINTMENTS   "api/appointment/read_next_7_days.php"

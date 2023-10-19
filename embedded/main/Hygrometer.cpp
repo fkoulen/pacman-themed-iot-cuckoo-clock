@@ -23,8 +23,8 @@ Hygrometer::Hygrometer(DHT dht) : dht(dht), jsonBuffer(DynamicJsonDocument(JSON_
 /**
  * Set the screen to use.
  */
-void Hygrometer::setScreen(Screen givenScreen) {
-    this->screen = std::move(givenScreen);
+void Hygrometer::setScreen(Screen *givenScreen) {
+    this->screen = givenScreen;
 }
 
 /**
@@ -55,7 +55,7 @@ void Hygrometer::displayState() {
 
     if (isnan(temperature) || isnan(humidity)) {
         Serial.println("Failed to read from DHT sensor!");
-        screen.printText("Failed to read", "from DHT sensor!");
+        screen->printText("Failed to read", "from DHT sensor!");
         return;
     }
 
@@ -65,7 +65,7 @@ void Hygrometer::displayState() {
     String firstLine = "Temp: " + String(temperature, 1) + DEGREE_SYMBOL + "C";
     String secondLine = "Humidity: " + String(humidity) + "%";
 
-    screen.printText(firstLine, secondLine);
+    screen->printText(firstLine, secondLine);
 
     postMeasurement(temperature, humidity);
 }
@@ -79,7 +79,8 @@ void Hygrometer::displayState() {
 void Hygrometer::postMeasurement(float temperature, int humidity) {
     // Initialize a wi-fi client & http client
     WiFiClientSecure client;
-    client.setFingerprint(FINGERPRINT);
+    const char fingerprint[] = FINGERPRINT
+    client.setFingerprint(fingerprint);
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.

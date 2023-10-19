@@ -16,7 +16,7 @@ Screen::Screen() = default;
 void Screen::initializeLCD() {
     Serial.println("Initializing LCD...");
     lcd.init();
-    lcd.backlight();
+    setBacklightOn(true);
     printText("Initializing...", "Please wait...");
     Serial.println("LCD initialized.");
 }
@@ -43,6 +43,7 @@ void Screen::printCustomCharacter(int position, int row, int character) {
  * @param clear Whether to clear the LCD before printing the text
  */
 void Screen::printText(const String &line, unsigned int positionLine, unsigned int row) {
+    if (!backlightOn) return;
     lcd.setCursor(positionLine, row);
     lcd.print(line);
 }
@@ -90,4 +91,36 @@ void Screen::clear() {
  */
 void Screen::createCustomCharacter(int location, byte pixels[]) {
     lcd.createChar(location, pixels);
+}
+
+/**
+ * Toggle the backlight
+ *
+ * @return Whether the backlight is now on or off
+ */
+bool Screen::toggleBacklight() {
+    setBacklightOn(!backlightOn);
+
+    return backlightOn;
+}
+
+/**
+ * Set the backlight
+ *
+ * @param backlightOn Whether to turn the backlight on or off
+ */
+void Screen::setBacklightOn(bool turnOn) {
+    this->backlightOn = turnOn;
+    lcd.clear();
+    Serial.println("Turning screen " + String(backlightOn ? "on" : "off") + "...");
+    backlightOn ? lcd.backlight() : lcd.noBacklight();
+}
+
+/**
+ * Check whether the backlight is on
+ *
+ * @return Whether the backlight is on
+ */
+bool Screen::isBacklightOn() const {
+    return backlightOn;
 }

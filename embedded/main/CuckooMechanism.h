@@ -22,7 +22,7 @@ class CuckooMechanism {
 public:
     CuckooMechanism();
 
-    void initialize(Screen givenScreen);
+    void initialize(Screen *givenScreen);
 
     void executeCuckooMechanism(RtcDateTime time);
 
@@ -66,7 +66,7 @@ private:
      */
     const int wholeNote = (60000 * 4) / BPM;
     Servo motor;
-    Screen screen;
+    Screen *screen{};
 
     byte pacMan[8] = {B01110, B11011, B11110, B11100, B11111, B01110, B00000, B00000};
     const int PAC_MAN_CHARACTER = 0;

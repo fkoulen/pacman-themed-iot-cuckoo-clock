@@ -10,7 +10,6 @@
 
 #include <Arduino.h>
 #include "Screen.h"
-#include "InternetManager.h"
 #include "TimeManager.h"
 #include "Hygrometer.h"
 #include "AppointmentManager.h"
@@ -19,10 +18,13 @@
 
 class StateManager {
 public:
-    StateManager(Screen screen, CuckooMechanism cuckooMechanism, TimeManager timeManager, Hygrometer hygrometer,
+    StateManager(Screen *screen,
+                 CuckooMechanism cuckooMechanism,
+                 TimeManager timeManager,
+                 Hygrometer hygrometer,
                  AppointmentManager appointments);
 
-    void initialize(const Screen &givenScreen);
+    void initialize(Screen *givenScreen);
 
     void checkToGoBackToTimeDisplay();
 
@@ -32,8 +34,10 @@ public:
 
     void checkToActivateCuckooMechanism();
 
+    void displayTime();
+
 private:
-    Screen screen;
+    Screen *screen;
     CuckooMechanism cuckooMechanism;
     TimeManager timeManager;
     Hygrometer hygrometer;

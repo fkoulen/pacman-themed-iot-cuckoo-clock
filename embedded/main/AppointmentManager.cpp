@@ -7,8 +7,8 @@
 AppointmentManager::AppointmentManager() : jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
 }
 
-void AppointmentManager::setScreen(Screen givenScreen) {
-    this->screen = std::move(givenScreen);
+void AppointmentManager::setScreen(Screen *givenScreen) {
+    this->screen = givenScreen;
 }
 
 
@@ -17,10 +17,11 @@ void AppointmentManager::setScreen(Screen givenScreen) {
  * If the connection is not successful, show an error message on the LCD.
  */
 void AppointmentManager::connectToAPI() {
-    screen.printText("Connecting", "to API...");
+    screen->printText("Connecting", "to API...");
     // Initialize a wi-fi client & http client
     WiFiClientSecure client;
-    client.setFingerprint(FINGERPRINT);
+    char fingerprint[] = FINGERPRINT
+    client.setFingerprint(fingerprint);
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.
@@ -39,26 +40,24 @@ void AppointmentManager::connectToAPI() {
         String message = jsonBuffer["message"];
 
         Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
-        if (message != "null") {
-            if (httpCode == HTTP_CODE_OK) {
-                connectionSuccessful = true;
-                Serial.println("Successfully connected to API");
-                storeAllAppointments(payload);
-            } else {
-                Serial.println(message);
-            }
+        if (httpCode == HTTP_CODE_OK) {
+            connectionSuccessful = true;
+            Serial.println("Successfully connected to API");
+            storeAllAppointments(payload);
+        } else if (message != "null") {
+            Serial.println(message);
         } else {
             Serial.printf("[HTTPS] GET... failed, error (%d)\n", httpCode);
         }
     } else {
-        Serial.printf("[HTTPS] GET... failed, error: %s\n", httpClient.errorToString(httpCode).c_str());
+        Serial.printf("[HTTPS] GET... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
     }
 
     // Show the correct message on the LCD
     if (connectionSuccessful) {
-        screen.printText(String(records.size()) + " " + getPluralizedAppointmentsString(), "found");
+        screen->printText(String(records.size()) + " " + getPluralizedAppointmentsString(), "found");
     } else {
-        screen.printText("Error ${httpCode}", "Failed to connect");
+        screen->printText("Error " + String(httpCode), "Failed to connect");
     }
 
     delay(5000);
@@ -80,11 +79,11 @@ void AppointmentManager::storeAllAppointments(String payload) {
 void AppointmentManager::displayState() {
     if (records.size() == 0) {
         Serial.println("No appointments found");
-        screen.printText("No appointments", "found");
+        screen->printText("No appointments", "found");
         return;
     }
 
-    screen.printText("Next 7 days:", String(records.size()) + " " + getPluralizedAppointmentsString());
+    screen->printText("Next 7 days:", String(records.size()) + " " + getPluralizedAppointmentsString());
 }
 
 /**
@@ -110,7 +109,7 @@ boolean AppointmentManager::displayNextAppointment(TimeManager timeManager) {
     Serial.print("Displaying appointment " + appointmentNumber + ": ");
     Serial.println(name + " at " + time);
 
-    screen.printText(appointmentNumber + ": " + name, time);
+    screen->printText(appointmentNumber + ": " + name, time);
 
     currentAppointmentIndex++;
     return true;

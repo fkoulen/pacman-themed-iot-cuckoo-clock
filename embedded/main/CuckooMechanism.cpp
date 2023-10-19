@@ -14,13 +14,13 @@ CuckooMechanism::CuckooMechanism() = default;
 /**
  * Initialize the cuckoo mechanism by attaching the servo motor and moving it to the starting position.
  */
-void CuckooMechanism::initialize(Screen givenScreen) {
+void CuckooMechanism::initialize(Screen *givenScreen) {
     motor.attach(SERVO_PIN);
     motor.write(0);
-    screen.createCustomCharacter(PAC_MAN_CHARACTER, pacMan);
-    screen.createCustomCharacter(GHOST_CHARACTER, ghost);
-    screen.createCustomCharacter(DOT_CHARACTER, dot);
-    screen = std::move(givenScreen);
+    this->screen = givenScreen;
+    screen->createCustomCharacter(PAC_MAN_CHARACTER, pacMan);
+    screen->createCustomCharacter(GHOST_CHARACTER, ghost);
+    screen->createCustomCharacter(DOT_CHARACTER, dot);
 }
 
 /**
@@ -100,15 +100,15 @@ void CuckooMechanism::displayCuckooState(RtcDateTime dateTime) {
         timeString = " " + timeString;
     }
 
-    screen.clear();
-    screen.printText(timeString, 0, 0);
+    screen->clear();
+    screen->printText(timeString, 0, 0);
 
     // Print the following: " X ･･････････ Y " where X represents Pac-Man and Y the ghost
-    screen.printCustomCharacter(1, 1, byte(PAC_MAN_CHARACTER));
-    screen.printCustomCharacter(14, 1, byte(GHOST_CHARACTER));
+    screen->printCustomCharacter(1, 1, byte(PAC_MAN_CHARACTER));
+    screen->printCustomCharacter(14, 1, byte(GHOST_CHARACTER));
 
     for (int i = 3; i < 13; ++i) {
-        screen.printCustomCharacter(i, 1, byte(DOT_CHARACTER));
+        screen->printCustomCharacter(i, 1, byte(DOT_CHARACTER));
     }
 }
 

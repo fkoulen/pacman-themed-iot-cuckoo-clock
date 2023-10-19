@@ -17,7 +17,7 @@ class TimeManager {
 public:
     explicit TimeManager(RtcDS1302<ThreeWire> rtc);
 
-    void initialize(Screen screen);
+    void initialize(Screen *screen);
 
     void displayTime();
 
@@ -31,7 +31,7 @@ public:
 private:
     Timezone timeZone;
     RtcDS1302<ThreeWire> rtc;
-    Screen screen;
+    Screen *screen;
     String datePrefix = "Date: ";
     String timePrefix = "Time: ";
 

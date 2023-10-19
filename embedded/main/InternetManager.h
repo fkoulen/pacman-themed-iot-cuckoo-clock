@@ -10,17 +10,34 @@
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-#include "Screen.h"
 #include <WiFiManager.h>
+#include <ESP8266HTTPClient.h>
+#include <ESP8266WebServer.h>
+#include "Screen.h"
+#include "StateManager.h"
+
 
 class InternetManager {
 public:
     InternetManager();
 
-    void initialize(const Screen &givenScreen, const String &ssid, const String &password);
+    void initialize(Screen *givenScreen, StateManager *givenStateManager);
+
+    void listenServer();
 
 private:
-    Screen screen;
+    const int PORT = 80;
+    const String ROOT = "/";
+    const String LCD = "/lcd";
+    Screen *screen{};
+    StateManager *stateManager;
+    ESP8266WebServer *server;
+
+    void handleRoot();
+
+    void handleLCD();
+
+    void handleNotFound();
 };
 
 
