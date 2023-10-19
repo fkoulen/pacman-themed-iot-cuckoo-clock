@@ -56,6 +56,7 @@ private:
     unsigned long lastCuckooMechanismActivationHour = 0;
     const unsigned long TIME_TO_GO_BACK_TO_TIME_DISPLAY = 15 * 1000;
     const unsigned long NEXT_BUTTON_DEBOUNCE_TIME = 500;
+    const unsigned long MIN_HIGH_ANALOG_VALUE = 1000;
 
     static String getDisplayStateString(DisplayState displayState);
 

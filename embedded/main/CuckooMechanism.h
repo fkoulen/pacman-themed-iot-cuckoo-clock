@@ -66,6 +66,10 @@ private:
      */
     const int wholeNote = (60000 * 4) / BPM;
     Servo motor;
+
+    const int SERVO_START_POSITION = 0;
+    const int SERVO_END_POSITION = 180;
+
     Screen *screen{};
 
     byte pacMan[8] = {B01110, B11011, B11110, B11100, B11111, B01110, B00000, B00000};

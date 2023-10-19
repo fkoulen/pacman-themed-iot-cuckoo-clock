@@ -29,11 +29,11 @@
 #define START_NIGHT_MODE       22
 #define END_NIGHT_MODE         7
 
-
 // --------------------- LCD
 #define LCD_ADDRESS             0x27
 #define CHARACTERS_PER_LINE     16
 #define NUMBER_OF_LINES         2
+#define TIME_TO_SHOW_MESSAGE    3000
 
 // --------------------- DHT
 #define DHT_TYPE                DHT11 // Temperature & Humidity Sensor KY-015 is type DHT11

@@ -23,7 +23,7 @@ public:
 
     void updateDateTime();
 
-    int updateInterval = 1000;
+    const int UPDATE_INTERVAL = 1000;
 
     RtcDateTime getDateTime();
 

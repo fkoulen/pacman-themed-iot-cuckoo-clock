@@ -18,7 +18,7 @@ public:
 
     void setScreen(Screen *screen);
 
-    void connectToAPI();
+    void fetch();
 
     void displayState();
 

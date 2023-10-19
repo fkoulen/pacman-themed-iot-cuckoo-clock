@@ -16,8 +16,8 @@ void AppointmentManager::setScreen(Screen *givenScreen) {
  * Connect to the API and store all appointments if the connection is successful.
  * If the connection is not successful, show an error message on the LCD.
  */
-void AppointmentManager::connectToAPI() {
-    screen->printText("Connecting", "to API...");
+void AppointmentManager::fetch() {
+    screen->printText("Fetching", "appointments...");
     // Initialize a wi-fi client & http client
     WiFiClientSecure client;
     char fingerprint[] = FINGERPRINT
@@ -33,7 +33,7 @@ void AppointmentManager::connectToAPI() {
     // Initialize boolean to check if the connection was successful
     boolean connectionSuccessful = false;
 
-    if (httpCode > 0) { // httpCode will be negative if it is an HttpClient error
+    if (HTTPClient::errorToString(httpCode) == String()) { // Check if it is not an HTTPClient error
         String payload = httpClient.getString();
         jsonBuffer.clear();
         deserializeJson(jsonBuffer, payload);
@@ -60,7 +60,7 @@ void AppointmentManager::connectToAPI() {
         screen->printText("Error " + String(httpCode), "Failed to connect");
     }
 
-    delay(5000);
+    delay(TIME_TO_SHOW_MESSAGE);
 }
 
 /**

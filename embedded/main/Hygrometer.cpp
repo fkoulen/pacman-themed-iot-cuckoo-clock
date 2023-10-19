@@ -107,7 +107,7 @@ void Hygrometer::postMeasurement(float temperature, int humidity) {
     Serial.println("[HTTPS] POST... " + String(BASE_URL) + API_POST_MEASUREMENT);
     int httpCode = httpClient.POST(body);
 
-    if (httpCode > 0) { // httpCode will be negative if it is an HttpClient error
+    if (HTTPClient::errorToString(httpCode) == String()) { // Check if it is not an HTTPClient error
         String payload = httpClient.getString();
         jsonBuffer.clear();
         deserializeJson(jsonBuffer, payload);

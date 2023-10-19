@@ -64,7 +64,7 @@ void CuckooMechanism::playMelody() {
  */
 void CuckooMechanism::moveCuckooForward() {
     Serial.println("Moving cuckoo forward.");
-    motor.write(180);
+    motor.write(SERVO_END_POSITION);
 }
 
 /**
@@ -72,7 +72,7 @@ void CuckooMechanism::moveCuckooForward() {
  */
 void CuckooMechanism::moveCuckooBackward() {
     Serial.println("Moving cuckoo backward.");
-    motor.write(0);
+    motor.write(SERVO_START_POSITION);
 }
 
 /**
@@ -104,9 +104,12 @@ void CuckooMechanism::displayCuckooState(RtcDateTime dateTime) {
     screen->printText(timeString, 0, 0);
 
     // Print the following: " X ･･････････ Y " where X represents Pac-Man and Y the ghost
+
+    // Print the Pac-Man on index 1 and the ghost on index 14
     screen->printCustomCharacter(1, 1, byte(PAC_MAN_CHARACTER));
     screen->printCustomCharacter(14, 1, byte(GHOST_CHARACTER));
 
+    // Print the dots (from index 3 to 12)
     for (int i = 3; i < 13; ++i) {
         screen->printCustomCharacter(i, 1, byte(DOT_CHARACTER));
     }

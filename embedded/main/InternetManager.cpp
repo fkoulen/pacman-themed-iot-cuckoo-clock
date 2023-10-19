@@ -28,9 +28,9 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
 
     Serial.println("Connected to Wi-Fi.");
     screen->printText("Connected to", "Wi-Fi.");
-    delay(1000);
+    delay(TIME_TO_SHOW_MESSAGE);
     screen->printText("Starting server:", WiFi.localIP().toString());
-    delay(1000);
+    delay(TIME_TO_SHOW_MESSAGE);
     server->on(ROOT, HTTP_GET, [this] { handleRoot(); });
     server->on(LCD, HTTP_POST, [this] { handleLCD(); });
     server->onNotFound([this] { handleNotFound(); });

@@ -30,7 +30,7 @@ void StateManager::initialize(Screen *givenScreen) {
     timeManager.initialize(screen);
     hygrometer.setScreen(screen);
     appointments.setScreen(screen);
-    appointments.connectToAPI();
+    appointments.fetch();
     cuckooMechanism.initialize(screen);
     changeCurrentDisplayState(TIME);
 }
@@ -62,13 +62,13 @@ String StateManager::getDisplayStateString(DisplayState displayState) {
 int StateManager::getCurrentUpdateInterval() {
     switch (currentDisplayState) {
         case TIME:
-            return timeManager.updateInterval;
+            return timeManager.UPDATE_INTERVAL;
         case HYGROMETER:
             return hygrometer.UPDATE_INTERVAL;
         case APPOINTMENTS:
             return appointments.UPDATE_INTERVAL;
         default:
-            return timeManager.updateInterval;
+            return timeManager.UPDATE_INTERVAL;
     }
 }
 
@@ -138,7 +138,7 @@ void StateManager::checkButtonPress() {
     // The play button is connected to an analog pin, so we need to use analogRead instead of digitalRead
     // to check if the button is pressed. The button is pressed when the analog value is close to 1024.
     // So we check if the analog value is greater than 1000.
-    if (analogRead(PLAY_BUTTON_ANALOG_PIN) > 1000) {
+    if (analogRead(PLAY_BUTTON_ANALOG_PIN) > MIN_HIGH_ANALOG_VALUE) {
         executeCuckooMechanism(timeManager.getDateTime());
         changeCurrentDisplayState(TIME);
     }
