@@ -71,9 +71,9 @@ int StateManager::getCurrentUpdateInterval() {
         case TIME:
             return timeManager.updateInterval;
         case HYGROMETER:
-            return hygrometer.updateInterval;
+            return hygrometer.UPDATE_INTERVAL;
         case APPOINTMENTS:
-            return appointments.updateInterval;
+            return appointments.UPDATE_INTERVAL;
         default:
             return timeManager.updateInterval;
     }
@@ -108,7 +108,7 @@ void StateManager::displayContent(const bool update = false) {
  * @param currentTime The current time in milliseconds
  */
 void StateManager::checkToGoBackToTimeDisplay() {
-    if (currentDisplayState != TIME && millis() - lastButtonPressTime >= timeToGoBackToTimeDisplay) {
+    if (currentDisplayState != TIME && millis() - lastButtonPressTime >= TIME_TO_GO_BACK_TO_TIME_DISPLAY) {
         changeCurrentDisplayState(TIME);
     }
 }
@@ -138,7 +138,7 @@ void StateManager::checkButtonPress() {
             displayContent();
         } else {
             goToNextDisplayState();
-            delay(timeToWaitForNextButtonPress);
+            delay(NEXT_BUTTON_DEBOUNCE_TIME);
         }
     }
 

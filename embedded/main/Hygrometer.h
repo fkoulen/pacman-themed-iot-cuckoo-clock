@@ -26,7 +26,7 @@ public:
 
     void displayState();
 
-    int updateInterval = 10 * 1000;
+    const int UPDATE_INTERVAL = 15 * 1000;
 
 private:
     const char DEGREE_SYMBOL = (char) 223;
