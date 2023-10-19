@@ -13,18 +13,11 @@
 /**
  * Initialize the state manager
  */
-StateManager::StateManager(
-        Screen *screen,
-        CuckooMechanism cuckooMechanism,
-        TimeManager timeManager,
-        Hygrometer hygrometer,
-        AppointmentManager appointments)
-        :
-        screen(screen),
-        cuckooMechanism(std::move(cuckooMechanism)),
-        timeManager(std::move(timeManager)),
-        hygrometer(std::move(hygrometer)),
-        appointments(std::move(appointments)) {
+StateManager::StateManager(Screen *screen, CuckooMechanism cuckooMechanism, TimeManager timeManager,
+                           Hygrometer hygrometer, AppointmentManager appointments) : screen(screen), cuckooMechanism(
+        std::move(cuckooMechanism)), timeManager(std::move(timeManager)), hygrometer(std::move(hygrometer)),
+                                                                                     appointments(
+                                                                                             std::move(appointments)) {
 }
 
 /**
@@ -135,18 +128,18 @@ void StateManager::checkButtonPress() {
         lastButtonPressTime = millis();
         if (!screen->isBacklightOn()) {
             screen->toggleBacklight();
-            displayContent();
+            displayTime();
         } else {
             goToNextDisplayState();
-            delay(NEXT_BUTTON_DEBOUNCE_TIME);
         }
+        delay(NEXT_BUTTON_DEBOUNCE_TIME);
     }
 
     // The play button is connected to an analog pin, so we need to use analogRead instead of digitalRead
     // to check if the button is pressed. The button is pressed when the analog value is close to 1024.
     // So we check if the analog value is greater than 1000.
     if (analogRead(PLAY_BUTTON_ANALOG_PIN) > 1000) {
-        cuckooMechanism.executeCuckooMechanism(timeManager.getDateTime());
+        executeCuckooMechanism(timeManager.getDateTime());
         changeCurrentDisplayState(TIME);
     }
 }
@@ -188,10 +181,7 @@ void StateManager::checkToActivateCuckooMechanism() {
 
     // It is time to activate the cuckoo mechanism if it has not been activated yet this hour
     if (lastCuckooMechanismActivationHour != currentHour) {
-        if (!screen->isBacklightOn()) {
-            screen->toggleBacklight();
-        }
-        cuckooMechanism.executeCuckooMechanism(now);
+        executeCuckooMechanism(now);
         lastCuckooMechanismActivationHour = currentHour;
         changeCurrentDisplayState(TIME);
     }
@@ -202,4 +192,14 @@ void StateManager::checkToActivateCuckooMechanism() {
  */
 void StateManager::displayTime() {
     changeCurrentDisplayState(TIME);
+}
+
+/**
+ * Execute the cuckoo mechanism and check if the backlight should be turned on during.
+ */
+void StateManager::executeCuckooMechanism(RtcDateTime currentTime) {
+    bool backlightOffAtStart = !screen->isBacklightOn();
+    if (backlightOffAtStart) screen->toggleBacklight();
+    cuckooMechanism.executeCuckooMechanism(currentTime);
+    if (backlightOffAtStart) screen->toggleBacklight();
 }

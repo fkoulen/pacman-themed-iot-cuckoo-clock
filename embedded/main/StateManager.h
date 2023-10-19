@@ -66,6 +66,8 @@ private:
     void changeCurrentDisplayState(DisplayState displayState);
 
     void goToNextDisplayState();
+
+    void executeCuckooMechanism(RtcDateTime currentTime);
 };
 
 

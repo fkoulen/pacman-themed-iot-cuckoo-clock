@@ -50,8 +50,7 @@ void InternetManager::listenServer() {
  */
 void InternetManager::handleRoot() {
     Serial.println("[Server] Handling root request");
-    server->send(HTTP_CODE_OK, "text/html",
-                 "<p>This is the URL for the web server of the WEMOS.</p>");
+    server->send(HTTP_CODE_OK, "text/html", "<p>This is the URL for the web server of the WEMOS.</p>");
 }
 
 /**
@@ -60,8 +59,8 @@ void InternetManager::handleRoot() {
 void InternetManager::handleLCD() {
     Serial.println("[Server] Handling LCD request");
     bool backlightOn = screen->toggleBacklight();
-    stateManager->displayTime();
-    server->send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") +".");
+    backlightOn ? stateManager->displayTime() : screen->clear();
+    server->send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") + ".");
 }
 
 /**
