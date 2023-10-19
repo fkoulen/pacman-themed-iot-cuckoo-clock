@@ -25,6 +25,10 @@
 #define API_READ_APPOINTMENTS   "api/appointment/read_next_7_days.php"
 #define API_POST_MEASUREMENT    "api/measurement/create.php"
 
+// --------------------- Cuckoo Mechanism
+#define START_NIGHT_MODE       22
+#define END_NIGHT_MODE         7
+
 
 // --------------------- LCD
 #define LCD_ADDRESS             0x27

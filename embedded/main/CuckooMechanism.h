@@ -34,7 +34,7 @@ private:
     void moveCuckooBackward();
 
     void displayCuckooState(RtcDateTime dateTime);
-
+    static const int DURATION_OF_CUCKOO_IN_NIGHT = 5000;
     static const int BPM = 105;
     static const int MELODY_SIZE = 62;
     /**

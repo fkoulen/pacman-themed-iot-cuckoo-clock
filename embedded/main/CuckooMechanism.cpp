@@ -119,6 +119,12 @@ void CuckooMechanism::executeCuckooMechanism(RtcDateTime time) {
     Serial.println("Executing cuckoo mechanism.");
     displayCuckooState(time);
     moveCuckooForward();
-    playMelody();
+    // Do not play the melody during night mode
+    if (time.Hour() >= END_NIGHT_MODE && time.Hour() <= START_NIGHT_MODE) {
+        playMelody();
+    } else {
+        Serial.println("Night mode is active, not playing melody.");
+        delay(DURATION_OF_CUCKOO_IN_NIGHT);
+    }
     moveCuckooBackward();
 }
