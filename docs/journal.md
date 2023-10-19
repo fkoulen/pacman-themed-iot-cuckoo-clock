@@ -24,12 +24,26 @@ title: Learning Journal
 
 # Week 7
 
+### Wednesday (18th of October)
+
+* Gave feedback to Jinyoung.
+* Switched pins for the 'Next' button and servo motor. This fixed the problem where the 'Next' button would be high even
+  when the button was not pressed.
+* Connected to the API through HTTPS.
+* Post the measurement to the API whenever it is shown on the screen.
+* Set up web server on embedded device.
+* Created endpoint to turn on/off the BACKLIGHT through the web server.
+* Turn the screen on when the device is turned on by a button press or during the cuckoo mechanism.
+* Disabled playing the melody in night mode.
+
 ### Monday (16th of October)
 
 * Gave feedback to a classmate on their code.
 * Restructured the database section of my portfolio after getting feedback on it from Dorus.
 * Wrote the technical documentation for the web section of my portfolio.
 * Asked Nazlıcan for feedback on the Technical Documentation of web.
+* Wrote the Web/Code section of my portfolio.
+* Asked Niels for feedback on the Web/Code section of my portfolio.
 
 # Week 6
 

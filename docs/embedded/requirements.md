@@ -42,6 +42,7 @@ Code:
 - [ ] Button to show next bit of information
 - [ ] Button to show Pac-Man and make sound
 - [ ] Temperature and humidity sensor to measure temperature and humidity
+- [ ] RTC to provide and keep track of time
 
 [Insert text explaining how you fulfilled the requirement here]
 
