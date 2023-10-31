@@ -14,9 +14,9 @@ fetch(API_APPOINTMENT_READ).then(response => {
 
             if (response.status !== HttpCodes.OK) { // Error occurred
                 if (response.status === HttpCodes.NOT_FOUND) { // No appointments found
-                    handleError("No appointments found.")
+                    handleReadAppointmentsError("No appointments found.")
                 } else { // Other error
-                    handleError(`An error (${response.status}) occurred while fetching the data.`)
+                    handleReadAppointmentsError(`An error (${response.status}) occurred while fetching the data.`)
                 }
             } else { // If no error occurred, display the appointments in a table
                 let appointmentsHTML = '';
@@ -33,14 +33,14 @@ fetch(API_APPOINTMENT_READ).then(response => {
                 document.getElementById('appointments').innerHTML = appointmentsHTML;
             }
         })
-        .catch(() => handleError("An error occurred while displaying the data."));
-}).catch(() => handleError("An error occurred while fetching the data."));
+        .catch(() => handleReadAppointmentsError("An error occurred while displaying the data."));
+}).catch(() => handleReadAppointmentsError("An error occurred while fetching the data."));
 
 /**
  * Handle the error by displaying an error message.
  *
  * @param message The error message to display.
  */
-function handleError(message) {
+function handleReadAppointmentsError(message) {
     document.getElementById('appointments').innerHTML = `<tr><td colspan="4">${message}</td></tr>`;
 }
