@@ -21,6 +21,15 @@ title: Learning Journal
 | 2023-09-21 | Should we test (as in write test cases) and deploy our websites online?          | For testing, use the simplest form; so test manually and describe how you've done it. For the deployment part; you do not need to deploy the application. However, make sure to write down how to set up your project. - Mats |
 | 2023-09-28 | What do you need to do for EMBRQ#05                                              | Check this out: https://github.com/tzapu/WiFiManager - Mats                                                                                                                                                                   |
 | 2023-10-07 | Can I get some advice on how to make my embedded device ready for manufacturing? | TBA                                                                                                                                                                                                                           |
+| 2023-10-30 | Should the power supply be included in the bill of materials?                    | TBA                                                                                                                                                                                                                           |
+
+# Week 9
+
+### Monday (30th of October)
+
+* Gave feedback to Jinyoung on her embedded code.
+* Change breadboard from full to half in Fritzing diagram.
+* Add bill of materials to technical documentation.
 
 # Week 7
 
