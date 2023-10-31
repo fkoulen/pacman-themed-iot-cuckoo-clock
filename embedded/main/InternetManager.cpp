@@ -8,7 +8,7 @@
 /**
  * Constructor of the InternetManager class
  */
-InternetManager::InternetManager() {
+InternetManager::InternetManager(): jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
     server = new ESP8266WebServer(PORT);
 }
 
@@ -35,6 +35,7 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
     server->on(LCD, HTTP_POST, [this] { handleLCD(); });
     server->on(MEASUREMENT, HTTP_GET, [this] { handleMeasurement(); });
     server->onNotFound([this] { handleNotFound(); });
+    server->enableCORS(true);
     server->begin();
     Serial.println("Server started.");
 }
@@ -69,9 +70,13 @@ void InternetManager::handleLCD() {
  * The measurement is posted to the API and the response is sent back to the client.
  */
 void InternetManager::handleMeasurement() {
+    jsonBuffer.clear();
     Serial.println("[Server] Handling measurement request");
     int responseCode = stateManager->postMeasurement();
-    server->send(HTTP_CODE_OK, "application/json", "{\"response\":" + String(responseCode) + "}");
+    jsonBuffer["response"] = responseCode;
+    String response;
+    serializeJson(jsonBuffer, response);
+    server->send(HTTP_CODE_OK, "application/json", response);
 }
 
 /**
@@ -79,5 +84,5 @@ void InternetManager::handleMeasurement() {
  */
 void InternetManager::handleNotFound() {
     Serial.println("[Server] Handling unknown request");
-    server->send(HTTP_CODE_NOT_FOUND, "text/plain", "404: Not found");
+    server->send(HTTP_CODE_OK, "text/plain", "404: Not found");
 }

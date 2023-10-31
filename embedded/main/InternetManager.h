@@ -13,6 +13,7 @@
 #include <WiFiManager.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WebServer.h>
+#include <ArduinoJson.h>
 #include "Screen.h"
 #include "StateManager.h"
 
@@ -31,8 +32,10 @@ private:
     const String LCD = "/lcd";
     const String MEASUREMENT = "/measurement";
     Screen *screen{};
-    StateManager *stateManager;
+    StateManager *stateManager{};
     ESP8266WebServer *server;
+    DynamicJsonDocument jsonBuffer;
+
 
     void handleRoot();
 

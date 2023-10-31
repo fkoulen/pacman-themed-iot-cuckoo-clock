@@ -28,11 +28,31 @@ function handleDisplayState(errorMessage) {
 }
 
 /**
+ * Request a new measurement from the embedded device. Show an alert if the request failed.
+ * Finally, retrieve the latest measurement from the API.
+ */
+function requestMeasurement() {
+    document.getElementById('measurement-spinner').classList.remove('d-none');
+    document.getElementById('measurement-container').classList.add('d-none');
+
+    fetch(REQUEST_MEASUREMENT_URL, {method: 'GET'})
+        .then(response => {
+            response.json()
+                .then(data => {
+                    if (data.response !== HttpCodes.CREATED) {
+                        alert("Failed to request new measurement. Error: " + data.response);
+                    }
+                })
+                .catch((reason) => alert("Failed to request new measurement. Error: " + reason))
+        })
+        .catch((reason) => alert("Failed to request new measurement. Error: " + reason))
+        .finally(() => getLatestMeasurement());
+}
+
+/**
  * Retrieve the latest measurement from the API and display it on the site if successful.
  */
 function getLatestMeasurement() {
-    document.getElementById('measurement-spinner').classList.remove('d-none');
-    document.getElementById('measurement-container').classList.add('d-none');
     let errorMessage = "";
 
     fetch(API_MEASUREMENT_READ_LATEST)
@@ -63,9 +83,9 @@ function getLatestMeasurement() {
         });
 }
 
-getLatestMeasurement();
+requestMeasurement();
 
 
 document.getElementById('refresh-button').addEventListener('click', function () {
-    getLatestMeasurement();
+    requestMeasurement();
 });
