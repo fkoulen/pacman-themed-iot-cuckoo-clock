@@ -13,10 +13,13 @@ CuckooMechanism::CuckooMechanism() = default;
 
 /**
  * Initialize the cuckoo mechanism by attaching the servo motor and moving it to the starting position.
+ * It also sets the screen to use for displaying the cuckoo state and creates the custom characters.
+ *
+ * @param givenScreen The screen to use for displaying the cuckoo state
  */
 void CuckooMechanism::initialize(Screen *givenScreen) {
     motor.attach(SERVO_PIN);
-    motor.write(0);
+    motor.write(SERVO_START_POSITION);
     this->screen = givenScreen;
     screen->createCustomCharacter(PAC_MAN_CHARACTER, pacMan);
     screen->createCustomCharacter(GHOST_CHARACTER, ghost);
@@ -45,11 +48,11 @@ void CuckooMechanism::playMelody() {
             noteDurationInMs = (wholeNote) / thisNoteDuration;
         } else if (thisNoteDuration < 0) { // If so, the duration is a dotted note.
             noteDurationInMs = (wholeNote) / abs(thisNoteDuration);
-            noteDurationInMs *= 1.5; // A dotted note is 1.5 times longer than a regular note.
+            noteDurationInMs *= DOTTED_NOTE_MULTIPLIER; // A dotted note is 1.5 times longer than a regular note.
         }
 
         // Play the note on the buzzer. Only play 90% of the note, to avoid overlapping notes.
-        tone(BUZZER_PIN, melody[thisNote], static_cast<int>(noteDurationInMs * 0.9));
+        tone(BUZZER_PIN, melody[thisNote], static_cast<int>(noteDurationInMs * NOTE_DURATION_MULTIPLIER));
 
         // Wait for the specified duration before playing the next note.
         delay(static_cast<int>(noteDurationInMs));

@@ -60,11 +60,25 @@ private:
      * the number of notes is half the size of the melody.
      */
     const int notes = sizeof(melody) / sizeof(melody[0]) / 2;
+
     /**
      * The duration of a whole note in ms.
      * Calculated by dividing 60000 (ms in a minute) multiplied by 4 (quarter notes) by the BPM.
      */
     const int wholeNote = (60000 * 4) / BPM;
+
+    /**
+     * The multiplier for dotted notes.
+     * A dotted note is 1.5 times longer than a regular note.
+     */
+    const double DOTTED_NOTE_MULTIPLIER = 1.5;
+
+    /**
+     * The multiplier for the duration of the note.
+     * A note is 90% of its duration to avoid overlapping notes.
+     */
+    const double NOTE_DURATION_MULTIPLIER = 0.9;
+
     Servo motor;
 
     const int SERVO_START_POSITION = 0;

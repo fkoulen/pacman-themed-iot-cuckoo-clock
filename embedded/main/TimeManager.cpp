@@ -42,7 +42,7 @@ void TimeManager::initialize(Screen *givenScreen) {
  * Display the time on the screen->
  */
 void TimeManager::displayTime() {
-    RtcDateTime now = rtc.GetDateTime();
+    RtcDateTime now = getDateTime();
 
     if (!isValidDateTime(now)) {
         return;
@@ -58,7 +58,7 @@ void TimeManager::displayTime() {
  * This is used to prevent flickering. Should only be called if displayTime() has been called before.
  */
 void TimeManager::updateDateTime() {
-    RtcDateTime now = rtc.GetDateTime();
+    RtcDateTime now = getDateTime();
 
     if (!isValidDateTime(now)) {
         return;
