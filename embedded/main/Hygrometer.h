@@ -16,6 +16,8 @@
 
 class Hygrometer {
 public:
+    const int UPDATE_INTERVAL = 15 * 1000;
+
     explicit Hygrometer(DHT sensor);
 
     void setScreen(Screen *screen);
@@ -26,7 +28,7 @@ public:
 
     void displayState();
 
-    const int UPDATE_INTERVAL = 15 * 1000;
+    int postMeasurement();
 
 private:
     const char DEGREE_SYMBOL = (char) 223;
@@ -34,7 +36,7 @@ private:
     Screen *screen{};
     DynamicJsonDocument jsonBuffer;
 
-    void postMeasurement(float temperature, int humidity);
+    bool checkValidityOfReadings(float temperature, int humidity);
 };
 
 

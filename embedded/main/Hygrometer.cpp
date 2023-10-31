@@ -53,30 +53,30 @@ void Hygrometer::displayState() {
     int humidity = readHumidity();
 
 
-    if (isnan(temperature) || isnan(humidity)) {
-        Serial.println("Failed to read from DHT sensor!");
-        screen->printText("Failed to read", "from DHT sensor!");
-        return;
-    }
-
-
+    if (!checkValidityOfReadings(temperature, humidity)) return;
 
     //  Print temperature with one decimal place and the degree symbol
     String firstLine = "Temp: " + String(temperature, 1) + DEGREE_SYMBOL + "C";
     String secondLine = "Humidity: " + String(humidity) + "%";
 
     screen->printText(firstLine, secondLine);
-
-    postMeasurement(temperature, humidity);
 }
 
 /**
- * Post a measurement to the API.
+ * Post a measurement to the API. Print the response to the serial monitor.
+ * If the temperature or humidity is invalid, return 0.
+ * Else, return the HTTP code of the response.
  *
  * @param temperature
  * @param humidity
+ * @return The HTTP code of the response or 0 if the temperature or humidity is invalid
  */
-void Hygrometer::postMeasurement(float temperature, int humidity) {
+int Hygrometer::postMeasurement() {
+    float temperature = readTemperature();
+    int humidity = readHumidity();
+
+    if (!checkValidityOfReadings(temperature, humidity)) return 0;
+
     // Initialize a wi-fi client & http client
     WiFiClientSecure client;
     const char fingerprint[] = FINGERPRINT
@@ -91,7 +91,7 @@ void Hygrometer::postMeasurement(float temperature, int humidity) {
 
     // Custom header to tell the tunnel that we don't want to see the screen
     httpClient.addHeader("X-Pinggy-No-Screen", "true");
-    httpClient.addHeader("Bypass-Tunnel-Reminder", "true");
+    httpClient.addHeader("Bypass-Tunnel-Reminder", "false");
 
     // Create the JSON-object
     jsonBuffer.clear();
@@ -103,8 +103,9 @@ void Hygrometer::postMeasurement(float temperature, int humidity) {
     String body;
     serializeJson(root, body);
 
-    // Make the POST-request, this returns the HTTP-code.
     Serial.println("[HTTPS] POST... " + String(BASE_URL) + API_POST_MEASUREMENT);
+
+    // Make the POST-request, this returns the HTTP-code.
     int httpCode = httpClient.POST(body);
 
     if (HTTPClient::errorToString(httpCode) == String()) { // Check if it is not an HTTPClient error
@@ -122,5 +123,23 @@ void Hygrometer::postMeasurement(float temperature, int humidity) {
     } else {
         Serial.printf("[HTTPS] POST... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
     }
+
+    return httpCode;
 }
 
+/**
+ * Check whether the temperature and humidity are valid. Display an error message if they are not.
+ *
+ * @param temperature The temperature to check
+ * @param humidity The humidity to check
+ * @return Whether the temperature and humidity are valid
+ */
+bool Hygrometer::checkValidityOfReadings(float temperature, int humidity) {
+    if (isnan(temperature) || isnan(humidity)) {
+        Serial.println("Failed to read from DHT sensor!");
+        screen->printText("Failed to read", "from DHT sensor!");
+        return false;
+    }
+
+    return true;
+}

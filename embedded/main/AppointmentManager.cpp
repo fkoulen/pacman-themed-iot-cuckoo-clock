@@ -27,6 +27,10 @@ void AppointmentManager::fetch() {
     // Set the URL of where the call should be made to.
     httpClient.begin(client, String(BASE_URL) + API_READ_APPOINTMENTS);
 
+    // Custom header to tell the tunnel that we don't want to see the screen
+    httpClient.addHeader("X-Pinggy-No-Screen", "true");
+    httpClient.addHeader("Bypass-Tunnel-Reminder", "false");
+
     // Make the GET-request, this returns the HTTP-code.
     int httpCode = httpClient.GET();
 

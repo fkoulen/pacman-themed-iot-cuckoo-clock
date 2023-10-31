@@ -36,6 +36,8 @@ public:
 
     void displayTime();
 
+    int postMeasurement();
+
 private:
     Screen *screen;
     CuckooMechanism cuckooMechanism;

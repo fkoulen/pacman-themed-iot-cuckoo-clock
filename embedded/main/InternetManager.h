@@ -29,6 +29,7 @@ private:
     const int PORT = 80;
     const String ROOT = "/";
     const String LCD = "/lcd";
+    const String MEASUREMENT = "/measurement";
     Screen *screen{};
     StateManager *stateManager;
     ESP8266WebServer *server;
@@ -36,6 +37,8 @@ private:
     void handleRoot();
 
     void handleLCD();
+
+    void handleMeasurement();
 
     void handleNotFound();
 };

@@ -203,3 +203,19 @@ void StateManager::executeCuckooMechanism(RtcDateTime currentTime) {
     cuckooMechanism.executeCuckooMechanism(currentTime);
     if (backlightOffAtStart) screen->toggleBacklight();
 }
+
+/**
+ * Post a measurement to the API. Print the response to the serial monitor.
+ * Show that the measurement is being posted on the LCD screen.
+ *
+ * @return The response code
+ */
+int StateManager::postMeasurement() {
+    screen->printText("Posting measure-", "ment to API...");
+    int response = hygrometer.postMeasurement();
+    screen->printText("Response code: ", String(response));
+    delay(TIME_TO_SHOW_MESSAGE);
+    displayTime();
+
+    return response;
+}

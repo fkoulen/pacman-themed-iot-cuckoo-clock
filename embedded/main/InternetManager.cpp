@@ -33,6 +33,7 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
     delay(TIME_TO_SHOW_MESSAGE);
     server->on(ROOT, HTTP_GET, [this] { handleRoot(); });
     server->on(LCD, HTTP_POST, [this] { handleLCD(); });
+    server->on(MEASUREMENT, HTTP_GET, [this] { handleMeasurement(); });
     server->onNotFound([this] { handleNotFound(); });
     server->begin();
     Serial.println("Server started.");
@@ -61,6 +62,16 @@ void InternetManager::handleLCD() {
     bool backlightOn = screen->toggleBacklight();
     backlightOn ? stateManager->displayTime() : screen->clear();
     server->send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") + ".");
+}
+
+/**
+ * Handle the GET request to post a measurement.
+ * The measurement is posted to the API and the response is sent back to the client.
+ */
+void InternetManager::handleMeasurement() {
+    Serial.println("[Server] Handling measurement request");
+    int responseCode = stateManager->postMeasurement();
+    server->send(HTTP_CODE_OK, "application/json", "{\"response\":" + String(responseCode) + "}");
 }
 
 /**
