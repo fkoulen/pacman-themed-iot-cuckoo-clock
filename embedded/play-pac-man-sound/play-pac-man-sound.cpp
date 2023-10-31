@@ -8,10 +8,10 @@
  */
 
 #include <Arduino.h>
-#include "Pitches.h"
+#include "main/Pitches.h"
+#include "main/Constants.h"
 
 #define BPM 105;
-#define BUZZER_PIN 14
 
 /**
  * Notes of the melody followed by the duration.
