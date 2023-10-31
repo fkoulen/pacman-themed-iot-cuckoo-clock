@@ -1,10 +1,11 @@
 nav:
+    - 🦊 GitLab: https://gitlab.fdmci.hva.nl/IoT/2023-2024-semester-1/individual-project/iot-koulenf
     - 🏚️ Home: index.md
     - 📅 Planning: planning.md
     - 📦 System Architecture: system_architecture
     - ♟️ Learning Journal: journal
     - 🧰 Embedded:
-      - Requirements: embedded/requirements
+      - System Requirements: embedded/requirements
       - Technical Documentation: embedded/technical_documentation
       - Code: embedded/code
     - 🌐 Web:
