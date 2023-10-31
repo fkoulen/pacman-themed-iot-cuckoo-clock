@@ -25,6 +25,16 @@ title: Learning Journal
 
 # Week 9
 
+### Tuesday (31st of October)
+
+* Fixed the problem where the error of the appointments fetching on the website would not be displayed on the screen.
+* Added EMBRQ#01 to the portfolio.
+* Added endpoint on embedded device to post a measurement to the API.
+* Changed website to request the latest measurement from the embedded device.
+* Updated the technical documentation of the website with images and additional information.
+* Added Pac-Man images to portfolio.
+* Added EMBRQ 1 to 4 to portfolio.
+
 ### Monday (30th of October)
 
 * Gave feedback to Jinyoung on her embedded code.
