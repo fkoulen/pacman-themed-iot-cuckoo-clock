@@ -1,5 +1,9 @@
-/*
+/**
+ * The AppointmentManager class is responsible for fetching, storing and displaying appointments.
+ * It uses the Screen class to display the appointments on the LCD.
  *
+ * @author F.S. Koulen
+ * @license GNU GPLv3
  */
 
 #ifndef APPOINTMENTS_H
@@ -24,13 +28,17 @@ public:
 
     boolean displayNextAppointment(TimeManager timeManager);
 
-    // No update interval needed so set to 1 minute since it will be back to time display after 15 seconds
+    /**
+     * The update interval for when the screen should be updated. It is set to 1 minute since the display will be back
+     * to the time display after 15 seconds. This means that the appointment will be displayed for 15 seconds at most
+     * and the screen does not need to be updated more often than that.
+     */
     const int UPDATE_INTERVAL = 60 * 1000;
 private:
-    Screen *screen{};
-    DynamicJsonDocument jsonBuffer;
-    JsonArray records;
-    int currentAppointmentIndex = 0;
+    Screen *screen{}; // Pointer to the screen to use for displaying the appointments
+    DynamicJsonDocument jsonBuffer; // Buffer to store the JSON response in
+    JsonArray records; // Array to store the appointments in
+    int currentAppointmentIndex = 0; // Index of the current appointment to display
 
     void storeAllAppointments(String payload);
     String getPluralizedAppointmentsString();

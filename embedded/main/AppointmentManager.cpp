@@ -1,12 +1,24 @@
-/*
+/**
+ * Implementation of the AppointmentManager class. It has methods to fetch, store and display appointments.
  *
+ * @author F.S. Koulen
+ * @license GNU GPLv3
  */
 
 #include "AppointmentManager.h"
 
+/**
+ * Constructor of the AppointmentManager class.
+ * It initializes the JSON buffer with the correct size.
+ */
 AppointmentManager::AppointmentManager() : jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
 }
 
+/**
+ * Set the screen to use for displaying the appointments.
+ *
+ * @param givenScreen The screen to use for displaying the appointments
+ */
 void AppointmentManager::setScreen(Screen *givenScreen) {
     this->screen = givenScreen;
 }
@@ -37,30 +49,34 @@ void AppointmentManager::fetch() {
     // Initialize boolean to check if the connection was successful
     boolean connectionSuccessful = false;
 
-    if (HTTPClient::errorToString(httpCode) == String()) { // Check if it is not an HTTPClient error
+    // If the HTTP code is an HTTPClient error code, print the error
+    if (!(HTTPClient::errorToString(httpCode) ==
+          String())) {
+        Serial.printf("[HTTPS] GET... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
+    } else { // If not, it has a valid HTTP code
         String payload = httpClient.getString();
         jsonBuffer.clear();
         deserializeJson(jsonBuffer, payload);
         String message = jsonBuffer["message"];
 
         Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
+
+        // If the HTTP code is 200, the connection was successful and the appointments can be stored
         if (httpCode == HTTP_CODE_OK) {
             connectionSuccessful = true;
             Serial.println("Successfully connected to API");
             storeAllAppointments(payload);
-        } else if (message != "null") {
+        } else if (message != "null") { // If the error message is not null, print the message
             Serial.println(message);
-        } else {
+        } else { // If the error message is null, print the HTTP code
             Serial.printf("[HTTPS] GET... failed, error (%d)\n", httpCode);
         }
-    } else {
-        Serial.printf("[HTTPS] GET... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
     }
 
-    // Show the correct message on the LCD
+    // If the connection was successful, show the number of appointments on the LCD
     if (connectionSuccessful) {
         screen->printText(String(records.size()) + " " + getPluralizedAppointmentsString(), "found");
-    } else {
+    } else { // If the connection was not successful, show an error message on the LCD
         screen->printText("Error " + String(httpCode), "Failed to connect");
     }
 
@@ -81,21 +97,24 @@ void AppointmentManager::storeAllAppointments(String payload) {
  * Display how many appointments are found on the LCD
  */
 void AppointmentManager::displayState() {
-    if (records.size() == 0) {
+    if (records.size() == 0) { // If there are no appointments, show a message on the LCD
         Serial.println("No appointments found");
         screen->printText("No appointments", "found");
         return;
     }
 
+    // Else, show the number of appointments on the LCD
     screen->printText("Next 7 days:", String(records.size()) + " " + getPluralizedAppointmentsString());
 }
 
 /**
- * Display the next appointment on the LCD if possible
+ * Display the next appointment on the LCD. If there is no next appointment to display, return false.
  *
- * @return whether or not there is an appointment to display
+ * @param timeManager The TimeManager to use for converting the UTC time to local time
+ * @return True if there is a next appointment to display, false otherwise
  */
 boolean AppointmentManager::displayNextAppointment(TimeManager timeManager) {
+    // If there are no appointments, return false
     if (records.size() == 0) return false;
 
     // If we are at the end of the list, reset the index to 0 and return false
@@ -104,25 +123,26 @@ boolean AppointmentManager::displayNextAppointment(TimeManager timeManager) {
         return false;
     }
 
-
+    // Get the appointment name and time
     JsonObject appointment = records[currentAppointmentIndex];
     String name = appointment["name"];
     String time = timeManager.convertUTCtoLocalTime(appointment["start"]);
 
-    String appointmentNumber = String(currentAppointmentIndex + 1);
+    String appointmentNumber = String(currentAppointmentIndex + 1); // Add 1 to the index since it starts at 0
     Serial.print("Displaying appointment " + appointmentNumber + ": ");
     Serial.println(name + " at " + time);
 
     screen->printText(appointmentNumber + ": " + name, time);
 
-    currentAppointmentIndex++;
+    currentAppointmentIndex++; // Increment the index so the next appointment will be displayed next time
+
     return true;
 }
 
 /**
  * Get the pluralized string of the word appointment
  *
- * @return The pluralized string
+ * @return Either "appointment" or "appointments" depending on the number of appointments
  */
 String AppointmentManager::getPluralizedAppointmentsString() {
     return records.size() == 1 ? "appointment" : "appointments";
