@@ -7,7 +7,16 @@ nav:
     - 🧰 Embedded:
       - System Requirements: embedded/requirements
       - Technical Documentation: embedded/technical_documentation
+    - 🧰 Embedded Code:
       - Code: embedded/code
+      - AppointmentManager: embedded/class_appointment_manager
+      - CuckooMechanism: embedded/class_cuckoo_mechanism
+      - DateTime: embedded/class_date_time
+      - Hygrometer: embedded/class_hygrometer
+      - InternetManager: embedded/class_internet_manager
+      - Screen: embedded/class_screen
+      - StateManager: embedded/class_state_manager
+      - TimeManager: embedded/class_time_manager
     - 🌐 Web:
       - Technical Documentation: web/technical_documentation
       - API Reference: web/api_reference
