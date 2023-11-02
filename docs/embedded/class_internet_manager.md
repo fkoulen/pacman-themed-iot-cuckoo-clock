@@ -17,9 +17,9 @@ Represents a manager that handles the internet connection and sets up a web serv
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[InternetManager](/embedded/class_internet_manager/#function-internetmanager)**()<br>Implementation of the [InternetManager](/embedded/class_internet_manager/) class.  |
-| void | **[initialize](/embedded/class_internet_manager/#function-initialize)**([Screen](/embedded/class_screen/) * givenScreen, [StateManager](/embedded/class_state_manager/) * givenStateManager)<br>Initialize the Wi-Fi connection and set up the web server.  |
-| void | **[listenServer](/embedded/class_internet_manager/#function-listenserver)**()<br>Listen for requests to the server.  |
+| | **[InternetManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_internet_manager/#function-internetmanager)**()<br>Implementation of the [InternetManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_internet_manager/) class.  |
+| void | **[initialize](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_internet_manager/#function-initialize)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * givenScreen, [StateManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/) * givenStateManager)<br>Initialize the Wi-Fi connection and set up the web server.  |
+| void | **[listenServer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_internet_manager/#function-listenserver)**()<br>Listen for requests to the server.  |
 
 ## Detailed Description
 
@@ -44,7 +44,7 @@ License: GNU GPLv3
 InternetManager()
 ```
 
-Implementation of the [InternetManager](/embedded/class_internet_manager/) class. 
+Implementation of the [InternetManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_internet_manager/) class. 
 
 **Author**: F.S. Koulen
 
@@ -53,7 +53,7 @@ Has methods to handle the internet connection, to set up a web server, and to ha
 
 License: GNU GPLv3 
 
- Constructor of the [InternetManager](/embedded/class_internet_manager/) class. Initializes the JSON buffer and the server. 
+ Constructor of the [InternetManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_internet_manager/) class. Initializes the JSON buffer and the server. 
 
 
 ### function initialize
@@ -86,4 +86,4 @@ This method should be called in the loop.
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100

@@ -17,14 +17,14 @@ Represents the manager for the state of the embedded system.  [More...](#detaile
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[StateManager](/embedded/class_state_manager/#function-statemanager)**([Screen](/embedded/class_screen/) * screen, [CuckooMechanism](/embedded/class_cuckoo_mechanism/) cuckooMechanism, [TimeManager](/embedded/class_time_manager/) timeManager, [Hygrometer](/embedded/class_hygrometer/) hygrometer, [AppointmentManager](/embedded/class_appointment_manager/) appointments)<br>Initialize the state manager with the given components.  |
-| void | **[initialize](/embedded/class_state_manager/#function-initialize)**([Screen](/embedded/class_screen/) * givenScreen)<br>Set the givenScreen for the state manager and its components.  |
-| void | **[checkToGoBackToTimeDisplay](/embedded/class_state_manager/#function-checktogobacktotimedisplay)**()<br>Check if it's time to go back to the time display.  |
-| void | **[checkToUpdateDisplay](/embedded/class_state_manager/#function-checktoupdatedisplay)**()<br>Check if it's time to update the current display state.  |
-| void | **[checkButtonPress](/embedded/class_state_manager/#function-checkbuttonpress)**()<br>Check if the button is pressed to switch display mode.  |
-| void | **[checkToActivateCuckooMechanism](/embedded/class_state_manager/#function-checktoactivatecuckoomechanism)**()<br>Check if it's time to activate the cuckoo mechanism.  |
-| void | **[displayTime](/embedded/class_state_manager/#function-displaytime)**()<br>Change the display state to TIME and display the time.  |
-| int | **[postMeasurement](/embedded/class_state_manager/#function-postmeasurement)**()<br>Post a measurement to the API.  |
+| | **[StateManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-statemanager)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen, [CuckooMechanism](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_cuckoo_mechanism/) cuckooMechanism, [TimeManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager/) timeManager, [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) hygrometer, [AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/) appointments)<br>Initialize the state manager with the given components.  |
+| void | **[initialize](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-initialize)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * givenScreen)<br>Set the givenScreen for the state manager and its components.  |
+| void | **[checkToGoBackToTimeDisplay](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-checktogobacktotimedisplay)**()<br>Check if it's time to go back to the time display.  |
+| void | **[checkToUpdateDisplay](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-checktoupdatedisplay)**()<br>Check if it's time to update the current display state.  |
+| void | **[checkButtonPress](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-checkbuttonpress)**()<br>Check if the button is pressed to switch display mode.  |
+| void | **[checkToActivateCuckooMechanism](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-checktoactivatecuckoomechanism)**()<br>Check if it's time to activate the cuckoo mechanism.  |
+| void | **[displayTime](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-displaytime)**()<br>Change the display state to TIME and display the time.  |
+| int | **[postMeasurement](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_state_manager/#function-postmeasurement)**()<br>Post a measurement to the API.  |
 
 ## Detailed Description
 
@@ -144,4 +144,4 @@ Print the response to the serial monitor. Show that the measurement is being pos
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100

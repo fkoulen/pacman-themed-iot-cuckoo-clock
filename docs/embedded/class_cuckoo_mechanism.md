@@ -17,9 +17,9 @@ Represents a mechanism for controlling a cuckoo clock.  [More...](#detailed-desc
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[CuckooMechanism](/embedded/class_cuckoo_mechanism/#function-cuckoomechanism)**()<br>Implementation of the cuckoo mechanism.  |
-| void | **[initialize](/embedded/class_cuckoo_mechanism/#function-initialize)**([Screen](/embedded/class_screen/) * givenScreen)<br>Initialize the cuckoo mechanism by attaching the servo motor and moving it to the starting position.  |
-| void | **[executeCuckooMechanism](/embedded/class_cuckoo_mechanism/#function-executecuckoomechanism)**(RtcDateTime time)<br>Execute the cuckoo mechanism by displaying the cuckoo state, moving the cuckoo forward, playing the melody and moving the cuckoo backward.  |
+| | **[CuckooMechanism](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_cuckoo_mechanism/#function-cuckoomechanism)**()<br>Implementation of the cuckoo mechanism.  |
+| void | **[initialize](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_cuckoo_mechanism/#function-initialize)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * givenScreen)<br>Initialize the cuckoo mechanism by attaching the servo motor and moving it to the starting position.  |
+| void | **[executeCuckooMechanism](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_cuckoo_mechanism/#function-executecuckoomechanism)**(RtcDateTime time)<br>Execute the cuckoo mechanism by displaying the cuckoo state, moving the cuckoo forward, playing the melody and moving the cuckoo backward.  |
 
 ## Detailed Description
 
@@ -59,7 +59,7 @@ Contains methods to play the melody, move the cuckoo and display the cuckoo stat
 
 License: GNU GPLv3 
 
- Create an instance of the [CuckooMechanism](/embedded/class_cuckoo_mechanism/) class. 
+ Create an instance of the [CuckooMechanism](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_cuckoo_mechanism/) class. 
 
 
 ### function initialize
@@ -97,4 +97,4 @@ Execute the cuckoo mechanism by displaying the cuckoo state, moving the cuckoo f
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100

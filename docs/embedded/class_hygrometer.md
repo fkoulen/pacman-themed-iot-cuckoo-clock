@@ -17,16 +17,16 @@ Represents a hygrometer that measures the temperature and humidity of the air.  
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[Hygrometer](/embedded/class_hygrometer/#function-hygrometer)**(DHT sensor)<br>Implementation of the [Hygrometer](/embedded/class_hygrometer/) class.  |
-| void | **[setScreen](/embedded/class_hygrometer/#function-setscreen)**([Screen](/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the state.  |
-| void | **[displayState](/embedded/class_hygrometer/#function-displaystate)**()<br>Display the current state of the DHT sensor on the LCD screen.  |
-| int | **[postMeasurement](/embedded/class_hygrometer/#function-postmeasurement)**()<br>Post a measurement to the API.  |
+| | **[Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-hygrometer)**(DHT sensor)<br>Implementation of the [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) class.  |
+| void | **[setScreen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-setscreen)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the state.  |
+| void | **[displayState](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-displaystate)**()<br>Display the current state of the DHT sensor on the LCD screen.  |
+| int | **[postMeasurement](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-postmeasurement)**()<br>Post a measurement to the API.  |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| const int | **[UPDATE_INTERVAL](/embedded/class_hygrometer/#variable-update_interval)** <br>The interval in which the state is displayed on the LCD screen, in milliseconds.  |
+| const int | **[UPDATE_INTERVAL](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#variable-update_interval)** <br>The interval in which the state is displayed on the LCD screen, in milliseconds.  |
 
 ## Detailed Description
 
@@ -53,7 +53,7 @@ explicit Hygrometer(
 )
 ```
 
-Implementation of the [Hygrometer](/embedded/class_hygrometer/) class. 
+Implementation of the [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) class. 
 
 **Parameters**: 
 
@@ -68,7 +68,7 @@ Contains methods to read the temperature and humidity, display the state on the 
 
 License: GNU GPLv3 
 
- Constructor of the [Hygrometer](/embedded/class_hygrometer/) class. Create a new [Hygrometer](/embedded/class_hygrometer/) instance and initialize the DHT sensor and JSON buffer.
+ Constructor of the [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) class. Create a new [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) instance and initialize the DHT sensor and JSON buffer.
 
 
 ### function setScreen
@@ -125,4 +125,4 @@ The interval in which the state is displayed on the LCD screen, in milliseconds.
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100

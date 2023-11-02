@@ -17,16 +17,16 @@ Represents the screen of the device.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[Screen](/embedded/class_screen/#function-screen)**()<br>Implementation of the [Screen](/embedded/class_screen/) class.  |
-| void | **[initializeLCD](/embedded/class_screen/#function-initializelcd)**()<br>Initialize the LCD and turn on the backlight.  |
-| void | **[printCustomCharacter](/embedded/class_screen/#function-printcustomcharacter)**(int position, int row, int character)<br>Print a custom character on the given location and row.  |
-| void | **[printText](/embedded/class_screen/#function-printtext)**(const String & line, unsigned int positionLine, unsigned int row)<br>Print the given text on the given line and row.  |
-| void | **[printText](/embedded/class_screen/#function-printtext)**(const String & firstLine, unsigned int positionFirstLine, const String & secondLine, unsigned int positionSecondLine, bool clear)<br>Clear the LCD if specified and show the given text on the first and second line.  |
-| void | **[printText](/embedded/class_screen/#function-printtext)**(const String & firstLine, const String & secondLine)<br>Clear the LCD and show the given text on the first and second line.  |
-| void | **[createCustomCharacter](/embedded/class_screen/#function-createcustomcharacter)**(int location, byte pixels[])<br>Create a custom character on the given location with the character pixels.  |
-| void | **[clear](/embedded/class_screen/#function-clear)**()<br>Clear the LCD.  |
-| bool | **[toggleBacklight](/embedded/class_screen/#function-togglebacklight)**()<br>Toggle the backlight.  |
-| bool | **[isBacklightOn](/embedded/class_screen/#function-isbacklighton)**() const<br>Check whether the backlight is on.  |
+| | **[Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-screen)**()<br>Implementation of the [Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) class.  |
+| void | **[initializeLCD](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-initializelcd)**()<br>Initialize the LCD and turn on the backlight.  |
+| void | **[printCustomCharacter](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-printcustomcharacter)**(int position, int row, int character)<br>Print a custom character on the given location and row.  |
+| void | **[printText](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-printtext)**(const String & line, unsigned int positionLine, unsigned int row)<br>Print the given text on the given line and row.  |
+| void | **[printText](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-printtext)**(const String & firstLine, unsigned int positionFirstLine, const String & secondLine, unsigned int positionSecondLine, bool clear)<br>Clear the LCD if specified and show the given text on the first and second line.  |
+| void | **[printText](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-printtext)**(const String & firstLine, const String & secondLine)<br>Clear the LCD and show the given text on the first and second line.  |
+| void | **[createCustomCharacter](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-createcustomcharacter)**(int location, byte pixels[])<br>Create a custom character on the given location with the character pixels.  |
+| void | **[clear](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-clear)**()<br>Clear the LCD.  |
+| bool | **[toggleBacklight](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-togglebacklight)**()<br>Toggle the backlight.  |
+| bool | **[isBacklightOn](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/#function-isbacklighton)**() const<br>Check whether the backlight is on.  |
 
 ## Detailed Description
 
@@ -51,7 +51,7 @@ License: GNU GPLv3
 Screen()
 ```
 
-Implementation of the [Screen](/embedded/class_screen/) class. 
+Implementation of the [Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) class. 
 
 **Author**: F.S. Koulen
 
@@ -60,7 +60,7 @@ This class is used to control the LCD. It contains methods to initialize the LCD
 
 License: GNU GPLv3 
 
- Constructor for the [Screen](/embedded/class_screen/) class. This constructor is empty because the LCD is initialized in the `initializeLCD` method. 
+ Constructor for the [Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) class. This constructor is empty because the LCD is initialized in the `initializeLCD` method. 
 
 
 ### function initializeLCD
@@ -197,4 +197,4 @@ Check whether the backlight is on.
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100

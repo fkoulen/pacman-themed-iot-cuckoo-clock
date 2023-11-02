@@ -14,14 +14,14 @@ Represents the date and time in a readable format.  [More...](#detailed-descript
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[DateTime](/embedded/class_time_manager_1_1_date_time/#function-datetime)**(RtcDateTime dateTime)<br>Constructor for the [DateTime](/embedded/class_time_manager_1_1_date_time/) class which is used to store the date and time as strings.  |
+| | **[DateTime](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager_1_1_date_time/#function-datetime)**(RtcDateTime dateTime)<br>Constructor for the [DateTime](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager_1_1_date_time/) class which is used to store the date and time as strings.  |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| String | **[date](/embedded/class_time_manager_1_1_date_time/#variable-date)** <br>Holds the date.  |
-| String | **[time](/embedded/class_time_manager_1_1_date_time/#variable-time)** <br>Holds the time.  |
+| String | **[date](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager_1_1_date_time/#variable-date)** <br>Holds the date.  |
+| String | **[time](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager_1_1_date_time/#variable-time)** <br>Holds the time.  |
 
 ## Detailed Description
 
@@ -43,11 +43,11 @@ explicit DateTime(
 )
 ```
 
-Constructor for the [DateTime](/embedded/class_time_manager_1_1_date_time/) class which is used to store the date and time as strings. 
+Constructor for the [DateTime](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager_1_1_date_time/) class which is used to store the date and time as strings. 
 
 **Parameters**: 
 
-  * **dateTime** The RtcDateTime object to use for this [DateTime](/embedded/class_time_manager_1_1_date_time/) object. 
+  * **dateTime** The RtcDateTime object to use for this [DateTime](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager_1_1_date_time/) object. 
 
 
 ## Public Attributes Documentation
@@ -70,4 +70,4 @@ Holds the time.
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100

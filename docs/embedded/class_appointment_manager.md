@@ -17,17 +17,17 @@ Represents an appointment manager that is responsible for fetching, storing and 
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[AppointmentManager](/embedded/class_appointment_manager/#function-appointmentmanager)**()<br>Implementation of the [AppointmentManager](/embedded/class_appointment_manager/) class.  |
-| void | **[setScreen](/embedded/class_appointment_manager/#function-setscreen)**([Screen](/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the appointments.  |
-| void | **[fetch](/embedded/class_appointment_manager/#function-fetch)**()<br>Connect to the API and store all appointments if the connection is successful.  |
-| void | **[displayState](/embedded/class_appointment_manager/#function-displaystate)**()<br>Display how many appointments are found on the LCD.  |
-| bool | **[displayNextAppointment](/embedded/class_appointment_manager/#function-displaynextappointment)**([TimeManager](/embedded/class_time_manager/) timeManager)<br>Display the next appointment on the LCD.  |
+| | **[AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-appointmentmanager)**()<br>Implementation of the [AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/) class.  |
+| void | **[setScreen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-setscreen)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the appointments.  |
+| void | **[fetch](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-fetch)**()<br>Connect to the API and store all appointments if the connection is successful.  |
+| void | **[displayState](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-displaystate)**()<br>Display how many appointments are found on the LCD.  |
+| bool | **[displayNextAppointment](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-displaynextappointment)**([TimeManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager/) timeManager)<br>Display the next appointment on the LCD.  |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| const int | **[UPDATE_INTERVAL](/embedded/class_appointment_manager/#variable-update_interval)** <br>The update interval for when the screen should be updated.  |
+| const int | **[UPDATE_INTERVAL](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#variable-update_interval)** <br>The update interval for when the screen should be updated.  |
 
 ## Detailed Description
 
@@ -39,7 +39,7 @@ Represents an appointment manager that is responsible for fetching, storing and 
 
 **Author**: F.S. Koulen
 
-It uses the [Screen](/embedded/class_screen/) class to display the appointments on the LCD. The appointments are fetched from the API and stored in a JSON array.
+It uses the [Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) class to display the appointments on the LCD. The appointments are fetched from the API and stored in a JSON array.
 
 
 License: GNU GPLv3 
@@ -52,7 +52,7 @@ License: GNU GPLv3
 AppointmentManager()
 ```
 
-Implementation of the [AppointmentManager](/embedded/class_appointment_manager/) class. 
+Implementation of the [AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/) class. 
 
 **Author**: F.S. Koulen
 
@@ -61,7 +61,7 @@ It has methods to fetch, store and display appointments.
 
 License: GNU GPLv3 
 
- Constructor of the [AppointmentManager](/embedded/class_appointment_manager/) class. It initializes the JSON buffer with the correct size. 
+ Constructor of the [AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/) class. It initializes the JSON buffer with the correct size. 
 
 
 ### function setScreen
@@ -110,7 +110,7 @@ Display the next appointment on the LCD.
 
 **Parameters**: 
 
-  * **timeManager** The [TimeManager](/embedded/class_time_manager/) to use for converting the UTC time to local time 
+  * **timeManager** The [TimeManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager/) to use for converting the UTC time to local time 
 
 
 **Return**: True if there is a next appointment to display, false otherwise 
@@ -133,4 +133,4 @@ It is set to 1 minute since the display will be back to the time display after 1
 
 -------------------------------
 
-Updated on 2023-11-02 at 13:07:21 +0100
+Updated on 2023-11-02 at 14:37:01 +0100
