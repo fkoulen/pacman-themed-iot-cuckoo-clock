@@ -1,17 +1,23 @@
 /**
- * Implementation of the Screen class. This class is used to control the LCD.
+ * Implementation of the Screen class.
+ * This class is used to control the LCD.
  * It contains methods to initialize the LCD and to print text on the LCD.
  *
  * @author F.S. Koulen
- * @date 2023-10-02
+ * @details License: GNU GPLv3
+ * <br/>
  */
 
 #include "Screen.h"
 
+/**
+ * Constructor for the Screen class.
+ * This constructor is empty because the LCD is initialized in the `initializeLCD` method.
+ */
 Screen::Screen() = default;
 
 /**
- * Initialize the LCD
+ * Initialize the LCD and turn on the backlight
  */
 void Screen::initializeLCD() {
     Serial.println("Initializing LCD...");
@@ -105,6 +111,15 @@ bool Screen::toggleBacklight() {
 }
 
 /**
+ * Check whether the backlight is on
+ *
+ * @return Whether the backlight is on
+ */
+bool Screen::isBacklightOn() const {
+    return backlightOn;
+}
+
+/**
  * Set the backlight
  *
  * @param backlightOn Whether to turn the backlight on or off
@@ -114,13 +129,4 @@ void Screen::setBacklightOn(bool turnOn) {
     lcd.clear();
     Serial.println("Turning screen " + String(backlightOn ? "on" : "off") + "...");
     backlightOn ? lcd.backlight() : lcd.noBacklight();
-}
-
-/**
- * Check whether the backlight is on
- *
- * @return Whether the backlight is on
- */
-bool Screen::isBacklightOn() const {
-    return backlightOn;
 }

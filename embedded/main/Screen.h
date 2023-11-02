@@ -1,16 +1,19 @@
 /**
- * A Screen object is used to print text on the LCD screen.
+ * Represents the screen of the device.
+ * This class is responsible for printing text on the screen and creating custom characters.
  *
  * @author F.S. Koulen
- * @date 2023-10-02
+ * @details License: GNU GPLv3
  */
 
 #ifndef SCREEN_H
 #define SCREEN_H
 
 #include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
 #include "Constants.h"
-#include "LiquidCrystal_I2C.h"
+
+// See `Screen.cpp` for the implementation of the functions and their documentation.
 
 class Screen {
 public:
@@ -36,7 +39,14 @@ public:
     bool isBacklightOn() const;
 
 private:
+    /**
+     * The LCD object used to print text on the screen.
+     */
     LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCD_ADDRESS, CHARACTERS_PER_LINE, NUMBER_OF_LINES);
+
+    /**
+     * Whether the backlight is on or off.
+     */
     bool backlightOn = false;
 
     void setBacklightOn(bool turnOn);
