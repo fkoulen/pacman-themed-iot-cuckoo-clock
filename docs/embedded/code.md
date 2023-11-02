@@ -30,7 +30,7 @@ of the components.
 
 ### Classes
 
-The embedded device consists of 7 classes.
+The embedded device consists of 8 classes.
 
 This diagram shows the classes of the embedded device and how they interact with each other.
 
@@ -43,6 +43,11 @@ In the diagram, the classes are represented by boxes. The arrows indicate that t
 used by the class that the arrow starts from. For example, the `StateManager` class uses the `Screen` class, because it
 needs to update the screen. The `Screen` class does not use the `StateManager` class, because it does not need to know
 about the state of the embedded system.
+
+There is 1 class that is not represented in the diagram, because it is not a class that is used by the embedded device.
+This class is the `HTTPSClient` class. This class has a static method that returns a `WiFiClientSecure` object. This
+object is then used by the embedded device to make HTTPS requests. Since only the static method is used, the class is
+not represented in the diagram.
 
 The classes are described in the list below. Feel free to click on the class name to go to the documentation of that
 class and read more about it.
