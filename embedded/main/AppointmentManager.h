@@ -1,6 +1,7 @@
 /**
- * The AppointmentManager class is responsible for fetching, storing and displaying appointments.
+ * Represents an appointment manager that is responsible for fetching, storing and displaying appointments.
  * It uses the Screen class to display the appointments on the LCD.
+ * The appointments are fetched from the API and stored in a JSON array.
  *
  * @author F.S. Koulen
  * @details License: GNU GPLv3

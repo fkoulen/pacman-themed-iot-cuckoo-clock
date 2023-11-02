@@ -1,6 +1,7 @@
 /**
  * Implementation of the Hygrometer class.
- * Contains methods to read the temperature and humidity.
+ * Contains methods to read the temperature and humidity,
+ * display the state on the LCD screen and post a measurement to the API.
  *
  * @author: F.S. Koulen
  * @date: 2023-10-02
@@ -10,7 +11,7 @@
 
 /**
  * Constructor of the Hygrometer class.
- * Create a new Hygrometer instance and initialize the DHT sensor.
+ * Create a new Hygrometer instance and initialize the DHT sensor and JSON buffer.
  *
  * @param pin       The pin to which the DHT sensor is connected
  * @param dhtType   The type of the DHT sensor
@@ -21,28 +22,12 @@ Hygrometer::Hygrometer(DHT dht) : dht(dht), jsonBuffer(DynamicJsonDocument(JSON_
 }
 
 /**
- * Set the screen to use.
+ * Set the screen to use for displaying the state.
+ *
+ * @param givenScreen The screen to use for displaying the state
  */
 void Hygrometer::setScreen(Screen *givenScreen) {
     this->screen = givenScreen;
-}
-
-/**
- * Read the temperature from the DHT sensor.
- *
- * @return The temperature in degrees Celsius with one decimal place
- */
-float Hygrometer::readTemperature() {
-    return dht.readTemperature();
-}
-
-/**
- * Read the humidity from the DHT sensor.
- *
- * @return The humidity in percent
- */
-int Hygrometer::readHumidity() {
-    return static_cast<int>(dht.readHumidity());
 }
 
 /**
@@ -67,14 +52,15 @@ void Hygrometer::displayState() {
  * If the temperature or humidity is invalid, return 0.
  * Else, return the HTTP code of the response.
  *
- * @param temperature
- * @param humidity
+ * @param temperature the temperature to post, in degrees Celsius with one decimal place.
+ * @param humidity the humidity to post, in percent.
  * @return The HTTP code of the response or 0 if the temperature or humidity is invalid
  */
 int Hygrometer::postMeasurement() {
     float temperature = readTemperature();
     int humidity = readHumidity();
 
+    // If the temperature or humidity is invalid, return 0
     if (!checkValidityOfReadings(temperature, humidity)) return 0;
 
     // Initialize a wi-fi client & http client
@@ -125,6 +111,25 @@ int Hygrometer::postMeasurement() {
     }
 
     return httpCode;
+}
+
+
+/**
+ * Read the temperature from the DHT sensor.
+ *
+ * @return The temperature in degrees Celsius with one decimal place
+ */
+float Hygrometer::readTemperature() {
+    return dht.readTemperature();
+}
+
+/**
+ * Read the humidity from the DHT sensor.
+ *
+ * @return The humidity in percent
+ */
+int Hygrometer::readHumidity() {
+    return static_cast<int>(dht.readHumidity());
 }
 
 /**
