@@ -17,6 +17,7 @@
 #include <DHT.h>
 #include <ArduinoJson.h>
 #include "Screen.h"
+#include "HTTPSClient.h"
 
 // See `Hygrometer.cpp` for the implementation of the functions and their documentation.
 

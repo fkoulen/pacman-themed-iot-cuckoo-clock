@@ -32,9 +32,7 @@ void AppointmentManager::setScreen(Screen *givenScreen) {
 void AppointmentManager::fetch() {
     screen->printText("Fetching", "appointments...");
     // Initialize a wi-fi client & http client
-    WiFiClientSecure client;
-    char fingerprint[] = FINGERPRINT
-    client.setFingerprint(fingerprint);
+    WiFiClientSecure client = HTTPSClient::getClient();
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.

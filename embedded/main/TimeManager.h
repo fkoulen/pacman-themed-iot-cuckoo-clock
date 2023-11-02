@@ -57,6 +57,8 @@ private:
      */
     String timePrefix = "Time: ";
 
+    static void configureTimeForCertificate();
+
 
     bool isValidDateTime(const RtcDateTime &dateTime);
 

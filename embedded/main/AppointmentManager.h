@@ -16,6 +16,7 @@
 #include "Screen.h"
 #include "Constants.h"
 #include "TimeManager.h"
+#include "HTTPSClient.h"
 
 // See `AppointmentManager.cpp` for the implementation of the functions and their documentation.
 

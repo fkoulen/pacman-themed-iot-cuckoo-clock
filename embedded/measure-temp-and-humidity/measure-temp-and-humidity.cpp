@@ -13,6 +13,7 @@
 #include <WiFiManager.h>
 #include <DHT.h>
 #include "main/Constants.h"
+#include "main/HTTPSClient.h"
 
 
 #define JSON_BUFFER_SIZE 1024
@@ -44,6 +45,7 @@ void initializeWifi() {
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
     }
+
 }
 
 /*
@@ -55,9 +57,11 @@ void initializeWifi() {
 void postMeasurement(float temperature, float humidity) {
     // Initialize a wi-fi client & http client
     WiFiClientSecure client;
+    X509List cert = X509List(IRG_Root_X1);
+    client.setTrustAnchors(&cert);
+    
     HTTPClient httpClient;
 
-    client.setInsecure();
 
     // Set the URL of where the call should be made to.
     httpClient.begin(client, String(BASE_URL) + API_POST_MEASUREMENT);

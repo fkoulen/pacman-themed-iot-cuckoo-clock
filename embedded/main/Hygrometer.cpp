@@ -65,9 +65,7 @@ int Hygrometer::postMeasurement() {
     if (!checkValidityOfReadings(temperature, humidity)) return 0;
 
     // Initialize a wi-fi client & http client
-    WiFiClientSecure client;
-    const char fingerprint[] = FINGERPRINT
-    client.setFingerprint(fingerprint);
+    WiFiClientSecure client = HTTPSClient::getClient();
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.

@@ -31,6 +31,8 @@ void TimeManager::initialize(Screen *givenScreen) {
     this->screen = givenScreen;
     screen->printText("Initializing", "RTC module");
 
+    configureTimeForCertificate();
+
     setDebug(INFO); // Enable debug output from ezTime to serial
     waitForSync(); // Wait for NTP sync to complete
 
@@ -45,6 +47,7 @@ void TimeManager::initialize(Screen *givenScreen) {
 
     rtc.SetIsWriteProtected(true); // Lock RTC for writing
 }
+
 
 /**
  * Display the current date and time on the screen.
@@ -80,24 +83,6 @@ void TimeManager::updateDateTime() {
 }
 
 /**
- * Check if the given date and time are valid.
- *
- * @param dateTime The date and time to check
- * @return True if the date and time are valid, false otherwise
- */
-bool TimeManager::isValidDateTime(const RtcDateTime &dateTime) {
-    if (!dateTime.IsValid()) {
-        // Common Causes:
-        //    1) the battery on the device is low or even missing and the power line was disconnected
-        Serial.println("RTC lost confidence in the DateTime!");
-        screen->printText("Could not", "retrieve time");
-        return false;
-    }
-
-    return true;
-}
-
-/**
  * Get the current date and time.
  *
  * @return The current date and time
@@ -128,6 +113,47 @@ String TimeManager::convertUTCtoLocalTime(const String &utcTime) {
 
     // Else display the date with the day of the week
     return timeZone.dateTime(timeZone.tzTime(time, UTC_TIME), "D d M H:i");
+}
+
+/**
+ * Configure the time for the certificate validation.
+ *
+ * @see https://randomnerdtutorials.com/esp8266-nodemcu-https-requests/#esp8266-https-requests-root-certificate
+ */
+void TimeManager::configureTimeForCertificate() {
+    // Set time via NTP, as required for x.509 validation
+    configTime(3 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+
+    Serial.print("Waiting for NTP time sync: ");
+    time_t now = time(nullptr);
+    while (now < 8 * 3600 * 2) {
+        delay(500);
+        Serial.print(".");
+        now = time(nullptr);
+    }
+    Serial.println("");
+    struct tm timeInfo{};
+    gmtime_r(&now, &timeInfo);
+    Serial.print("Current time: ");
+    Serial.print(asctime(&timeInfo));
+}
+
+/**
+ * Check if the given date and time are valid.
+ *
+ * @param dateTime The date and time to check
+ * @return True if the date and time are valid, false otherwise
+ */
+bool TimeManager::isValidDateTime(const RtcDateTime &dateTime) {
+    if (!dateTime.IsValid()) {
+        // Common Causes:
+        //    1) the battery on the device is low or even missing and the power line was disconnected
+        Serial.println("RTC lost confidence in the DateTime!");
+        screen->printText("Could not", "retrieve time");
+        return false;
+    }
+
+    return true;
 }
 
 

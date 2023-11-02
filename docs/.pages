@@ -11,6 +11,7 @@ nav:
       - Code: embedded/code
       - AppointmentManager: embedded/class_appointment_manager
       - CuckooMechanism: embedded/class_cuckoo_mechanism
+      - HTTPSClient: embedded/class_h_t_t_p_s_client
       - DateTime: embedded/class_date_time
       - Hygrometer: embedded/class_hygrometer
       - InternetManager: embedded/class_internet_manager
