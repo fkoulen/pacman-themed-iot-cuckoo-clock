@@ -1,3 +1,11 @@
+/**
+ * This file contains all the constants used in the project.
+ * It is used to store all the constants in one place and to make them easy to change.
+ *
+ * @author F.S. Koulen
+ * @details License: GNU GPLv3
+ */
+
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
