@@ -1,6 +1,10 @@
 /*************************************************
 
  * Public Constants
+ *
+ * @author Arduino
+ * @see https://github.com/arduino/arduino-examples/blob/main/examples/02.Digital/toneMelody/pitches.h
+ * @details License: CC0-1.0
 
  *************************************************/
 
