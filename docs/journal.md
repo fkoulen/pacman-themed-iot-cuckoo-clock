@@ -25,6 +25,14 @@ title: Learning Journal
 
 # Week 9
 
+### Wednesday (1st of November)
+
+* Gave feedback on Jinyoung's Web/Code section of her portfolio.
+* Gave feedback on David's Embedded/System Requirements section of his portfolio.
+* Looked into using a callback function for when the Wi-Fi Manager fails to connect to the last known network.
+* Asked Dolinde (who then asked Gerald) about EMBRQ#05 and the rubric for it.
+* Made sure that the embedded code complied to the rubric.
+
 ### Tuesday (31st of October)
 
 * Fixed the problem where the error of the appointments fetching on the website would not be displayed on the screen.
