@@ -1,8 +1,10 @@
 /**
- * Implementation of the TimeManager class. This class is used to display the time on the LCD screen->
+ * Implementation of the TimeManager class.
+ * This class is used to display the time on the LCD screen and to convert UTC time to local time.
  *
  * @author F.S. Koulen
- * @date 2023-10-02
+ * @details License: GNU GPLv3
+ * <br/>
  */
 
 #include "TimeManager.h"
@@ -10,14 +12,20 @@
 
 /**
  * Constructor for the TimeManager class.
+ * Creates a TimeManager object and initializes the RTC object to use for getting the current date and time.
  *
- * @param rtc The RTC object to use for getting the time.
+ * @param rtc The RTC object to use for getting the current date and time
  */
 TimeManager::TimeManager(RtcDS1302<ThreeWire> rtc) : rtc(rtc) {
 }
 
 /**
- * Set the screen to use for displaying the time.
+ * Initialize the TimeManager object by setting the screen to use for displaying the time and initializing the RTC.
+ * This method also waits for the NTP sync to complete and sets the RTC time to the NTP time.
+ * The NTP time is converted to the local time zone before setting the RTC time.
+ * The RTC is then locked for writing.
+ *
+ * @param givenScreen The screen to use for displaying the time
  */
 void TimeManager::initialize(Screen *givenScreen) {
     this->screen = givenScreen;
@@ -39,7 +47,7 @@ void TimeManager::initialize(Screen *givenScreen) {
 }
 
 /**
- * Display the time on the screen->
+ * Display the current date and time on the screen.
  */
 void TimeManager::displayTime() {
     RtcDateTime now = getDateTime();
@@ -56,6 +64,8 @@ void TimeManager::displayTime() {
 /**
  * Update the time on the screen instead of clearing the screen and redrawing the time.
  * This is used to prevent flickering. Should only be called if displayTime() has been called before.
+ *
+ * @see displayTime()
  */
 void TimeManager::updateDateTime() {
     RtcDateTime now = getDateTime();
@@ -73,6 +83,7 @@ void TimeManager::updateDateTime() {
  * Check if the given date and time are valid.
  *
  * @param dateTime The date and time to check
+ * @return True if the date and time are valid, false otherwise
  */
 bool TimeManager::isValidDateTime(const RtcDateTime &dateTime) {
     if (!dateTime.IsValid()) {
@@ -95,7 +106,13 @@ RtcDateTime TimeManager::getDateTime() {
     return rtc.GetDateTime();
 }
 
-String TimeManager::convertUTCtoLocalTime(const String& utcTime) {
+/**
+ * Convert the given UTC time to local time.
+ *
+ * @param utcTime The UTC time to convert
+ * @return The local time
+ */
+String TimeManager::convertUTCtoLocalTime(const String &utcTime) {
     auto utcString = utcTime.c_str();
 
     int year, month, day, hour, minute, second;
@@ -117,11 +134,11 @@ String TimeManager::convertUTCtoLocalTime(const String& utcTime) {
 // ---------------------------------- DateTime ----------------------------------
 
 /**
- * Constructor for the DateTime class.
+ * Constructor for the DateTime class which is used to store the date and time as strings.
  *
- * @param dateTime The date and time to use for this DateTime object.
+ * @param dateTime The RtcDateTime object to use for this DateTime object.
  */
-DateTime::DateTime(RtcDateTime dateTime) {
+TimeManager::DateTime::DateTime(RtcDateTime dateTime) {
     char dateString[CHARACTERS_PER_LINE];
     char timeString[CHARACTERS_PER_LINE];
 
