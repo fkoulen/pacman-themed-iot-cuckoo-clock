@@ -1,10 +1,12 @@
 /**
- * Use a CuckooMechanism object to play the melody or move the cuckoo.
+ * Represents a mechanism for controlling a cuckoo clock.
+ * This class provides methods for moving the cuckoo forward and backward,
+ * playing the melody and displaying the cuckoo state on the screen.
  *
+ * @author F.S. Koulen
  * @author Robson Couto
  * @see https://github.com/robsoncouto/arduino-songs/blob/master/pacman/pacman.ino
- * @editor F.S. Koulen
- * @date 2023-10-03
+ * @details License: GNU GPLv3
  */
 
 
@@ -13,10 +15,12 @@
 
 #include <Arduino.h>
 #include <Servo.h>
+#include <RtcDS1302.h>
 #include "Constants.h"
 #include "Pitches.h"
 #include "Screen.h"
-#include "RtcDS1302.h"
+
+// See `CuckooMechanism.cpp` for the implementation of the functions and their documentation.
 
 class CuckooMechanism {
 public:
@@ -34,8 +38,18 @@ private:
     void moveCuckooBackward();
 
     void displayCuckooState(RtcDateTime dateTime);
+
+    /**
+     * The duration of the cuckoo in ms when the night mode is active.
+     */
     static const int DURATION_OF_CUCKOO_IN_NIGHT = 5000;
+    /**
+     * The BPM of the melody.
+     */
     static const int BPM = 105;
+    /**
+     * The size of the melody (number of notes + duration).
+     */
     static const int MELODY_SIZE = 62;
     /**
      * Notes of the melody followed by the duration.
@@ -79,13 +93,25 @@ private:
      */
     const double NOTE_DURATION_MULTIPLIER = 0.9;
 
+    /**
+     * The servo motor used to move the cuckoo forward and backward.
+     */
     Servo motor;
 
+    /**
+     * The start and end position of the servo motor.
+     */
     const int SERVO_START_POSITION = 0;
     const int SERVO_END_POSITION = 180;
 
+    /**
+     * The screen used to display the cuckoo state.
+     */
     Screen *screen{};
 
+    /**
+     * The custom characters used to display the cuckoo state and their corresponding indices.
+     */
     byte pacMan[8] = {B01110, B11011, B11110, B11100, B11111, B01110, B00000, B00000};
     const int PAC_MAN_CHARACTER = 0;
 
