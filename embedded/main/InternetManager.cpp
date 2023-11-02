@@ -1,21 +1,28 @@
 /**
  * Implementation of the InternetManager class.
- * This class is used to connect to the Wi-Fi network.
+ * Has methods to handle the internet connection, to set up a web server, and to handle requests.
+ * The server can be used to control the LCD backlight and to get the current measurement.
+ *
+ * @author F.S. Koulen
+ * @details License: GNU GPLv3
+ * <br/>
  */
 
 #include "InternetManager.h"
 
 /**
- * Constructor of the InternetManager class
+ * Constructor of the InternetManager class.
+ * Initializes the JSON buffer and the server.
  */
 InternetManager::InternetManager(): jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
     server = new ESP8266WebServer(PORT);
 }
 
 /**
- * Initialize the Wi-Fi connection
+ * Initialize the Wi-Fi connection and set up the web server.
  *
- * @param givenScreen   The screen to use
+ * @param givenScreen   The screen to use for displaying messages.
+ * @param givenStateManager    The state manager to use for posting the current measurement.
  */
 void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateManager) {
     this->screen = givenScreen;
@@ -41,14 +48,17 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
 }
 
 /**
- * Handle the server
+ * Listen for requests to the server.
+ * This method should be called in the loop.
  */
 void InternetManager::listenServer() {
     server->handleClient();
 }
 
 /**
- * Handle the GET request to the root URI
+ * Handle the GET request to the root URI.
+ * This method is called when the root URI is requested.
+ * It sends a response that describes that this is the URL for the web server of the WEMOS.
  */
 void InternetManager::handleRoot() {
     Serial.println("[Server] Handling root request");
@@ -56,7 +66,9 @@ void InternetManager::handleRoot() {
 }
 
 /**
- * Handle the POST request to toggle the LCD backlight
+ * Handle the POST request to toggle the LCD backlight.
+ * This method is called when the LCD URI is requested.
+ * It toggles the backlight and sends a response that describes that the backlight is turned on or off.
  */
 void InternetManager::handleLCD() {
     Serial.println("[Server] Handling LCD request");
@@ -67,7 +79,8 @@ void InternetManager::handleLCD() {
 
 /**
  * Handle the GET request to post a measurement.
- * The measurement is posted to the API and the response is sent back to the client.
+ * This method is called when the measurement URI is requested.
+ * It posts the current measurement and sends a response that describes the result of the request.
  */
 void InternetManager::handleMeasurement() {
     jsonBuffer.clear();
@@ -80,7 +93,9 @@ void InternetManager::handleMeasurement() {
 }
 
 /**
- * Handle the request to an unknown URI
+ * Handle the request to an unknown URI.
+ * This method is called when an unknown URI is requested.
+ * It sends a response that describes that the requested URI is not found.
  */
 void InternetManager::handleNotFound() {
     Serial.println("[Server] Handling unknown request");

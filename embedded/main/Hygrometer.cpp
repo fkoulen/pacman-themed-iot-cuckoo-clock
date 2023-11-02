@@ -3,8 +3,9 @@
  * Contains methods to read the temperature and humidity,
  * display the state on the LCD screen and post a measurement to the API.
  *
- * @author: F.S. Koulen
- * @date: 2023-10-02
+ * @author F.S. Koulen
+ * @details License: GNU GPLv3
+ * <br/>
  */
 
 #include "Hygrometer.h"
