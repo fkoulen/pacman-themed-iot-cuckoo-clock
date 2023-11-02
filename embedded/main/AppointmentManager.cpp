@@ -2,7 +2,8 @@
  * Implementation of the AppointmentManager class. It has methods to fetch, store and display appointments.
  *
  * @author F.S. Koulen
- * @license GNU GPLv3
+ * @details License: GNU GPLv3
+ * <br/>
  */
 
 #include "AppointmentManager.h"
@@ -84,16 +85,6 @@ void AppointmentManager::fetch() {
 }
 
 /**
- * Store all appointments in the records variable
- *
- * @param payload The JSON payload from the API
- */
-void AppointmentManager::storeAllAppointments(String payload) {
-    deserializeJson(jsonBuffer, payload);
-    records = jsonBuffer["records"];
-}
-
-/**
  * Display how many appointments are found on the LCD
  */
 void AppointmentManager::displayState() {
@@ -113,7 +104,7 @@ void AppointmentManager::displayState() {
  * @param timeManager The TimeManager to use for converting the UTC time to local time
  * @return True if there is a next appointment to display, false otherwise
  */
-boolean AppointmentManager::displayNextAppointment(TimeManager timeManager) {
+bool AppointmentManager::displayNextAppointment(TimeManager timeManager) {
     // If there are no appointments, return false
     if (records.size() == 0) return false;
 
@@ -137,6 +128,16 @@ boolean AppointmentManager::displayNextAppointment(TimeManager timeManager) {
     currentAppointmentIndex++; // Increment the index so the next appointment will be displayed next time
 
     return true;
+}
+
+/**
+ * Store all appointments in the records variable
+ *
+ * @param payload The JSON payload from the API
+ */
+void AppointmentManager::storeAllAppointments(String payload) {
+    deserializeJson(jsonBuffer, payload);
+    records = jsonBuffer["records"];
 }
 
 /**

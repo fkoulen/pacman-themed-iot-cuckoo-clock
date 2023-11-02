@@ -3,18 +3,20 @@
  * It uses the Screen class to display the appointments on the LCD.
  *
  * @author F.S. Koulen
- * @license GNU GPLv3
+ * @details License: GNU GPLv3
  */
 
 #ifndef APPOINTMENTS_H
 #define APPOINTMENTS_H
 
-#include "Screen.h"
-#include "Constants.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include "ArduinoJson.h"
+#include <ArduinoJson.h>
+#include "Screen.h"
+#include "Constants.h"
 #include "TimeManager.h"
+
+// See `AppointmentManager.cpp` for the implementation of the functions and their documentation.
 
 class AppointmentManager {
 public:
@@ -26,7 +28,7 @@ public:
 
     void displayState();
 
-    boolean displayNextAppointment(TimeManager timeManager);
+    bool displayNextAppointment(TimeManager timeManager);
 
     /**
      * The update interval for when the screen should be updated. It is set to 1 minute since the display will be back
@@ -35,12 +37,25 @@ public:
      */
     const int UPDATE_INTERVAL = 60 * 1000;
 private:
-    Screen *screen{}; // Pointer to the screen to use for displaying the appointments
-    DynamicJsonDocument jsonBuffer; // Buffer to store the JSON response in
-    JsonArray records; // Array to store the appointments in
-    int currentAppointmentIndex = 0; // Index of the current appointment to display
+    /**
+     * Pointer to the screen to use for displaying the appointments
+     */
+    Screen *screen{};
+    /**
+     * Buffer to store the JSON response in
+     */
+    DynamicJsonDocument jsonBuffer;
+    /**
+     * Array to store the appointments in
+     */
+    JsonArray records;
+    /**
+     * The index of the current appointment to display
+     */
+    int currentAppointmentIndex = 0;
 
     void storeAllAppointments(String payload);
+
     String getPluralizedAppointmentsString();
 };
 
