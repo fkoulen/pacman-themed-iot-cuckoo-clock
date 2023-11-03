@@ -3,10 +3,10 @@
 | Requirement ID#      | Requirement                                                                                                                                                  | MoSCoW | Compliant |
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------|
 | [EMBRQ#01](#embrq01) | Embedded device sends measured sensor data to the application backend over http or https.                                                                    | MUST   | YES       |
-| [EMBRQ#02](#embrq02) | Embedded device receives or retrieves status messages from the application backend over http or https.                                                       | MUST   | NO        |
-| [EMBRQ#03](#embrq03) | The embedded device contains at least two input sensors (e.g. LDR, buttons, joystick, capacitive touch, etc.).                                               | MUST   | NO        |
-| [EMBRQ#04](#embrq04) | The embedded device contains at least two visual and/or sensory outputs (e.g. LED, LED Matrix, 7-segment display, motor, servo, actuator, LCD-screen, etc.). | MUST   | NO        |
-| [EMBRQ#05](#embrq05) | The embedded device uses the Wi-Fi manager for configuration of SSID, User ID (UID) en Password (PWD) for connecting to the network.                         | MUST   | NO        |
+| [EMBRQ#02](#embrq02) | Embedded device receives or retrieves status messages from the application backend over http or https.                                                       | MUST   | YES       |
+| [EMBRQ#03](#embrq03) | The embedded device contains at least two input sensors (e.g. LDR, buttons, joystick, capacitive touch, etc.).                                               | MUST   | YES       |
+| [EMBRQ#04](#embrq04) | The embedded device contains at least two visual and/or sensory outputs (e.g. LED, LED Matrix, 7-segment display, motor, servo, actuator, LCD-screen, etc.). | MUST   | YES       |
+| [EMBRQ#05](#embrq05) | The embedded device uses the Wi-Fi manager for configuration of SSID, User ID (UID) and Password (PWD) for connecting to the network.                        | MUST   | YES       |
 
 ## EMBRQ#01
 
@@ -18,14 +18,73 @@ contains the temperature and humidity data & is sent to the application backend 
 
 Code:
 
-```cpp title="embedded/main/HygroMeter.cpp"
+```cpp title="embedded/main/Hygrometer.cpp"
 /**
  * Post a measurement to the API. Print the response to the serial monitor.
+ * If the temperature or humidity is invalid, return 0.
+ * Else, return the HTTP code of the response.
  *
- * @param temperature
- * @param humidity
+ * @param temperature the temperature to post, in degrees Celsius with one decimal place.
+ * @param humidity the humidity to post, in percent.
+ * @return The HTTP code of the response or 0 if the temperature or humidity is invalid
  */
-void Hygrometer::postMeasurement(float temperature, int humidity) {
+int Hygrometer::postMeasurement() {
+    float temperature = readTemperature();
+    int humidity = readHumidity();
+
+    // If the temperature or humidity is invalid, return 0
+    if (!checkValidityOfReadings(temperature, humidity)) return 0;
+
+    // Initialize a wi-fi client & http client
+    WiFiClientSecure client = httpsClient->getClient();
+    HTTPClient httpClient;
+
+    // Set the URL of where the call should be made to.
+    httpClient.begin(client, String(BASE_URL) + API_POST_MEASUREMENT);
+
+    // Set the content-type header
+    httpClient.addHeader("Content-Type", "application/json");
+
+    // Custom header to tell the tunnel that we don't want to see the screen
+    httpClient.addHeader("X-Pinggy-No-Screen", "true");
+    httpClient.addHeader("Bypass-Tunnel-Reminder", "false");
+
+    // Create the JSON-object
+    jsonBuffer.clear();
+    JsonObject root = jsonBuffer.to<JsonObject>();
+    root["temperature"] = temperature;
+    root["humidity"] = humidity;
+
+    // Serialize the JSON-object to a string
+    String body;
+    serializeJson(root, body);
+
+    Serial.println("[HTTPS] POST... " + String(BASE_URL) + API_POST_MEASUREMENT);
+
+    // Make the POST-request, this returns the HTTP-code.
+    int httpCode = httpClient.POST(body);
+
+    Serial.println("[HTTPS] POST... done with code " + String(httpCode));
+
+    // If the HTTP code is an error code from the HTTPClient, print the error.
+    if (HTTPClient::errorToString(httpCode) != String()) {
+        Serial.printf("[HTTPS] POST... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
+    } else { // Else, check the response
+        String payload = httpClient.getString();
+        jsonBuffer.clear();
+        deserializeJson(jsonBuffer, payload);
+        String message = jsonBuffer["message"];
+
+        Serial.printf("[HTTPS] POST... code: %d\n", httpCode);
+        // If the message is not null, print the message
+        if (message != "null") {
+            Serial.println(message);
+        } else { // Else, print the HTTP code
+            Serial.printf("[HTTPS] POST... failed, error (%d)\n", httpCode);
+        }
+    }
+
+    return httpCode;
 }
 ```
 
@@ -132,6 +191,18 @@ method in the [EMBRQ#01](#embrq01) section. What this method does is post a new 
 and return the response code/status message from the application backend. This is done over the **HTTPS** protocol.
 The response code is then sent back to the client.
 
+The server itself is in these code snippets not served over **HTTPS**. This is because the embedded device runs out of
+memory when the server is served over **HTTPS**. This is because the ESP8266 has a very limited amount of memory. If the
+server is served over **HTTPS**, the embedded device runs out of memory and crashes. This is why I have chosen to serve
+the server over **HTTP**.
+
+However, you can see
+in [this](https://gitlab.fdmci.hva.nl/IoT/2023-2024-semester-1/individual-project/iot-koulenf/-/commit/bc07eba905bc2a3f8795a1e93caff3479486cdd5){:target="_blank"}
+and [this](https://gitlab.fdmci.hva.nl/IoT/2023-2024-semester-1/individual-project/iot-koulenf/-/commit/24dbc3063436d14857229a5dcc648e9b9f03ce4c){:target="_blank"}
+commit that I have two different branches with working code for serving the server over **HTTPS**. However, this code is
+not used in the final
+product because it would cause the embedded device to crash which would make the product unusable.
+
 That concludes the implementation of the embedded device receiving or retrieving status messages from the application
 backend over http or https.
 
@@ -141,7 +212,7 @@ backend over http or https.
 
 The embedded device contains the following input sensors:
 
-### Button to show next bit of information
+### 1. Button to show next bit of information
 
 This button is connected to pin 16 of the ESP8266, which is a digital pin. It is initialized in the `setup` method of
 the embedded device.
@@ -175,7 +246,7 @@ void StateManager::checkButtonPress() {
 }
 ```
 
-### Button to show Pac-Man and make sound
+### 2. Button to show Pac-Man and make sound
 
 This button is connected to pin A0 of the ESP8266, which is an analog pin.
 
@@ -198,7 +269,7 @@ void StateManager::checkButtonPress() {
 }
 ```
 
-### Temperature and humidity sensor to measure temperature and humidity
+### 3. Temperature and humidity sensor to measure temperature and humidity
 
 The KY-015 sensor is used to measure the temperature and humidity. The sensor is connected to the ESP8266 using pin 2.
 An object of the `DHT` class is created in the main file. The sensor is then initialized in the Hygrometer constructor.
@@ -244,7 +315,7 @@ int Hygrometer::readHumidity() {
 }
 ```
 
-### RTC to provide and keep track of time
+### 4. RTC to provide and keep track of time
 
 The DS1302 module is used to provide and keep track of time. The module is connected to the ESP8266 using the following
 pins:
@@ -294,7 +365,7 @@ RtcDateTime TimeManager::getDateTime() {
 
 The embedded device contains the following visual and/or sensory outputs:
 
-### LCD screen to display information
+### 1. LCD screen to display information
 
 The embedded device contains a 16x2 LCD screen to display information. The LCD screen is connected to the ESP8266 and
 can be reached on address 0x27. The LCD screen is initialized in the constructor of the Screen class.
@@ -312,7 +383,7 @@ The screen is then used through the different methods in the Screen class. Check
 the [implementation of the Screen class](https://gitlab.fdmci.hva.nl/IoT/2023-2024-semester-1/individual-project/iot-koulenf/-/blob/main/embedded/main/Screen.cpp?ref_type=heads)
 for more information.
 
-### Servo motor to move Pac-Man
+### 2. Servo motor to move Pac-Man
 
 The servo motor is connected to pin 0 of the ESP8266. It is initialized in the `initialize` method of
 the `CuckooMechanism` class.
@@ -351,7 +422,7 @@ void CuckooMechanism::moveCuckooBackward() {
 }
 ```
 
-### Buzzer to play sound
+### 3. Buzzer to play sound
 
 The buzzer is connected to pin 14 of the ESP8266. Notes are played on the buzzer in the `playMelody` method of the
 `CuckooMechnism` class.
@@ -380,17 +451,48 @@ void CuckooMechanism::playMelody() {
 
 ## EMBRQ#05
 
-> The embedded device uses the Wi-Fi manager for configuration of SSID, User ID (UID) en Password (PWD) for connecting
+> The embedded device uses the Wi-Fi manager for configuration of SSID, User ID (UID) and Password (PWD) for connecting
 > to the network.
 
-- [ ] Use Wi-Fi manager to configure SSID, UID and PWD
 
-[Insert text explaining how you fulfilled the requirement here]
+To fulfill this requirement, the embedded device uses the [Wi-Fi manager library](https://github.com/tzapu/WiFiManager).
+The Wi-Fi manager library is used to
+automatically connect the embedded device to the last known Wi-Fi network. If the embedded device fails to connect to
+the last known Wi-Fi network, the embedded device will start a Wi-Fi access point. The user can then connect to the
+Wi-Fi access point and configure the Wi-Fi network to connect to. The embedded device will then connect to the
+configured Wi-Fi network. The code will continue to run after the embedded device has connected to the Wi-Fi network. By
+doing this the embedded device uses the Wi-Fi manager library for configuration of SSID and Password (PWD)
+to authenticate and connect to the network over **HTTPS**.
+
+!!! info
+    In both the provided tutorial and the documentation
+    of [tzapu's Wi-Fi manager library](https://github.com/tzapu/WiFiManager),
+    there is no mention of configuring the User ID (UID) of the Wi-Fi network. After messaging Dolinde about this,
+    she forwarded my message to Gerald who responded that if there is no mention of configuring the User ID (UID) through
+    the Wi-Fi Manager, it might not be required to implement this, and it is probably a typo in the
+    requirement. Therefore, there is no implementation of configuring the User ID (UID) in the code.
 
 Code:
 
-```cpp
-// Insert code snippet(s) proving the requirement is fulfilled here
+```cpp title="embedded/main/InternetManager.cpp"
+/**
+ * Initialize the Wi-Fi connection and set up the web server.
+ *
+ * @param givenScreen   The screen to use for displaying messages.
+ * @param givenStateManager    The state manager to use for posting the current measurement.
+ */
+void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateManager) {
+    // ...
+    screen->printText("Initializing", "Wi-Fi connection");
+    // Try to connect to the Wi-Fi network
+    WiFiManager wifiManager;
+
+    wifiManager.autoConnect(WIFI_SSID, WIFI_PASSWORD);
+
+    Serial.println("Connected to Wi-Fi.");
+    screen->printText("Connected to", "Wi-Fi.");
+    // ...
+}
 ```
 
 

@@ -93,20 +93,24 @@ int Hygrometer::postMeasurement() {
     // Make the POST-request, this returns the HTTP-code.
     int httpCode = httpClient.POST(body);
 
-    if (HTTPClient::errorToString(httpCode) == String()) { // Check if it is not an HTTPClient error
+    Serial.println("[HTTPS] POST... done with code " + String(httpCode));
+
+    // If the HTTP code is an error code from the HTTPClient, print the error.
+    if (HTTPClient::errorToString(httpCode) != String()) {
+        Serial.printf("[HTTPS] POST... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
+    } else { // Else, check the response
         String payload = httpClient.getString();
         jsonBuffer.clear();
         deserializeJson(jsonBuffer, payload);
         String message = jsonBuffer["message"];
 
         Serial.printf("[HTTPS] POST... code: %d\n", httpCode);
+        // If the message is not null, print the message
         if (message != "null") {
             Serial.println(message);
-        } else {
+        } else { // Else, print the HTTP code
             Serial.printf("[HTTPS] POST... failed, error (%d)\n", httpCode);
         }
-    } else {
-        Serial.printf("[HTTPS] POST... failed, error: %s\n", HTTPClient::errorToString(httpCode).c_str());
     }
 
     return httpCode;
