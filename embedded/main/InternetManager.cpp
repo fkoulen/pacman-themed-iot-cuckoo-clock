@@ -14,8 +14,7 @@
  * Constructor of the InternetManager class.
  * Initializes the JSON buffer and the server.
  */
-InternetManager::InternetManager(): jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
-    server = new ESP8266WebServer(PORT);
+InternetManager::InternetManager() : jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
 }
 
 /**
@@ -38,13 +37,31 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
     delay(TIME_TO_SHOW_MESSAGE);
     screen->printText("Starting server:", WiFi.localIP().toString());
     delay(TIME_TO_SHOW_MESSAGE);
-    server->on(ROOT, HTTP_GET, [this] { handleRoot(); });
-    server->on(LCD, HTTP_POST, [this] { handleLCD(); });
-    server->on(MEASUREMENT, HTTP_GET, [this] { handleMeasurement(); });
-    server->onNotFound([this] { handleNotFound(); });
-    server->enableCORS(true);
-    server->begin();
-    Serial.println("Server started.");
+
+
+    configTime(3 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+
+    Serial.println("");
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+
+
+    if (MDNS.begin("esp8266")) { Serial.println("MDNS responder started"); }
+
+
+    server.getServer().setRSACert(new BearSSL::X509List(serverCert), new BearSSL::PrivateKey(serverKey));
+
+    // Cache SSL sessions to accelerate the TLS handshake.
+    server.getServer().setCache(&serverCache);
+
+    server.on(ROOT, HTTP_GET, [this] { handleRoot(); });
+    server.on(LCD, HTTP_POST, [this] { handleLCD(); });
+    server.on(MEASUREMENT, HTTP_GET, [this] { handleMeasurement(); });
+    server.onNotFound([this] { handleNotFound(); });
+    server.enableCORS(true);
+    server.begin();
+    Serial.print("Server started on: https://");
+    Serial.println(WiFi.localIP());
 }
 
 /**
@@ -52,7 +69,8 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
  * This method should be called in the loop.
  */
 void InternetManager::listenServer() {
-    server->handleClient();
+    server.handleClient();
+    MDNS.update();
 }
 
 /**
@@ -62,7 +80,7 @@ void InternetManager::listenServer() {
  */
 void InternetManager::handleRoot() {
     Serial.println("[Server] Handling root request");
-    server->send(HTTP_CODE_OK, "text/html", "<p>This is the URL for the web server of the WEMOS.</p>");
+    server.send(HTTP_CODE_OK, "text/html", "<p>This is the URL for the web server of the WEMOS.</p>");
 }
 
 /**
@@ -74,7 +92,7 @@ void InternetManager::handleLCD() {
     Serial.println("[Server] Handling LCD request");
     bool backlightOn = screen->toggleBacklight();
     backlightOn ? stateManager->displayTime() : screen->clear();
-    server->send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") + ".");
+    server.send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") + ".");
 }
 
 /**
@@ -89,7 +107,7 @@ void InternetManager::handleMeasurement() {
     jsonBuffer["response"] = responseCode;
     String response;
     serializeJson(jsonBuffer, response);
-    server->send(HTTP_CODE_OK, "application/json", response);
+    server.send(HTTP_CODE_OK, "application/json", response);
 }
 
 /**
@@ -99,5 +117,5 @@ void InternetManager::handleMeasurement() {
  */
 void InternetManager::handleNotFound() {
     Serial.println("[Server] Handling unknown request");
-    server->send(HTTP_CODE_OK, "text/plain", "404: Not found");
+    server.send(HTTP_CODE_OK, "text/plain", "404: Not found");
 }
