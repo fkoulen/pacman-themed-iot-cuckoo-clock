@@ -18,6 +18,7 @@ StateManager::StateManager(Screen *screen, CuckooMechanism cuckooMechanism, Time
         std::move(cuckooMechanism)), timeManager(std::move(timeManager)), hygrometer(std::move(hygrometer)),
                                                                                      appointments(
                                                                                              std::move(appointments)) {
+    httpsClient = new HTTPSClient();
 }
 
 /**
@@ -28,8 +29,8 @@ StateManager::StateManager(Screen *screen, CuckooMechanism cuckooMechanism, Time
 void StateManager::initialize(Screen *givenScreen) {
     this->screen = givenScreen;
     timeManager.initialize(screen);
-    hygrometer.setScreen(screen);
-    appointments.setScreen(screen);
+    hygrometer.initialize(screen, httpsClient);
+    appointments.initialize(screen, httpsClient);
     appointments.fetch();
     cuckooMechanism.initialize(screen);
     changeCurrentDisplayState(TIME);

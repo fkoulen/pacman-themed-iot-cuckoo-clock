@@ -18,7 +18,7 @@ Represents a hygrometer that measures the temperature and humidity of the air.  
 |                | Name           |
 | -------------- | -------------- |
 | | **[Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-hygrometer)**(DHT sensor)<br>Implementation of the [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) class.  |
-| void | **[setScreen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-setscreen)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the state.  |
+| void | **[initialize](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-setscreen)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the state.  |
 | void | **[displayState](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-displaystate)**()<br>Display the current state of the DHT sensor on the LCD screen.  |
 | int | **[postMeasurement](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/#function-postmeasurement)**()<br>Post a measurement to the API.  |
 
@@ -71,10 +71,10 @@ License: GNU GPLv3
  Constructor of the [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) class. Create a new [Hygrometer](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_hygrometer/) instance and initialize the DHT sensor and JSON buffer.
 
 
-### function setScreen
+### function initialize
 
 ```cpp
-void setScreen(
+void initialize(
     Screen * screen
 )
 ```

@@ -24,7 +24,7 @@ class AppointmentManager {
 public:
     AppointmentManager();
 
-    void setScreen(Screen *screen);
+    void initialize(Screen *givenScreen, HTTPSClient *givenClient);
 
     void fetch();
 
@@ -43,6 +43,10 @@ private:
      * Pointer to the screen to use for displaying the appointments
      */
     Screen *screen{};
+    /**
+     * Pointer to the HTTPS client to use for sending the request to the API
+     */
+    HTTPSClient *httpsClient{};
     /**
      * Buffer to store the JSON response in
      */

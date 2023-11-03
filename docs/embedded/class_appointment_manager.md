@@ -18,7 +18,7 @@ Represents an appointment manager that is responsible for fetching, storing and 
 |                | Name           |
 | -------------- | -------------- |
 | | **[AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-appointmentmanager)**()<br>Implementation of the [AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/) class.  |
-| void | **[setScreen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-setscreen)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the appointments.  |
+| void | **[initialize](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-setscreen)**([Screen](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_screen/) * screen)<br>Set the screen to use for displaying the appointments.  |
 | void | **[fetch](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-fetch)**()<br>Connect to the API and store all appointments if the connection is successful.  |
 | void | **[displayState](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-displaystate)**()<br>Display how many appointments are found on the LCD.  |
 | bool | **[displayNextAppointment](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/#function-displaynextappointment)**([TimeManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_time_manager/) timeManager)<br>Display the next appointment on the LCD.  |
@@ -64,10 +64,10 @@ License: GNU GPLv3
  Constructor of the [AppointmentManager](/2023-2024-semester-1/individual-project/iot-koulenf/embedded/class_appointment_manager/) class. It initializes the JSON buffer with the correct size. 
 
 
-### function setScreen
+### function initialize
 
 ```cpp
-void setScreen(
+void initialize(
     Screen * screen
 )
 ```

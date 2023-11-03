@@ -18,10 +18,11 @@ AppointmentManager::AppointmentManager() : jsonBuffer(DynamicJsonDocument(JSON_B
 /**
  * Set the screen to use for displaying the appointments.
  *
- * @param givenScreen The screen to use for displaying the appointments
+ * @param screen The screen to use for displaying the appointments
  */
-void AppointmentManager::setScreen(Screen *givenScreen) {
+void AppointmentManager::initialize(Screen *givenScreen, HTTPSClient *givenClient) {
     this->screen = givenScreen;
+    this->httpsClient = givenClient;
 }
 
 
@@ -32,7 +33,7 @@ void AppointmentManager::setScreen(Screen *givenScreen) {
 void AppointmentManager::fetch() {
     screen->printText("Fetching", "appointments...");
     // Initialize a wi-fi client & http client
-    WiFiClientSecure client = HTTPSClient::getClient();
+    WiFiClientSecure client = httpsClient->getClient();
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.

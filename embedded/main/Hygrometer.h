@@ -30,7 +30,7 @@ public:
 
     explicit Hygrometer(DHT sensor);
 
-    void setScreen(Screen *screen);
+    void initialize(Screen *screen, HTTPSClient *givenClient);
 
     void displayState();
 
@@ -53,6 +53,10 @@ private:
      * The JSON buffer to use for parsing the response of the API.
      */
     DynamicJsonDocument jsonBuffer;
+    /**
+     * The HTTPS client to use for sending the request to the API.
+     */
+    HTTPSClient *httpsClient{};
 
     float readTemperature();
 

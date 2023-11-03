@@ -25,10 +25,11 @@ Hygrometer::Hygrometer(DHT dht) : dht(dht), jsonBuffer(DynamicJsonDocument(JSON_
 /**
  * Set the screen to use for displaying the state.
  *
- * @param givenScreen The screen to use for displaying the state
+ * @param screen The screen to use for displaying the state
  */
-void Hygrometer::setScreen(Screen *givenScreen) {
-    this->screen = givenScreen;
+void Hygrometer::initialize(Screen *screen, HTTPSClient *givenClient) {
+    this->screen = screen;
+    this->httpsClient = givenClient;
 }
 
 /**
@@ -65,7 +66,7 @@ int Hygrometer::postMeasurement() {
     if (!checkValidityOfReadings(temperature, humidity)) return 0;
 
     // Initialize a wi-fi client & http client
-    WiFiClientSecure client = HTTPSClient::getClient();
+    WiFiClientSecure client = httpsClient->getClient();
     HTTPClient httpClient;
 
     // Set the URL of where the call should be made to.
@@ -92,6 +93,8 @@ int Hygrometer::postMeasurement() {
 
     // Make the POST-request, this returns the HTTP-code.
     int httpCode = httpClient.POST(body);
+
+    Serial.println("[HTTPS] POST... done with code " + String(httpCode));
 
     if (HTTPClient::errorToString(httpCode) == String()) { // Check if it is not an HTTPClient error
         String payload = httpClient.getString();

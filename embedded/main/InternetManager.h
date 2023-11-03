@@ -14,10 +14,13 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266WebServerSecure.h>
+#include <ESP8266mDNS.h>
 #include <WiFiManager.h>
 #include <ArduinoJson.h>
 #include "Screen.h"
 #include "StateManager.h"
+#include "HTTPSClient.h"
 
 // See `InternetManager.cpp` for the implementation of the functions and their documentation.
 
@@ -33,7 +36,7 @@ private:
     /**
      * Port of the web server.
      */
-    const int PORT = 80;
+    const int PORT = 443;
     /**
      * Path to the root URI.
      */
@@ -57,12 +60,18 @@ private:
     /**
      * Server to use for setting up the web server and handling requests.
      */
-    ESP8266WebServer *server;
+    ESP8266WebServerSecure *secureServer = new ESP8266WebServerSecure(PORT);
+    ESP8266WebServer *server = new ESP8266WebServer(80);
+    /**
+     * Create cache for server
+     */
+     ServerSessions *cache = new ServerSessions(5);
     /**
      * The JSON buffer to use for parsing the response of the API.
      */
     DynamicJsonDocument jsonBuffer;
 
+    void handleRedirectToHTTPS();
 
     void handleRoot();
 

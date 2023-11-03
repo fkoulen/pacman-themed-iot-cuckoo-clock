@@ -9,17 +9,22 @@
 #define HTTPSCLIENT_H
 
 #include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 #include "Constants.h"
 
 
 class HTTPSClient {
+public:
+    HTTPSClient();
     /**
      * List of certificates to trust.
      */
     inline static X509List cert = X509List(IRG_Root_X1);
+    HTTPClient httpClient;
+    WiFiClientSecure getClient();
 
-public:
-    static WiFiClientSecure getClient();
+private:
+    WiFiClientSecure client;
 };
 
 

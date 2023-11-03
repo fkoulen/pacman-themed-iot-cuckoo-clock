@@ -7,6 +7,6 @@
  */
 
 const BASE_URL = 'http://localhost';
-const REQUEST_MEASUREMENT_URL = 'http://192.168.1.254/measurement';
+const REQUEST_MEASUREMENT_URL = 'https://192.168.1.254/measurement';
 const MAX_APPOINTMENT_NAME_LENGTH = 13;
 const LENGTH_DATE_TIME = 16;

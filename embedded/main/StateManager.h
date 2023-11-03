@@ -62,6 +62,10 @@ private:
      * The appointment manager to change the display state to when needed
      */
     AppointmentManager appointments;
+    /**
+     * The HTTPS client to send API requests to the server over HTTPS
+     */
+    HTTPSClient *httpsClient;
 
     /**
      * The display states

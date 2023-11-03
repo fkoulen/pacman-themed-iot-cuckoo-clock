@@ -14,8 +14,7 @@
  * Constructor of the InternetManager class.
  * Initializes the JSON buffer and the server.
  */
-InternetManager::InternetManager(): jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
-    server = new ESP8266WebServer(PORT);
+InternetManager::InternetManager() : jsonBuffer(DynamicJsonDocument(JSON_BUFFER_SIZE)) {
 }
 
 /**
@@ -38,13 +37,27 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
     delay(TIME_TO_SHOW_MESSAGE);
     screen->printText("Starting server:", WiFi.localIP().toString());
     delay(TIME_TO_SHOW_MESSAGE);
-    server->on(ROOT, HTTP_GET, [this] { handleRoot(); });
-    server->on(LCD, HTTP_POST, [this] { handleLCD(); });
-    server->on(MEASUREMENT, HTTP_GET, [this] { handleMeasurement(); });
-    server->onNotFound([this] { handleNotFound(); });
-    server->enableCORS(true);
-    server->begin();
-    Serial.println("Server started.");
+
+
+    // Configure the time for certificate validation
+    configTime(3 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+//
+//    server->on(ROOT, HTTP_GET, [this] { handleRedirectToHTTPS(); });
+//    server->begin();
+
+//    Serial.println("HTTP server started. Accessible via http://" + WiFi.localIP().toString());
+    secureServer->getServer().setRSACert(new X509List(serverCert), new PrivateKey(serverKey));
+
+    // Cache SSL sessions to accelerate the TLS handshake.
+//    secureServer->getServer().setCache(cache);
+
+    secureServer->on(ROOT, HTTP_GET, [this] { handleRoot(); });
+    secureServer->on(LCD, HTTP_POST, [this] { handleLCD(); });
+    secureServer->on(MEASUREMENT, HTTP_GET, [this] { handleMeasurement(); });
+    secureServer->onNotFound([this] { handleNotFound(); });
+    secureServer->enableCORS(true);
+    secureServer->begin();
+    Serial.println("Server started. Accessible via https://" + WiFi.localIP().toString());
 }
 
 /**
@@ -52,7 +65,16 @@ void InternetManager::initialize(Screen *givenScreen, StateManager *givenStateMa
  * This method should be called in the loop.
  */
 void InternetManager::listenServer() {
-    server->handleClient();
+//    server->handleClient();
+    secureServer->handleClient();
+    MDNS.update();
+}
+
+
+void InternetManager::handleRedirectToHTTPS() {
+    Serial.println("[HTTPServer] Handling redirect to HTTPS server");
+    secureServer->sendHeader("Location", String("https://") + WiFi.localIP().toString(), true);
+    secureServer->send(HTTP_CODE_MOVED_PERMANENTLY, "text/plain", "");
 }
 
 /**
@@ -61,8 +83,8 @@ void InternetManager::listenServer() {
  * It sends a response that describes that this is the URL for the web server of the WEMOS.
  */
 void InternetManager::handleRoot() {
-    Serial.println("[Server] Handling root request");
-    server->send(HTTP_CODE_OK, "text/html", "<p>This is the URL for the web server of the WEMOS.</p>");
+    Serial.println("[HTTPSServer] Handling root request");
+    secureServer->send(HTTP_CODE_OK, "text/html", "<p>This is the URL for the web server of the WEMOS.</p>");
 }
 
 /**
@@ -71,10 +93,10 @@ void InternetManager::handleRoot() {
  * It toggles the backlight and sends a response that describes that the backlight is turned on or off.
  */
 void InternetManager::handleLCD() {
-    Serial.println("[Server] Handling LCD request");
+    Serial.println("[HTTPSServer] Handling LCD request");
     bool backlightOn = screen->toggleBacklight();
     backlightOn ? stateManager->displayTime() : screen->clear();
-    server->send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") + ".");
+    secureServer->send(HTTP_CODE_OK, "text/plain", "Turned backlight " + String(backlightOn ? "on" : "off") + ".");
 }
 
 /**
@@ -84,12 +106,12 @@ void InternetManager::handleLCD() {
  */
 void InternetManager::handleMeasurement() {
     jsonBuffer.clear();
-    Serial.println("[Server] Handling measurement request");
+    Serial.println("[HTTPSServer] Handling measurement request");
     int responseCode = stateManager->postMeasurement();
     jsonBuffer["response"] = responseCode;
     String response;
     serializeJson(jsonBuffer, response);
-    server->send(HTTP_CODE_OK, "application/json", response);
+    secureServer->send(HTTP_CODE_OK, "application/json", response);
 }
 
 /**
@@ -98,6 +120,6 @@ void InternetManager::handleMeasurement() {
  * It sends a response that describes that the requested URI is not found.
  */
 void InternetManager::handleNotFound() {
-    Serial.println("[Server] Handling unknown request");
-    server->send(HTTP_CODE_OK, "text/plain", "404: Not found");
+    Serial.println("[HTTPSServer] Handling unknown request");
+    secureServer->send(HTTP_CODE_OK, "text/plain", "404: Not found");
 }
