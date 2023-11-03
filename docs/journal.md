@@ -13,6 +13,25 @@ title: Learning Journal
 > your learning journal. You can also write down what you have learned from the feedback, and how you will apply it in
 > your project.
 
+# Feedback checklist
+
+| Section                    | Requested | Assessed | Implemented | Assessor                    | Submitted |
+|----------------------------|-----------|----------|-------------|-----------------------------|-----------|
+| 📦 System Architecture     |           |          |             |                             |           |
+| 🧰 System Requirements     | ✅         |          |             | David Siduon                |           |
+| 🧰 Technical Documentation | ✅         | ✅        |             | Jinyoung Lee                |           |
+| 🧰 Embedded Code           | ✅         | ✅        | ✅           | Callum Svadkovski           |           |
+| 🌐 Database                | ✅         | ✅        | ✅           | Dorus van Weelden           |           |
+| 🌐 Technical Documentation | ✅         | ✅        |             | Nazlıcan  Eren              |           |
+| 🌐 API Reference           | ✅         | ✅        |             | Boaz Camero, Mats van Otten |           |
+| 🌐 Application code        | ✅         | ✅        | ✅           | Niels Aling                 |           |
+| 📐 Design-phase            | ☑         |          |             | (Tahera Balhas)             |           |
+| 📐 Create-phase            |           |          |             |                             |           |
+| 📐 Failure-phase           |           |          |             |                             |           |
+
+✅ = Done
+☑ = Earlier, but could ask again
+
 # Q & A
 
 | Date       | Question                                                                         | Answer                                                                                                                                                                                                                        |
@@ -24,6 +43,19 @@ title: Learning Journal
 | 2023-10-30 | Should the power supply be included in the bill of materials?                    | TBA                                                                                                                                                                                                                           |
 
 # Week 9
+
+### Thursday (2nd of November)
+
+* Completed the Code section of my portfolio.
+* Did a complete refactor of the embedded code.
+* Gave feedback on Julien's Web section of his portfolio.
+* Looked into what still needs to receive feedback and what feedback still needs to be implemented.
+* Gave feedback on Callum's Web section (technical documentation + API reference).
+* Research how to make the web server serve over HTTPS. After spending numerous hours on this, I found out that it is
+  not possible to do this with the ESP8266, since it runs out of memory and then crashes.
+* Added EMBRQ#05 to the portfolio & asked for feedback on the whole page.
+* Looked into models I could use to design my product.
+* Started with a [Fusion 360 crash course](https://www.youtube.com/watch?v=5hComh1hFzY).
 
 ### Wednesday (1st of November)
 
